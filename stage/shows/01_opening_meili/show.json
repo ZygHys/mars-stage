@@ -1,0 +1,572 @@
+{
+  "schema": "1.0",
+  "id": "01_opening_meili",
+  "title": "01 开场 · 美丽",
+  "subtitle": "双色交叉激光（洋红 + 青白）· 屏塔变阵 · 彩烟烟花",
+  "bpm": 124,
+  "duration": "1:30",
+  "night": true,
+  "loop": true,
+  "defaults": {
+    "stage": {
+      "rings": "stowed",
+      "bridge": "low",
+      "lift": "down",
+      "fountain": false
+    },
+    "prisms": "night9687",
+    "lights": {
+      "beams": [
+        "#b03cff",
+        "#e040ff",
+        "#7a5cff"
+      ],
+      "pattern": "fan",
+      "beamI": 0.1,
+      "wash": "#18082a",
+      "washI": 0.25,
+      "haze": 1,
+      "hazeI": 1.35,
+      "strips": "#ff2f6a",
+      "stripI": 0.3,
+      "hourglass": "off",
+      "laserOn": false,
+      "crowdGlow": "#ff2a3a",
+      "crowdGlowI": 0.7
+    },
+    "screens": {
+      "all": {
+        "mode": "blackout"
+      },
+      "tower": {
+        "mode": "blackout"
+      }
+    }
+  },
+  "cues": [
+    {
+      "at": "0:00",
+      "fade": 1,
+      "label": "暗场浓烟酝酿",
+      "stage": {
+        "rings": "stowed",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beamI": 0.08,
+        "wash": "#140822",
+        "washI": 0.25,
+        "hazeI": 1.6,
+        "hazeC": "#2a1b44",
+        "stripI": 0.2,
+        "hourglass": "off",
+        "laserOn": false,
+        "crowdGlow": "#ff2a3a",
+        "crowdGlowI": 0.75
+      },
+      "screens": {
+        "all": {
+          "mode": "blackout"
+        },
+        "tower": {
+          "mode": "blackout"
+        }
+      }
+    },
+    {
+      "at": "0:08",
+      "fade": 2,
+      "label": "紫红铺光 · 左洋红右青白双色激光扇",
+      "stage": {
+        "rings": "flat",
+        "lift": "down"
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beams": [
+          "#d63cff",
+          "#ff4fd8",
+          "#80e8ff"
+        ],
+        "beamLeft": "#d936ff",
+        "beamRight": "#9beeff",
+        "pattern": "fan",
+        "beamSpeed": 0.85,
+        "beamI": 0.95,
+        "wash": [
+          "#b828e8",
+          "#7a2cff",
+          "#4ca8ff"
+        ],
+        "washI": 1.05,
+        "hazeI": 1.45,
+        "hazeC": "#7d38c8",
+        "strips": "#ff2f6a",
+        "towerStrips": "#ff2442",
+        "hgColor": "#d94cff",
+        "stripI": 1.15,
+        "hourglass": "show",
+        "laserOn": true,
+        "laserI": 1.25,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#e038ff",
+            "spread": 0.95,
+            "pitch": 0.62,
+            "sweep": 0.35,
+            "speed": 0.65,
+            "aimBias": 0.22
+          },
+          {
+            "emitter": "towerLeft",
+            "color": "#ff42d6",
+            "spread": 0.8,
+            "pitch": 0.42,
+            "sweep": 0.3,
+            "speed": 0.55,
+            "aimBias": 0.25
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#c4f4ff",
+            "spread": 0.85,
+            "pitch": 0.48,
+            "sweep": 0.38,
+            "speed": 0.7,
+            "aimBias": -0.32
+          },
+          {
+            "emitter": "towerRight",
+            "color": "#96f0e2",
+            "spread": 0.75,
+            "pitch": 0.36,
+            "sweep": 0.28,
+            "speed": 0.6,
+            "aimBias": -0.28
+          },
+          {
+            "emitter": "canopy",
+            "color": "#b47aff",
+            "spread": 1.1,
+            "pitch": 0.5,
+            "sweep": 0.4,
+            "speed": 0.8
+          }
+        ],
+        "crowdGlow": "#ff2a4a",
+        "crowdGlowI": 1
+      },
+      "screens": {
+        "all": {
+          "mode": "marsLogo",
+          "primary": "#ff385c",
+          "secondary": "#8b2cf5",
+          "text": "MARS CONCERT · 开场"
+        },
+        "tower": {
+          "mode": "nebula",
+          "primary": "#b82cff",
+          "secondary": "#ff3278",
+          "speed": 0.9
+        }
+      }
+    },
+    {
+      "at": "0:24",
+      "fade": 0.8,
+      "label": "橙色焰火爆开 · 瞬切深蓝紫",
+      "stage": {
+        "rings": "tiered"
+      },
+      "prisms": "zigzag",
+      "lights": {
+        "beams": [
+          "#ff7b24",
+          "#ffb347",
+          "#3a7bff"
+        ],
+        "beamLeft": null,
+        "beamRight": null,
+        "pattern": "cross",
+        "beamSpeed": 1.35,
+        "beamI": 1.25,
+        "wash": [
+          "#ff5e1a",
+          "#3a4cff",
+          "#ff5e1a"
+        ],
+        "washI": 1.25,
+        "hazeI": 1.55,
+        "hazeC": "#ff7a38",
+        "strips": "#ff3b2f",
+        "towerStrips": "#ff1e30",
+        "hgColor": "#3e78ff",
+        "hourglass": "chase",
+        "laserOn": true,
+        "laserI": 1.1,
+        "laserGroups": [
+          {
+            "emitter": "all",
+            "color": "#4ad0ff",
+            "spread": 1.3,
+            "pitch": 0.52,
+            "sweep": 0.55,
+            "speed": 1
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "fire",
+          "primary": "#e8341c",
+          "secondary": "#ff9e24",
+          "speed": 1.3
+        },
+        "tower": {
+          "mode": "bars",
+          "primary": "#3868ff",
+          "secondary": "#ff6a2b",
+          "speed": 1.5
+        }
+      },
+      "fx": {
+        "flameJet": {
+          "color": "#ff5a18",
+          "intensity": 1.2
+        }
+      }
+    },
+    {
+      "at": "0:38",
+      "fade": 1.5,
+      "label": "第一段彩色烟花 · 紫色激光扇",
+      "stage": {
+        "rings": "layered",
+        "lift": "up"
+      },
+      "prisms": "rose",
+      "lights": {
+        "beams": [
+          "#c85cff",
+          "#ff72c6",
+          "#ffffff"
+        ],
+        "pattern": "fan",
+        "beamSpeed": 0.95,
+        "beamI": 1.15,
+        "wash": "#8a2eff",
+        "washI": 1.15,
+        "hazeI": 1.4,
+        "hazeC": "#a654ff",
+        "strips": "#ff428e",
+        "towerStrips": "#ff2f55",
+        "hgColor": "#e066ff",
+        "hourglass": "show",
+        "laserOn": true,
+        "laserI": 1.3,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#d64cff",
+            "spread": 1.2,
+            "pitch": 0.65,
+            "sweep": 0.42,
+            "speed": 0.85
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#d64cff",
+            "spread": 1.2,
+            "pitch": 0.65,
+            "sweep": 0.42,
+            "speed": 0.85
+          },
+          {
+            "emitter": "canopy",
+            "color": "#ffffff",
+            "spread": 1.35,
+            "pitch": 0.48,
+            "sweep": 0.5,
+            "speed": 0.9
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "title",
+          "primary": "#ff72c6",
+          "secondary": "#8a2eff",
+          "text": "火星演唱会 2.0",
+          "subtext": "MARS CONCERT · NANJING"
+        },
+        "tower": {
+          "mode": "nebula",
+          "primary": "#e048ff",
+          "secondary": "#ff8cd6",
+          "speed": 1.1
+        },
+        "cylinder": {
+          "mode": "rings",
+          "primary": "#ff428e",
+          "secondary": "#ffffff",
+          "speed": 1.2
+        }
+      },
+      "fx": {
+        "firework": {
+          "colors": [
+            "#ff428e",
+            "#ffd442",
+            "#58e8ff",
+            "#c462ff"
+          ],
+          "rate": 1.4
+        }
+      }
+    },
+    {
+      "at": "0:56",
+      "fade": 1.2,
+      "label": "多色激光秀（蓝·黄绿·紫）· 八屏合墙",
+      "stage": {
+        "rings": "tilted",
+        "bridge": "high",
+        "lift": "up"
+      },
+      "prisms": "screensFwd",
+      "lights": {
+        "beams": [
+          "#2cd6ff",
+          "#a6ff38",
+          "#c84cff"
+        ],
+        "beamLeft": "#2cd6ff",
+        "beamRight": "#a8ff38",
+        "pattern": "sweep",
+        "beamSpeed": 1.25,
+        "beamI": 1.2,
+        "wash": [
+          "#2688ff",
+          "#8838ff",
+          "#44e066"
+        ],
+        "washI": 1.1,
+        "hazeI": 1.35,
+        "hazeC": "#58a6ff",
+        "strips": "#e8f4ff",
+        "towerStrips": "#ffffff",
+        "hgColor": "#42e8ff",
+        "hourglass": "bands",
+        "laserOn": true,
+        "laserI": 1.35,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#2ce0ff",
+            "spread": 1.15,
+            "pitch": 0.56,
+            "sweep": 0.52,
+            "speed": 1.1
+          },
+          {
+            "emitter": "towerLeft",
+            "color": "#b4ff38",
+            "spread": 1,
+            "pitch": 0.45,
+            "sweep": 0.48,
+            "speed": 0.95
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#d44cff",
+            "spread": 1.15,
+            "pitch": 0.56,
+            "sweep": 0.52,
+            "speed": 1.1
+          },
+          {
+            "emitter": "towerRight",
+            "color": "#ffffff",
+            "spread": 0.95,
+            "pitch": 0.42,
+            "sweep": 0.45,
+            "speed": 1
+          },
+          {
+            "emitter": "canopy",
+            "color": "#64ffb4",
+            "spread": 1.3,
+            "pitch": 0.52,
+            "sweep": 0.6,
+            "speed": 1.2
+          }
+        ],
+        "crowdGlow": "#ff3858",
+        "crowdGlowI": 1.1
+      },
+      "screens": {
+        "all": {
+          "mode": "rings",
+          "primary": "#38e4ff",
+          "secondary": "#c84cff",
+          "speed": 1.4
+        },
+        "tower": {
+          "mode": "marsLogo",
+          "primary": "#ffffff",
+          "secondary": "#4288ff",
+          "text": "MARS 2.0"
+        }
+      }
+    },
+    {
+      "at": "1:12",
+      "fade": 0.8,
+      "label": "高潮爆点 · 红焰火 + 全场烟花 + 激光齐射",
+      "stage": {
+        "rings": "layered",
+        "bridge": "high",
+        "lift": "up",
+        "fountain": true
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#ff2840",
+          "#ffd452",
+          "#ffffff"
+        ],
+        "beamLeft": null,
+        "beamRight": null,
+        "pattern": "cross",
+        "beamSpeed": 1.5,
+        "beamI": 1.35,
+        "pulse": true,
+        "wash": [
+          "#ff2038",
+          "#ff6830",
+          "#ff2038"
+        ],
+        "washI": 1.35,
+        "hazeI": 1.6,
+        "hazeC": "#ff5640",
+        "strips": "#ff2438",
+        "towerStrips": "#ff2020",
+        "hgColor": "#ff3048",
+        "hourglass": "all",
+        "laserOn": true,
+        "laserI": 1.4,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#ff3864",
+            "spread": 1.3,
+            "pitch": 0.62,
+            "sweep": 0.6,
+            "speed": 1.3
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#ffd442",
+            "spread": 1.3,
+            "pitch": 0.62,
+            "sweep": 0.6,
+            "speed": 1.3
+          },
+          {
+            "emitter": "towerLeft",
+            "color": "#ffffff",
+            "spread": 1,
+            "pitch": 0.5,
+            "sweep": 0.5,
+            "speed": 1.2
+          },
+          {
+            "emitter": "towerRight",
+            "color": "#ffffff",
+            "spread": 1,
+            "pitch": 0.5,
+            "sweep": 0.5,
+            "speed": 1.2
+          },
+          {
+            "emitter": "canopy",
+            "color": "#ff48c8",
+            "spread": 1.4,
+            "pitch": 0.55,
+            "sweep": 0.65,
+            "speed": 1.4
+          }
+        ],
+        "crowdGlow": "#ff2438",
+        "crowdGlowI": 1.25
+      },
+      "screens": {
+        "all": {
+          "mode": "marsLogo",
+          "primary": "#ff2438",
+          "secondary": "#ffd442",
+          "text": "欢迎回家 · 火星人"
+        },
+        "tower": {
+          "mode": "fire",
+          "primary": "#ff1e28",
+          "secondary": "#ffd442",
+          "speed": 1.6
+        }
+      },
+      "fx": {
+        "firework": {
+          "colors": [
+            "#ff2438",
+            "#ffd442",
+            "#ffffff",
+            "#ff68c8"
+          ],
+          "rate": 2.4
+        },
+        "flameJet": {
+          "color": "#ff3b1a",
+          "intensity": 1.35
+        }
+      }
+    },
+    {
+      "at": "1:24",
+      "fade": 2.5,
+      "label": "收光落幕 · 余烟微光",
+      "stage": {
+        "rings": "stowed",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beamI": 0.12,
+        "pulse": false,
+        "wash": "#181a24",
+        "washI": 0.3,
+        "hazeI": 1.1,
+        "hazeC": "#7a8298",
+        "stripI": 0.25,
+        "hourglass": "off",
+        "laserOn": false,
+        "crowdGlow": "#ff2a3a",
+        "crowdGlowI": 0.8
+      },
+      "screens": {
+        "all": {
+          "mode": "blackout"
+        },
+        "tower": {
+          "mode": "blackout"
+        }
+      }
+    }
+  ]
+}

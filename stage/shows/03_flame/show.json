@@ -1,0 +1,306 @@
+{
+  "schema": "1.0",
+  "id": "03_flame",
+  "title": "03 火焰",
+  "subtitle": "参考 09-27 灯光提示：白色块面 → 竖直金色光柱 → 深蓝烟雾反转 → 红白频闪气柱与烟花",
+  "bpm": 138,
+  "duration": "1:20",
+  "night": true,
+  "loop": true,
+  "cues": [
+    {
+      "at": "0:00",
+      "fade": 0.9,
+      "label": "极简冷白舞台 · 红色控制塔竖条",
+      "stage": {
+        "rings": "flat",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#ffffff",
+          "#dce8ff"
+        ],
+        "pattern": "vertical",
+        "beamI": 0.85,
+        "wash": "#8ea8cc",
+        "washI": 0.75,
+        "hazeI": 1,
+        "hazeC": "#c8d8f0",
+        "strips": "#ffffff",
+        "towerStrips": "#ff1e2e",
+        "hgColor": "#ffffff",
+        "hourglass": "bands",
+        "laserOn": false
+      },
+      "screens": {
+        "all": {
+          "mode": "solid",
+          "primary": "#edf2f8",
+          "intensity": 1.05
+        },
+        "tower": {
+          "mode": "solid",
+          "primary": "#f4f6fa",
+          "intensity": 1.1
+        },
+        "cylinder": {
+          "mode": "bars",
+          "primary": "#ff1e2e",
+          "secondary": "#ffffff",
+          "speed": 1
+        }
+      }
+    },
+    {
+      "at": "0:16",
+      "fade": 0.8,
+      "label": "红白交替 · 舞台后方金色竖直光柱冲天",
+      "stage": {
+        "rings": "tiered"
+      },
+      "prisms": "rose",
+      "lights": {
+        "beams": [
+          "#ffd050",
+          "#ffffff",
+          "#ff2a2a"
+        ],
+        "pattern": "vertical",
+        "beamSpeed": 0.7,
+        "beamI": 1.2,
+        "wash": [
+          "#ff1e20",
+          "#ff6830",
+          "#ff1e20"
+        ],
+        "washI": 1.1,
+        "hazeI": 1.35,
+        "hazeC": "#ff6042",
+        "strips": "#ff2020",
+        "towerStrips": "#ff1818",
+        "hgColor": "#ff2828",
+        "hourglass": "show",
+        "laserOn": false
+      },
+      "screens": {
+        "all": {
+          "mode": "title",
+          "primary": "#ff2a2a",
+          "secondary": "#600808",
+          "text": "火 焰",
+          "subtext": "FLAME"
+        },
+        "tower": {
+          "mode": "fire",
+          "primary": "#d81414",
+          "secondary": "#ff9e22",
+          "speed": 1.3
+        }
+      }
+    },
+    {
+      "at": "0:34",
+      "fade": 1.6,
+      "label": "深蓝反转 · 蓝色浓雾与青色背光",
+      "stage": {
+        "rings": "bowl",
+        "lift": "cage"
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beams": [
+          "#2478ff",
+          "#3ad6ff",
+          "#88e6ff"
+        ],
+        "pattern": "fan",
+        "beamSpeed": 0.65,
+        "beamI": 0.55,
+        "wash": "#1034d8",
+        "washI": 1.15,
+        "hazeI": 1.85,
+        "hazeC": "#1e68ff",
+        "strips": "#66d8ff",
+        "towerStrips": "#e8f2ff",
+        "hgColor": "#2a88ff",
+        "hourglass": "chase",
+        "laserOn": true,
+        "laserGroups": [
+          {
+            "emitter": "canopy",
+            "color": "#38dcff",
+            "spread": 1.3,
+            "pitch": 0.45,
+            "sweep": 0.35,
+            "speed": 0.6
+          }
+        ],
+        "crowdGlow": "#2a88ff",
+        "crowdGlowI": 0.85
+      },
+      "screens": {
+        "all": {
+          "mode": "nebula",
+          "primary": "#0e38d8",
+          "secondary": "#32dcff",
+          "speed": 0.7
+        },
+        "tower": {
+          "mode": "gradient",
+          "primary": "#0b2488",
+          "secondary": "#28c8ff",
+          "speed": 0.8
+        }
+      }
+    },
+    {
+      "at": "0:50",
+      "fade": 0.5,
+      "label": "白绿爆亮 · 切黄绿浓烟与白光扇",
+      "stage": {
+        "rings": "tilted",
+        "lift": "up"
+      },
+      "prisms": "matrix",
+      "lights": {
+        "beams": [
+          "#ffffff",
+          "#88ff4a",
+          "#e4ffaa"
+        ],
+        "pattern": "cross",
+        "beamSpeed": 1.3,
+        "beamI": 1.3,
+        "wash": "#78e830",
+        "washI": 1.1,
+        "hazeI": 1.55,
+        "hazeC": "#a6f048",
+        "strips": "#ffffff",
+        "hgColor": "#88ff4a",
+        "hourglass": "all",
+        "laserOn": true,
+        "laserGroups": [
+          {
+            "emitter": "all",
+            "color": "#b8ff58",
+            "spread": 1.35,
+            "pitch": 0.58,
+            "sweep": 0.55,
+            "speed": 1.1
+          }
+        ],
+        "crowdGlow": "#ff2a3a",
+        "crowdGlowI": 1
+      },
+      "screens": {
+        "all": {
+          "mode": "bars",
+          "primary": "#88ff4a",
+          "secondary": "#ffffff",
+          "speed": 2
+        },
+        "tower": {
+          "mode": "rings",
+          "primary": "#ffffff",
+          "secondary": "#78e830",
+          "speed": 1.8
+        }
+      }
+    },
+    {
+      "at": "1:02",
+      "fade": 0.4,
+      "label": "高潮爆裂 · 红白频闪 + 白色气柱 + 金红烟花",
+      "stage": {
+        "rings": "layered",
+        "bridge": "high",
+        "lift": "up"
+      },
+      "prisms": "screensFwd",
+      "lights": {
+        "beams": [
+          "#ffffff",
+          "#ff2626",
+          "#ffd0b0"
+        ],
+        "pattern": "cross",
+        "beamSpeed": 1.6,
+        "beamI": 1.35,
+        "strobe": 6,
+        "pulse": true,
+        "wash": [
+          "#ff1810",
+          "#ffffff",
+          "#ff1810"
+        ],
+        "washI": 1.4,
+        "hazeI": 1.65,
+        "hazeC": "#ff5638",
+        "strips": "#ff1e1e",
+        "towerStrips": "#ff1818",
+        "hgColor": "#ff2424",
+        "hourglass": "all",
+        "laserOn": true,
+        "laserI": 1.35,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#ff2828",
+            "spread": 1.25,
+            "pitch": 0.62,
+            "sweep": 0.55,
+            "speed": 1.4,
+            "strobe": 5
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#ffffff",
+            "spread": 1.25,
+            "pitch": 0.62,
+            "sweep": 0.55,
+            "speed": 1.4,
+            "strobe": 5
+          }
+        ],
+        "crowdGlow": "#ff2020",
+        "crowdGlowI": 1.3
+      },
+      "screens": {
+        "all": {
+          "mode": "fire",
+          "primary": "#ff1414",
+          "secondary": "#ffffff",
+          "speed": 2.2
+        },
+        "tower": {
+          "mode": "fire",
+          "primary": "#ff1810",
+          "secondary": "#ffd442",
+          "speed": 2.2
+        }
+      },
+      "fx": {
+        "smokeJet": {
+          "color": "#f0f6ff",
+          "intensity": 1.4
+        },
+        "flameJet": {
+          "color": "#ff3814",
+          "intensity": 1.3
+        },
+        "firework": {
+          "colors": [
+            "#ffd442",
+            "#ff2424",
+            "#ffffff"
+          ],
+          "rate": 2.2
+        }
+      }
+    }
+  ]
+}

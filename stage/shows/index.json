@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "shows": [
+    {
+      "id": "01_opening_meili",
+      "title": "01 开场 · 美丽",
+      "subtitle": "双色激光交叉（洋红+青白）· 屏塔变阵 · 彩烟烟花",
+      "path": "./shows/01_opening_meili/show.json",
+      "baseUrl": "./shows/01_opening_meili/"
+    },
+    {
+      "id": "02_creator",
+      "title": "02 造物者",
+      "subtitle": "金黄光束扇扫射 · 冰蓝粉交替 · 八屏合墙烈焰",
+      "path": "./shows/02_creator/show.json",
+      "baseUrl": "./shows/02_creator/"
+    },
+    {
+      "id": "03_flame",
+      "title": "03 火焰",
+      "subtitle": "极昼冷白块面 · 竖直金光柱 · 深蓝反转 · 红白频闪气柱",
+      "path": "./shows/03_flame/show.json",
+      "baseUrl": "./shows/03_flame/"
+    },
+    {
+      "id": "04_forever",
+      "title": "04 Forever",
+      "subtitle": "三环分层 · 粉紫V形光束 · 延伸台升起 · 圆台喷泉",
+      "path": "./shows/04_forever/show.json",
+      "baseUrl": "./shows/04_forever/"
+    }
+  ]
+}

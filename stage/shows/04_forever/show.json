@@ -1,0 +1,280 @@
+{
+  "schema": "1.0",
+  "id": "04_forever",
+  "title": "04 Forever",
+  "subtitle": "三环分层 · 蓝粉洋红铺光 · V形光束 · 延伸台升起 · 圆台喷泉",
+  "bpm": 116,
+  "duration": "1:15",
+  "night": true,
+  "loop": true,
+  "cues": [
+    {
+      "at": "0:00",
+      "fade": 1.5,
+      "label": "蓝粉温柔铺光 · 三环缓缓分层展开",
+      "stage": {
+        "rings": "layered",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beams": [
+          "#72c8ff",
+          "#ff8ae0",
+          "#ffffff"
+        ],
+        "beamLeft": "#6ec8ff",
+        "beamRight": "#ff88de",
+        "pattern": "fan",
+        "beamSpeed": 0.6,
+        "beamI": 0.8,
+        "wash": [
+          "#3884ff",
+          "#c858ff",
+          "#ff68c4"
+        ],
+        "washI": 0.95,
+        "hazeI": 1.15,
+        "hazeC": "#b882ff",
+        "strips": "#ffffff",
+        "towerStrips": "#ffffff",
+        "hgColor": "#ff8ae0",
+        "hourglass": "show",
+        "laserOn": false,
+        "crowdGlow": "#ff58a8",
+        "crowdGlowI": 1
+      },
+      "screens": {
+        "all": {
+          "mode": "title",
+          "primary": "#ff9ce8",
+          "secondary": "#6a2cff",
+          "text": "Forever",
+          "subtext": "MARS CONCERT"
+        },
+        "tower": {
+          "mode": "nebula",
+          "primary": "#ff62c8",
+          "secondary": "#4c8cff",
+          "speed": 0.7
+        }
+      }
+    },
+    {
+      "at": "0:18",
+      "fade": 1.8,
+      "label": "洋红粉紫梦幻 · 延伸台升起 + 圆台喷泉开启",
+      "stage": {
+        "rings": "layered",
+        "bridge": "high",
+        "lift": "up",
+        "fountain": true
+      },
+      "prisms": "rose",
+      "lights": {
+        "beams": [
+          "#ff6cd8",
+          "#d46cff",
+          "#ffffff"
+        ],
+        "beamLeft": null,
+        "beamRight": null,
+        "pattern": "vee",
+        "beamSpeed": 0.85,
+        "beamI": 1,
+        "wash": "#ff3ab0",
+        "washI": 1.15,
+        "hazeI": 1.1,
+        "hazeC": "#ff6ad4",
+        "strips": "#ffffff",
+        "towerStrips": "#ffffff",
+        "hgColor": "#ff58c8",
+        "hourglass": "show",
+        "laserOn": true,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#ff7ad8",
+            "spread": 1.1,
+            "pitch": 0.56,
+            "sweep": 0.35,
+            "speed": 0.7
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#ff7ad8",
+            "spread": 1.1,
+            "pitch": 0.56,
+            "sweep": 0.35,
+            "speed": 0.7
+          }
+        ],
+        "crowdGlow": "#ff428e",
+        "crowdGlowI": 1.15
+      },
+      "screens": {
+        "all": {
+          "mode": "nebula",
+          "primary": "#ff48b8",
+          "secondary": "#9a42ff",
+          "speed": 0.9
+        },
+        "tower": {
+          "mode": "nebula",
+          "primary": "#ff70d6",
+          "secondary": "#ffffff",
+          "speed": 0.85
+        },
+        "cylinder": {
+          "mode": "rings",
+          "primary": "#ffffff",
+          "secondary": "#ff6ad4",
+          "speed": 0.9
+        }
+      }
+    },
+    {
+      "at": "0:42",
+      "fade": 1.4,
+      "label": "粉紫金白高潮 · V形光束 + 空中吊笼与浪漫烟花",
+      "stage": {
+        "rings": [
+          [
+            24.5,
+            8,
+            6
+          ],
+          [
+            20.5,
+            -6,
+            -8
+          ],
+          [
+            16.8,
+            5,
+            4
+          ]
+        ],
+        "bridge": "high",
+        "lift": "up",
+        "fountain": true
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#ff8ae0",
+          "#ffe078",
+          "#ffffff"
+        ],
+        "pattern": "vee",
+        "beamSpeed": 1.05,
+        "beamI": 1.2,
+        "wash": [
+          "#ff42b8",
+          "#ffd488",
+          "#c85cff"
+        ],
+        "washI": 1.2,
+        "hazeI": 1.05,
+        "hazeC": "#ff9ce0",
+        "strips": "#ffffff",
+        "towerStrips": "#ffffff",
+        "hgColor": "#ffe078",
+        "hourglass": "bands",
+        "laserOn": true,
+        "laserI": 1.25,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "color": "#ff88dc",
+            "spread": 1.25,
+            "pitch": 0.6,
+            "sweep": 0.42,
+            "speed": 0.85
+          },
+          {
+            "emitter": "stageRight",
+            "color": "#fff2b8",
+            "spread": 1.25,
+            "pitch": 0.6,
+            "sweep": 0.42,
+            "speed": 0.85
+          },
+          {
+            "emitter": "canopy",
+            "color": "#ffffff",
+            "spread": 1.3,
+            "pitch": 0.5,
+            "sweep": 0.4,
+            "speed": 0.8
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "marsLogo",
+          "primary": "#ff8ae0",
+          "secondary": "#ffe078",
+          "text": "Forever · 火星演唱会"
+        },
+        "tower": {
+          "mode": "rings",
+          "primary": "#ff8ae0",
+          "secondary": "#ffe078",
+          "speed": 1.1
+        }
+      },
+      "fx": {
+        "firework": {
+          "colors": [
+            "#ff8ae0",
+            "#ffe078",
+            "#ffffff",
+            "#b878ff"
+          ],
+          "rate": 1.6
+        }
+      }
+    },
+    {
+      "at": "1:04",
+      "fade": 2,
+      "label": "柔和收尾 · 延伸台缓慢回降",
+      "stage": {
+        "rings": "layered",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "night9687",
+      "lights": {
+        "beams": [
+          "#ff9ce8",
+          "#ffffff"
+        ],
+        "pattern": "cone",
+        "beamSpeed": 0.5,
+        "beamI": 0.6,
+        "wash": "#6a2cb8",
+        "washI": 0.7,
+        "hazeI": 0.9,
+        "strips": "#ffffff",
+        "hourglass": "show",
+        "laserOn": false
+      },
+      "screens": {
+        "all": {
+          "mode": "nebula",
+          "primary": "#a45cff",
+          "secondary": "#ff8ae0",
+          "speed": 0.5
+        },
+        "tower": {
+          "mode": "default"
+        }
+      }
+    }
+  ]
+}
