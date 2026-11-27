@@ -24,14 +24,18 @@ import { createTouchControls, IS_TOUCH } from "./touch-controls.js";
 import { campGroundAt } from "./site/mars-camp.js";
 import { createVideoScreens, SCREEN_GROUPS, FIT_MODES, CAN_CAST } from "./video-screens.js";
 import { createShowEngine } from "./show/engine.js";
+import { createMediaSync } from "./show/media-sync.js";
+import { pickLocalMediaHandle } from "./show/local-store.js";
 import { EMBEDDED_SHOWS } from "./show/embedded.js";
 import { createLoader } from "./loader.js";
 const params = new URLSearchParams(location.search);
 const loader = createLoader();
 await loader.step("准备画布", 0.04);
-const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance", preserveDrawingBuffer: false, alpha: true });
 renderer.setClearColor(0, 1);
-renderer.setPixelRatio(Math.min(devicePixelRatio, Number(params.get("dpr")) || 1.25));
+const BASE_DPR = Math.min(devicePixelRatio, Number(params.get("dpr")) || 1.25);
+let activeDpr = BASE_DPR;
+renderer.setPixelRatio(activeDpr);
 renderer.setSize(innerWidth, innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1;
@@ -259,10 +263,12 @@ ui.innerHTML = `
   <div class="panel show" data-for="show" hidden>
     <label>节目<select id="showSelect"><option value="">手动控制</option></select></label>
     <button id="showPlay" type="button">播放</button>
+    <button id="showWithVideo" type="button" hidden title="联动该节目预设的 B 站视频同步播放">带视频播</button>
     <button id="showStop" type="button">停止</button>
     <button id="showLoop" type="button" class="on" aria-pressed="true">循环</button>
     <label>倍速<select id="showRate"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select></label>
     <button id="showCuesToggle" type="button" hidden aria-pressed="false">段落</button>
+    <button id="showMediaToggle" type="button" aria-pressed="false">音视频</button>
     <label class="file">导入<input id="showFile" type="file" accept=".json,application/json"></label>
     <a id="showEvidence" href="#" target="_blank" rel="noopener" hidden style="color:#6ce2ff;font-size:12px;text-decoration:none;padding:4px 8px;border-radius:6px;background:rgba(92,224,255,.14)">证据对照 ↗</a>
     <div class="showTimeline">
@@ -271,6 +277,19 @@ ui.innerHTML = `
       <span class="showCueLabel" id="showCueLabel"></span>
     </div>
     <div class="showCues" id="showCues" hidden></div>
+    <div class="showMedia" id="showMedia" hidden>
+      <button id="smPickFile" type="button">本地音视频</button>
+      <input id="smFileFallback" type="file" accept="audio/*,video/*" hidden>
+      <button id="smReconnect" type="button" hidden>续播上次文件</button>
+      <input id="smUrl" type="url" placeholder="B站 / YouTube / .mp4 链接" spellcheck="false">
+      <button id="smGoUrl" type="button">同步</button>
+      <select id="smTarget" title="视频上大屏范围"><option value="all" selected>上直播大屏</option><option value="none">仅听声音</option><option value="imag">仅两侧竖屏</option><option value="cylinder">仅中控横屏</option></select>
+      <span style="display:inline-flex;align-items:center;gap:3px;color:#cfd3da;font-size:11.5px">偏移<button type="button" class="smMini" data-nudge="-0.5">-0.5</button><button type="button" class="smMini" data-nudge="-0.1">-0.1</button><input id="smOffset" type="number" step="0.05" value="0" aria-label="同步偏移秒"><button type="button" class="smMini" data-nudge="0.1">+0.1</button><button type="button" class="smMini" data-nudge="0.5">+0.5</button></span>
+      <button id="smResync" type="button" class="smMini" hidden title="把舞美时间轴立即对齐到当前起点">对表</button>
+      <button id="smPlayer" type="button" class="smMini" hidden title="浮出隐藏的 B站/YouTube 播放器以点播放、拖动或调音量">操作播放器</button>
+      <button id="smClear" type="button" hidden>断开</button>
+      <span class="smTag" id="smStatus"></span>
+    </div>
     <div class="showMeta" id="showMeta" hidden></div>
   </div>
   <div class="panel" data-for="env" hidden>
@@ -372,10 +391,11 @@ const videoCtl = createVideoScreens({
     vidStatus.textContent = t;
   },
   onMode: (m) => {
-    vidInteract.hidden = m !== "cast" && m !== "multi";
+    vidInteract.hidden = m !== "cast" && m !== "multi" && m !== "audioEmbed";
     vidOne.hidden = !(m === "multi" && CAN_CAST);
     vidMulti.hidden = m !== "ready";
     if (vidInteract.classList.contains("on")) setVidInteract(false);
+    mediaSync?.onVideoModeChange(m);
   }
 });
 ui.querySelector("#vidTarget").addEventListener("change", (e) => videoCtl.setTarget(e.target.value));
@@ -439,11 +459,16 @@ function updateHud(dt) {
 }
 const clock = new THREE.Clock();
 const fwd = new THREE.Vector3(), right = new THREE.Vector3();
-let simT = 0, nightCtl = null, showEngine = null, showRingsTarget = null;
+let simT = 0, nightCtl = null, showEngine = null, mediaSync = null, showRingsTarget = null;
+let shadowDirtyFrames = 4, lastSunX = 1e9, lastSunY = 1e9, lastSunZ = 1e9, lastRingsSig = "", lastPrismsSig = "";
+let slowFrameCount = 0;
+const lockedDpr = params.has("dpr");
 function frame(dt, clockDelta = dt) {
   simT += dt;
+  mediaSync?.update(performance.now());
   showEngine?.update(dt, simT);
-  VN.updateRings(rings, showRingsTarget ?? formation, dt);
+  const ringTarget = showRingsTarget ?? formation;
+  VN.updateRings(rings, ringTarget, dt);
   VN.updatePrisms(prisms, dt);
   for (const f of VN.animators) f(dt, simT);
   nav.update(dt);
@@ -456,15 +481,42 @@ function frame(dt, clockDelta = dt) {
   }
   sky.position.copy(camera.position);
   weatherCtl.update(dt, simT, camera.position, clockDelta);
-  nightCtl.update(simT, camera);
+  const lightT = showEngine?.isActive() ? showEngine.getTime() : simT;
+  nightCtl.update(lightT, camera);
   crowd.userData.setNight(nightCtl.isNight());
   crowd.userData.updateLod?.(camera);
   updateHud(dt);
-  renderer.shadowMap.needsUpdate = sun.castShadow;
+  if (sun.castShadow) {
+    const sunMoved = Math.abs(sun.position.x - lastSunX) > 0.2 || Math.abs(sun.position.y - lastSunY) > 0.2 || Math.abs(sun.position.z - lastSunZ) > 0.2;
+    const rSig = typeof ringTarget === "string" ? ringTarget : "custom";
+    if (sunMoved || rSig !== lastRingsSig || prismMode !== lastPrismsSig || showEngine?.isActive()) {
+      lastSunX = sun.position.x;
+      lastSunY = sun.position.y;
+      lastSunZ = sun.position.z;
+      lastRingsSig = rSig;
+      lastPrismsSig = prismMode;
+      shadowDirtyFrames = 2;
+    }
+    renderer.shadowMap.needsUpdate = shadowDirtyFrames > 0;
+    if (shadowDirtyFrames > 0) shadowDirtyFrames--;
+  } else {
+    renderer.shadowMap.needsUpdate = false;
+  }
   if (composer) composer.render();
   else renderer.render(scene, camera);
   if (labelsOn) labelRenderer.render(scene, camera);
   videoCtl.update();
+  if (!lockedDpr && clockDelta > 0.031 && activeDpr > 0.85) {
+    slowFrameCount++;
+    if (slowFrameCount >= 60) {
+      slowFrameCount = 0;
+      activeDpr = Math.max(0.85, Math.round((activeDpr - 0.15) * 20) / 20);
+      renderer.setPixelRatio(activeDpr);
+      fit();
+    }
+  } else if (slowFrameCount > 0 && clockDelta < 0.022) {
+    slowFrameCount = Math.max(0, slowFrameCount - 2);
+  }
 }
 function loop() {
   const delta = clock.getDelta();
@@ -473,7 +525,13 @@ function loop() {
 }
 let composer = null, gtao = null, bloomPass = null, gradePass = null;
 if (params.get("ao") !== "0" && renderer.extensions.has("EXT_color_buffer_float")) {
-  composer = new EffectComposer(renderer);
+  const useHwMsaa = renderer.capabilities.isWebGL2 && (renderer.capabilities.maxSamples || 0) >= 4;
+  if (useHwMsaa) {
+    const rt = new THREE.WebGLRenderTarget(innerWidth, innerHeight, { type: THREE.HalfFloatType, samples: 4 });
+    composer = new EffectComposer(renderer, rt);
+  } else {
+    composer = new EffectComposer(renderer);
+  }
   composer.addPass(new RenderPass(scene, camera));
   gtao = new GTAOPass(scene, camera, innerWidth, innerHeight);
   const cutouts = [];
@@ -488,7 +546,7 @@ if (params.get("ao") !== "0" && renderer.extensions.has("EXT_color_buffer_float"
   gtao.updateGtaoMaterial({ radius: 1.2, distanceExponent: 1.5, thickness: 2, scale: 1.2, samples: 12 });
   gtao.blendIntensity = 0.62;
   composer.addPass(gtao);
-  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.4, 0.32, 0.86);
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(Math.max(1, Math.floor(innerWidth * 0.5)), Math.max(1, Math.floor(innerHeight * 0.5))), 0.4, 0.32, 0.86);
   bloomPass.enabled = false;
   if (bloomPass.materialHighPassFilter?.fragmentShader) {
     bloomPass.materialHighPassFilter.fragmentShader = bloomPass.materialHighPassFilter.fragmentShader.replace(
@@ -502,7 +560,9 @@ if (params.get("ao") !== "0" && renderer.extensions.has("EXT_color_buffer_float"
   composer.addPass(new OutputPass());
   gradePass = createGradePass();
   composer.addPass(gradePass);
-  composer.addPass(new SMAAPass(innerWidth * renderer.getPixelRatio(), innerHeight * renderer.getPixelRatio()));
+  if (!useHwMsaa) {
+    composer.addPass(new SMAAPass(innerWidth * activeDpr, innerHeight * activeDpr));
+  }
 }
 function fit() {
   const a = Number(params.get("aspect")) || 0;
@@ -516,7 +576,10 @@ function fit() {
   renderer.setSize(w, h);
   labelRenderer.setSize(w, h);
   videoCtl.setSize(w, h);
-  if (composer) composer.setSize(w, h);
+  if (composer) {
+    composer.setSize(w, h);
+    if (bloomPass) bloomPass.setSize(Math.max(1, Math.floor(w * 0.5)), Math.max(1, Math.floor(h * 0.5)));
+  }
 }
 addEventListener("resize", fit);
 fit();
@@ -666,9 +729,12 @@ showEngine = createShowEngine({
       renderedCuesFor = st.id;
       showCuesEl.innerHTML = st.cues.map((c) => `<button type="button" data-cue-at="${c.at}" data-cue-idx="${c.index}">${c.atLabel} ${shortCueLabel(c.label)}</button>`).join("");
       showCuesEl.querySelectorAll("button").forEach((btn) => btn.addEventListener("click", () => {
-        showEngine.seek(Number(btn.dataset.cueAt));
+        const sec = Number(btn.dataset.cueAt);
+        showEngine.seek(sec);
+        mediaSync?.onShowSeek(sec);
         btn.blur();
       }));
+      mediaSync?.onShowChanged(st.id, st.media);
     }
     const hasCues = Boolean(st.active && st.cues.length > 0);
     showCuesToggle.hidden = !hasCues;
@@ -677,6 +743,132 @@ showEngine = createShowEngine({
     showCuesEl.hidden = !(hasCues && showCuesOpen);
     showCuesEl.querySelectorAll("button").forEach((btn) => btn.classList.toggle("on", Number(btn.dataset.cueIdx) === st.cueIndex));
   }
+});
+const showMediaToggle = ui.querySelector("#showMediaToggle");
+const showWithVideoBtn = ui.querySelector("#showWithVideo");
+const showMediaEl = ui.querySelector("#showMedia");
+const smPickFile = ui.querySelector("#smPickFile");
+const smFileFallback = ui.querySelector("#smFileFallback");
+const smReconnect = ui.querySelector("#smReconnect");
+const smUrl = ui.querySelector("#smUrl");
+const smGoUrl = ui.querySelector("#smGoUrl");
+const smTarget = ui.querySelector("#smTarget");
+const smOffset = ui.querySelector("#smOffset");
+const smResync = ui.querySelector("#smResync");
+const smPlayer = ui.querySelector("#smPlayer");
+const smClear = ui.querySelector("#smClear");
+const smStatus = ui.querySelector("#smStatus");
+let showMediaOpen = false;
+mediaSync = createMediaSync({
+  showEngine,
+  videoCtl,
+  onUpdate(ms) {
+    showMediaToggle.classList.toggle("on", showMediaOpen || ms.active);
+    showWithVideoBtn.hidden = !ms.savedUrl || ms.active;
+    smClear.hidden = !ms.active;
+    smResync.hidden = !ms.active;
+    smPlayer.hidden = !ms.isEmbed;
+    smTarget.value = ms.videoTarget || "all";
+    if (document.activeElement !== smOffset) smOffset.value = String(ms.offset ?? 0);
+    if (!ms.active && ms.savedUrl && !smUrl.value) smUrl.value = ms.savedUrl;
+    smReconnect.hidden = ms.active || !ms.hasSavedHandle;
+    if (ms.hasSavedHandle && ms.savedFileName) smReconnect.textContent = `续播 ${ms.savedFileName.slice(0, 12)}`;
+    smStatus.textContent = ms.active ? `${ms.label}` : "";
+  }
+});
+showWithVideoBtn.addEventListener("click", async () => {
+  showWithVideoBtn.blur();
+  const u = (smUrl.value || mediaSync.state().savedUrl || "").trim();
+  if (!u) return;
+  showMediaOpen = true;
+  showMediaEl.hidden = false;
+  showMediaToggle.setAttribute("aria-pressed", "true");
+  showMediaToggle.classList.add("on");
+  try {
+    await mediaSync.attachUrl(u);
+    setShowError("");
+  } catch (err) {
+    setShowError(String(err.message || err));
+  }
+});
+showMediaToggle.addEventListener("click", () => {
+  showMediaOpen = !showMediaOpen;
+  showMediaEl.hidden = !showMediaOpen;
+  showMediaToggle.setAttribute("aria-pressed", String(showMediaOpen));
+  showMediaToggle.classList.toggle("on", showMediaOpen || mediaSync.state().active);
+  showMediaToggle.blur();
+});
+smPickFile.addEventListener("click", async () => {
+  smPickFile.blur();
+  const picked = await pickLocalMediaHandle();
+  if (picked === null) {
+    smFileFallback.click();
+    return;
+  }
+  if (picked.cancelled) return;
+  try {
+    await mediaSync.attachFile(picked.file, picked.handle);
+    setShowError("");
+  } catch (e) {
+    setShowError(String(e.message || e));
+  }
+});
+smFileFallback.addEventListener("change", async (e) => {
+  const f = e.target.files?.[0];
+  e.target.value = "";
+  if (!f) return;
+  try {
+    await mediaSync.attachFile(f, null);
+    setShowError("");
+  } catch (err) {
+    setShowError(String(err.message || err));
+  }
+});
+smReconnect.addEventListener("click", async () => {
+  smReconnect.blur();
+  const ok = await mediaSync.reconnectSavedHandle();
+  if (!ok) setShowError("无法读取上次文件，请重新选择");
+});
+const syncMediaUrl = async () => {
+  const u = smUrl.value.trim();
+  if (!u) return;
+  try {
+    await mediaSync.attachUrl(u);
+    setShowError("");
+  } catch (err) {
+    setShowError(String(err.message || err));
+  }
+};
+smGoUrl.addEventListener("click", syncMediaUrl);
+smUrl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") syncMediaUrl();
+  e.stopPropagation();
+});
+smTarget.addEventListener("change", () => {
+  mediaSync.setVideoTarget(smTarget.value);
+  smTarget.blur();
+});
+smOffset.addEventListener("change", () => mediaSync.setOffset(Number(smOffset.value) || 0));
+smOffset.addEventListener("keydown", (e) => e.stopPropagation());
+showMediaEl.querySelectorAll("[data-nudge]").forEach((b) => b.addEventListener("click", () => {
+  mediaSync.nudgeOffset(Number(b.dataset.nudge));
+  b.blur();
+}));
+smResync.addEventListener("click", () => {
+  mediaSync.resyncStart();
+  smResync.blur();
+});
+smPlayer.addEventListener("click", () => {
+  const next = !videoCtl.state().interactive;
+  setVidInteract(next);
+  smPlayer.classList.toggle("on", next);
+  smPlayer.blur();
+});
+smClear.addEventListener("click", () => {
+  setVidInteract(false);
+  smPlayer.classList.remove("on");
+  mediaSync.clear();
+  smClear.blur();
 });
 showCuesToggle.addEventListener("click", () => {
   showCuesOpen = !showCuesOpen;
@@ -691,6 +883,7 @@ showSelect.addEventListener("change", async () => {
   const id = showSelect.value;
   showSelect.blur();
   if (!id) {
+    mediaSync.clear();
     showEngine.stop();
     return;
   }
@@ -705,23 +898,37 @@ showPlayBtn.addEventListener("click", async () => {
   if (!st.active) {
     const first = showEngine.list()[0];
     if (first) await showEngine.load(first.id, { autoPlay: true });
-  } else if (st.playing) showEngine.pause();
-  else showEngine.play();
+  } else if (st.playing) {
+    showEngine.pause();
+    mediaSync.onShowPlayPause(false);
+  } else {
+    showEngine.play();
+    mediaSync.onShowPlayPause(true);
+  }
   showPlayBtn.blur();
 });
 showStopBtn.addEventListener("click", () => {
+  mediaSync.clear();
   showEngine.stop();
   showStopBtn.blur();
 });
 showLoopBtn.addEventListener("click", () => {
-  showEngine.setLoop(!showEngine.state().loop);
+  const next = !showEngine.state().loop;
+  showEngine.setLoop(next);
+  mediaSync.onShowLoop(next);
   showLoopBtn.blur();
 });
 showRateSel.addEventListener("change", () => {
-  showEngine.setRate(Number(showRateSel.value));
+  const r = Number(showRateSel.value);
+  showEngine.setRate(r);
+  mediaSync.onShowRate(r);
   showRateSel.blur();
 });
-showSeek.addEventListener("input", () => showEngine.seek(Number(showSeek.value)));
+showSeek.addEventListener("input", () => {
+  const sec = Number(showSeek.value);
+  showEngine.seek(sec);
+  mediaSync.onShowSeek(sec);
+});
 showFileInput.addEventListener("change", async (e) => {
   const file = e.target.files?.[0];
   e.target.value = "";
@@ -771,7 +978,7 @@ const cam = (pos, target, fov = 45, near = null) => {
   nav.syncFromCamera();
   frame(0);
 };
-window.G = { shot, cam, nav, video: videoCtl, show: showEngine, teleport: (x, z) => nav.teleport(x, z), setNight: (on) => setNight(on), setLook: (k) => setLook(k), scene, camera, LAYOUT, setView, setMode, setLabels, step: (n = 30, dt = 1 / 30) => {
+window.G = { shot, cam, nav, video: videoCtl, show: showEngine, mediaSync, teleport: (x, z) => nav.teleport(x, z), setNight: (on) => setNight(on), setLook: (k) => setLook(k), scene, camera, LAYOUT, setView, setMode, setLabels, step: (n = 30, dt = 1 / 30) => {
   for (let i = 0; i < n; i++) frame(dt);
 }, setFormation: (k) => formation = k, setControl, controls: VN.controls, setPrisms: (k) => {
   prismMode = k;
@@ -813,9 +1020,16 @@ if (params.get("live") === "1") {
 }
 await loader.step("编译着色器", 0.86);
 try {
+  nightCtl.setPrewarm(true);
   await renderer.compileAsync(scene, camera);
 } catch (e) {
   console.warn(e);
+} finally {
+  nightCtl.setPrewarm(false);
+}
+if ("serviceWorker" in navigator && location.protocol === "https:" && !/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)) {
+  navigator.serviceWorker.register("./sw.js").catch(() => {
+  });
 }
 loop();
 requestAnimationFrame(() => requestAnimationFrame(() => loader.done()));

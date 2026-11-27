@@ -2,8 +2,8 @@ const SHOW_SCHEMA_VERSION = "1.0";
 const VALID_PATTERNS =  new Set(["fan", "sunburst", "vee", "sweep", "cross", "vertical", "cone", "down", "whipSweep", "scissorWhip", "waveWhip", "doubleFan"]);
 const VALID_HOURGLASS =  new Set(["show", "chase", "bands", "test", "all", "off", "zebra", "inkWhite", "amberBars"]);
 const VALID_SCREEN_GROUPS =  new Set(["all", "tower", "imag", "side", "delay", "lawn", "cylinder"]);
-const VALID_VISUAL_MODES =  new Set(["default", "blackout", "solid", "gradient", "marsLogo", "fire", "nebula", "rings", "bars", "title", "image", "monoCards", "monoSilhouettes", "monoEyes", "imagFrame"]);
-const VALID_LASER_EMITTERS =  new Set(["all", "stageLeft", "stageCenter", "stageRight", "canopy", "towerLeft", "towerRight", "fineWeb", "lowCurtain"]);
+const VALID_VISUAL_MODES =  new Set(["default", "blackout", "solid", "gradient", "marsLogo", "fire", "nebula", "rings", "bars", "title", "image", "monoCards", "monoSilhouettes", "monoEyes", "monoBurst", "imagFrame"]);
+const VALID_LASER_EMITTERS =  new Set(["all", "stageLeft", "stageCenter", "stageRight", "canopy", "towerLeft", "towerRight", "wingLeft", "wingRight", "fineWeb", "lowCurtain"]);
 const VALID_PERFORMER_OUTFITS =  new Set(["redCoat", "whiteSuit", "blackRock", "goldRoyal", "redFeather", "meiqiuKing"]);
 const VALID_PERFORMER_POSES =  new Set(["stand", "sing", "rock", "openArms"]);
 const VALID_PERFORMER_PROPS =  new Set(["redMic", "micStand", "guitar", "none"]);
@@ -103,6 +103,7 @@ function validateShow(raw) {
     subtitle: String(raw.subtitle || ""),
     source: raw.source || null,
     evidenceUrl: raw.evidenceUrl || null,
+    media: raw.media || null,
     bpm: Number(raw.bpm) || 120,
     beatOffset: Number(raw.beatOffset) || 0,
     duration: Number.isFinite(duration) ? duration : 60,
@@ -229,22 +230,19 @@ function compileShow(rawShow) {
 }
 function evaluateShow(compiled, time) {
   const { snapshots, rootState, show } = compiled;
-  if (!snapshots.length) return { index: -1, cue: null, state: rootState, beatStepIdx: -1 };
+  if (!snapshots.length) return { index: -1, cue: null, state: rootState, beatStepIdx: -1, blend: 1 };
   let idx = -1;
   for (let i = 0; i < snapshots.length; i++) {
     if (snapshots[i].cue.at <= time) idx = i;
     else break;
   }
-  if (idx < 0) return { index: -1, cue: null, state: rootState, beatStepIdx: -1 };
+  if (idx < 0) return { index: -1, cue: null, state: rootState, beatStepIdx: -1, blend: 1 };
   const curr = snapshots[idx];
   const prevState = idx > 0 ? snapshots[idx - 1].state : rootState;
   const fade = curr.cue.fade ?? 1.2;
   const elapsed = time - curr.cue.at;
   const blend = fade > 0 ? Math.max(0, Math.min(1, elapsed / fade)) : 1;
-  let state = {
-    ...curr.state,
-    lights: blendLights(prevState.lights, curr.state.lights, blend)
-  };
+  let state = blend >= 1 ? curr.state : { ...curr.state, lights: blendLights(prevState.lights, curr.state.lights, blend) };
   let beatStepIdx = -1;
   const bc = curr.cue.beatCycle;
   if (bc && Array.isArray(bc.steps) && bc.steps.length > 0) {
@@ -259,7 +257,42 @@ function evaluateShow(compiled, time) {
       state = applyTrackPatch(state, stepPatch);
     }
   }
-  return { index: idx, cue: curr.cue, state, cueElapsed: elapsed, beatStepIdx };
+  return { index: idx, cue: curr.cue, state, cueElapsed: elapsed, beatStepIdx, blend };
+}
+function createHybridClock() {
+  let smoothTime = 0;
+  let lastNowMs = null;
+  let initialized = false;
+  return {
+    reset(t = 0, nowMs = null) {
+      smoothTime = Math.max(0, Number(t) || 0);
+      lastNowMs = nowMs;
+      initialized = true;
+      return smoothTime;
+    },
+    sample(mediaTime, nowMs, { rate = 1, playing = true } = {}) {
+      const m = Math.max(0, Number(mediaTime) || 0);
+      if (!initialized || lastNowMs === null || !playing) {
+        smoothTime = m;
+        lastNowMs = nowMs;
+        initialized = true;
+        return smoothTime;
+      }
+      const dt = Math.max(0, Math.min(0.15, (nowMs - lastNowMs) / 1e3));
+      lastNowMs = nowMs;
+      const pred = smoothTime + dt * rate;
+      const err = m - pred;
+      if (Math.abs(err) > 0.08) {
+        smoothTime = m;
+      } else if (Math.abs(err) > 4e-3) {
+        smoothTime = pred + err * 0.18;
+      } else {
+        smoothTime = pred;
+      }
+      return Math.max(0, smoothTime);
+    },
+    current: () => smoothTime
+  };
 }
 export {
   SHOW_SCHEMA_VERSION,
@@ -272,6 +305,7 @@ export {
   VALID_SCREEN_GROUPS,
   VALID_VISUAL_MODES,
   compileShow,
+  createHybridClock,
   evaluateShow,
   formatTimecode,
   lerpHex,

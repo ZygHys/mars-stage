@@ -106,6 +106,8 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
     [10, LAYOUT.frame.depth / 2 + 1, LAYOUT.frame.legHeight + 1, "canopy"],
     [-46, LAYOUT.prisms.rowZ + 4, LAYOUT.prisms.height + 2, "towerLeft"],
     [46, LAYOUT.prisms.rowZ + 4, LAYOUT.prisms.height + 2, "towerRight"],
+    [-58, MS.z1 + 8, stageLaserY + 0.3, "wingLeft"],
+    [58, MS.z1 + 8, stageLaserY + 0.3, "wingRight"],
     [-26, MS.z1 - 0.2, stageLaserY + 0.25, "fineWeb"],
     [0, MS.z1 - 0.2, stageLaserY + 0.25, "fineWeb"],
     [26, MS.z1 - 0.2, stageLaserY + 0.25, "fineWeb"],
@@ -129,7 +131,8 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
       attribute vec3 aEdgeColor;
       attribute float aWidth;
       attribute float aGain;
-      varying float across, along, vGain;
+      attribute float aSheet;
+      varying float across, along, vGain, vSheet;
       varying vec3 vColor, vEdgeColor;
       void main(){
         #ifdef USE_INSTANCING_COLOR
@@ -139,6 +142,7 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
         #endif
         vEdgeColor = aEdgeColor;
         vGain = aGain;
+        vSheet = aSheet;
         mat4 transform = modelViewMatrix * instanceMatrix;
         vec4 start = transform * vec4(0.0, 0.0, 0.0, 1.0);
         vec4 end = transform * vec4(0.0, shaftLength, 0.0, 1.0);
@@ -176,20 +180,25 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
         }
         vec2 crossLine = vec2(-delta.y, delta.x) / dLen;
         gl_Position = mix(start, end, uv.y);
-        float pxW = clamp(aWidth, 1.2, 10.0);
+        float beamW = clamp(aWidth, 0.9, 10.0);
+        float sheetW = mix(2.5, clamp(aWidth, 12.0, 52.0), along);
+        float pxW = mix(beamW, sheetW, vSheet);
         gl_Position.xy += crossLine * (pxW / max(resolution, vec2(1.0))) * across * gl_Position.w;
       }`,
     fragmentShader: `uniform vec3 color;
       uniform float uI;
-      varying float across, along, vGain;
+      varying float across, along, vGain, vSheet;
       varying vec3 vColor, vEdgeColor;
       void main(){
         float d = abs(across);
-        float edge = 1.0 - smoothstep(0.0, 1.0, d);
-        float core = 1.0 - smoothstep(0.0, 0.24, d);
+        float beamEdge = 1.0 - smoothstep(0.0, 1.0, d);
+        float beamCore = 1.0 - smoothstep(0.0, 0.24, d);
+        float sheetMask = (1.0 - smoothstep(0.86, 1.0, d)) * (0.36 + 0.34 * d * d + 0.08 * sin(d * 18.0));
+        float shape = mix(beamEdge, sheetMask, vSheet);
+        float core = mix(beamCore, 0.12 * (1.0 - d), vSheet);
         vec3 baseCol = mix(vEdgeColor, vColor, smoothstep(0.18, 0.82, 1.0 - d));
-        vec3 col = clamp(color * mix(baseCol, vec3(1.0), core * 0.26) * (0.95 + 0.58 * core), 0.0, 6.0);
-        float a = clamp(0.58 * uI * max(vGain, 0.0) * edge * (1.0 - smoothstep(0.20, 1.0, along)), 0.0, 1.0);
+        vec3 col = clamp(color * mix(baseCol, vec3(1.0), core * 0.24) * (0.95 + 0.52 * core), 0.0, 6.0);
+        float a = clamp(0.56 * uI * max(vGain, 0.0) * shape * (1.0 - smoothstep(0.18, 1.0, along)), 0.0, 1.0);
         gl_FragColor = vec4(col, a);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
@@ -200,10 +209,12 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
   const laserEdgeBuf = new THREE.InstancedBufferAttribute(new Float32Array(laserCountTotal * 3), 3);
   const laserWidthBuf = new THREE.InstancedBufferAttribute(new Float32Array(laserCountTotal).fill(4.6), 1);
   const laserGainBuf = new THREE.InstancedBufferAttribute(new Float32Array(laserCountTotal).fill(1), 1);
+  const laserSheetBuf = new THREE.InstancedBufferAttribute(new Float32Array(laserCountTotal).fill(0), 1);
   for (let i = 0; i < laserCountTotal; i++) laserEdgeBuf.setXYZ(i, 1, 1, 1);
   laserGeo.setAttribute("aEdgeColor", laserEdgeBuf);
   laserGeo.setAttribute("aWidth", laserWidthBuf);
   laserGeo.setAttribute("aGain", laserGainBuf);
+  laserGeo.setAttribute("aSheet", laserSheetBuf);
   const lasers = new THREE.InstancedMesh(laserGeo, laserMat, laserCountTotal);
   for (let i = 0; i < laserCountTotal; i++) lasers.setColorAt(i, C("#ffffff"));
   lasers.frustumCulled = false;
@@ -363,6 +374,20 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
   let night = false, look = LOOKS.opening, lookKey = "opening", customLook = null;
   const day = { exp: renderer.toneMappingExposure, sun: sun.intensity, sunC: sun.color.clone(), shadow: sun.castShadow, hemi: hemi.intensity, env: scene.environmentIntensity, fog: scene.fog.color.clone(), fogD: scene.fog.density };
   const activeLook = () => customLook || look;
+  const cTint = C("#ffffff"), cStrip = C("#ffffff"), cHg = C("#ffffff"), cCtrl = C("#ffffff"), cWhite = C("#ffffff"), cWarmMix = C("#fff4dc"), cHazeMix = C("#cad8ff"), cDayStrip = C("#ff2f55"), cNightSun = C("#8fa6ff"), cNightFog = C("#040406"), cBeamL = C("#ffffff"), cBeamR = C("#ffffff"), cScratch = C("#ffffff");
+  function setPrewarm(on) {
+    if (on) {
+      root.visible = true;
+      lasers.visible = true;
+      hgTopGroup.visible = true;
+      screenTopGroup.visible = true;
+      canopyMatrixGroup.visible = true;
+      frontStrobeGroup.visible = true;
+    } else {
+      root.visible = night;
+      applyLook();
+    }
+  }
   function setNight(on) {
     night = on;
     root.visible = on;
@@ -371,10 +396,10 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
     if (bloomPass) bloomPass.enabled = on;
     sun.castShadow = day.shadow && !on;
     sun.intensity = on ? NIGHT_LIGHT.sun : day.sun;
-    sun.color.copy(on ? C("#8fa6ff") : day.sunC);
+    sun.color.copy(on ? cNightSun : day.sunC);
     hemi.intensity = on ? NIGHT_LIGHT.hemi : day.hemi;
     scene.environmentIntensity = on ? NIGHT_LIGHT.environment : day.env;
-    scene.fog.color.copy(on ? C("#040406") : day.fog);
+    scene.fog.color.copy(on ? cNightFog : day.fog);
     scene.fog.density = on ? 22e-4 : day.fogD;
     renderer.toneMappingExposure = on ? 1 : day.exp;
     applyLook();
@@ -393,10 +418,10 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
   }
   function applyLook() {
     const L2 = activeLook();
-    const tint = C(L2.led);
-    const stripCol = C(L2.strips);
-    const hgCol = C(L2.hgColor || L2.strips);
-    const ctrlCol = C(L2.towerStrips || L2.strips);
+    cTint.set(L2.led || "#b04cff");
+    cStrip.set(L2.strips || "#ff2f6a");
+    cHg.set(L2.hgColor || L2.strips || "#ff2f6a");
+    cCtrl.set(L2.towerStrips || L2.strips || "#ff2f6a");
     for (const m of glow) {
       const d2 = m.userData.day;
       if (m.userData.showControlled) continue;
@@ -410,29 +435,30 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
         m.emissive.copy(d2.c);
       } else if (m.userData.nightMap) {
         m.emissiveIntensity = 0.9;
-        m.emissive.set("#ffffff");
+        m.emissive.copy(cWhite);
       } else if (m.userData.nightStrips) {
         m.emissiveIntensity = 1.45 * (L2.stripI ?? 1);
-        m.emissive.copy(stripCol);
+        m.emissive.copy(cStrip);
       } else {
         m.emissiveIntensity = 0.8;
-        m.emissive.copy(C("#ffffff")).lerp(tint, 0.45);
+        m.emissive.copy(cWhite).lerp(cTint, 0.45);
       }
     }
     for (const m of fixtures) {
       const d2 = m.userData.day;
       m.emissiveIntensity = night ? d2.i * 1.6 : d2.i;
     }
-    MAT.ledStrip.emissive.copy(night ? stripCol : C("#ff2f55"));
+    MAT.ledStrip.emissive.copy(night ? cStrip : cDayStrip);
     for (const m of tinted) {
       const d2 = m.userData.day;
-      const col = m === MAT.hgLed ? hgCol : m === MAT.controlTowerLed ? ctrlCol : m === MAT.warm ? stripCol : tint;
+      const col = m === MAT.hgLed ? cHg : m === MAT.controlTowerLed ? cCtrl : m === MAT.warm ? cStrip : cTint;
       m.emissiveIntensity = night ? (m === MAT.warm ? 7 : 2.2) * (L2.stripI ?? 1) : d2.i;
-      m.emissive.copy(night ? col.clone().lerp(C("#ffffff"), m === MAT.warm ? 0.55 : 0.35) : d2.c);
+      if (night) m.emissive.copy(col).lerp(cWhite, m === MAT.warm ? 0.55 : 0.35);
+      else m.emissive.copy(d2.c);
     }
-    footGlowMat.color.copy(stripCol.clone().lerp(C("#fff4dc"), 0.55)).multiplyScalar(1.6 * (L2.stripI ?? 1));
+    footGlowMat.color.copy(cStrip).lerp(cWarmMix, 0.55).multiplyScalar(1.6 * (L2.stripI ?? 1));
     const b0 = Array.isArray(L2.beams) && L2.beams.length ? L2.beams[0] : "#ffffff";
-    spotGlowMat.color.copy(C(b0).lerp(C("#ffffff"), 0.5)).multiplyScalar(1.4);
+    spotGlowMat.color.set(b0).lerp(cWhite, 0.5).multiplyScalar(1.4);
     const hgTopI = L2.hgTopI ?? 0.35;
     hgTopGroup.visible = hgTopI > 0.02;
     if (hgTopGroup.visible) hgTopGlowMat.color.set(L2.hgTopColor || L2.hgColor || L2.strips || "#ffffff").multiplyScalar(1.6 * hgTopI);
@@ -447,47 +473,54 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
     const laserGroups = L2.laserGroups;
     lasers.visible = Boolean(L2.laserOn || Array.isArray(laserGroups) && laserGroups.length > 0);
     if (Array.isArray(laserGroups) && laserGroups.length > 0) {
-      laserMat.uniforms.color.value.set("#ffffff").multiplyScalar(1.38);
-      laserMat.uniforms.uI.value = L2.laserI ?? 1.25;
+      laserMat.uniforms.color.value.set("#ffffff").multiplyScalar(1.32);
+      laserMat.uniforms.uI.value = L2.laserI ?? 1.2;
     } else {
-      laserMat.uniforms.color.value.set(L2.lasers || "#ffffff").multiplyScalar(1.35);
-      laserMat.uniforms.uI.value = L2.laserI ?? 1.1;
+      laserMat.uniforms.color.value.set(L2.lasers || "#ffffff").multiplyScalar(1.3);
+      laserMat.uniforms.uI.value = L2.laserI ?? 1.05;
       for (let i = 0; i < laserCountTotal; i++) {
-        lasers.setColorAt(i, C("#ffffff"));
+        lasers.setColorAt(i, cWhite);
         laserEdgeBuf.setXYZ(i, 1, 1, 1);
         laserWidthBuf.setX(i, 4.4);
         laserGainBuf.setX(i, 1);
+        laserSheetBuf.setX(i, 0);
       }
       lasers.instanceColor.needsUpdate = true;
       laserEdgeBuf.needsUpdate = true;
       laserWidthBuf.needsUpdate = true;
       laserGainBuf.needsUpdate = true;
+      laserSheetBuf.needsUpdate = true;
     }
     const washColors = Array.isArray(L2.wash) ? L2.wash : [L2.wash, L2.wash, L2.wash];
     const washI = L2.washI ?? 1;
     nightSky.material.uniforms.stageColor.value.set(washColors[1] || washColors[0] || "#7a2cff").multiplyScalar(washI);
     for (const l of washes) {
       const col = l.position.x < -8 ? washColors[0] : l.position.x > 8 ? washColors[2] || washColors[0] : washColors[1] || washColors[0];
-      l.color.copy(C(col || "#ffffff"));
+      l.color.set(col || "#ffffff");
       l.intensity = (l.userData.baseIntensity || 1e3) * washI;
     }
-    for (const haze of hazes) haze.material.color.set(L2.hazeC || washColors[1] || washColors[0] || "#7a2cff").lerp(C("#cad8ff"), 0.12);
+    for (const haze of hazes) haze.material.color.set(L2.hazeC || washColors[1] || washColors[0] || "#7a2cff").lerp(cHazeMix, 0.12);
     const beamPalette = Array.isArray(L2.beams) && L2.beams.length ? L2.beams : ["#ffffff"];
-    const beamLeft = L2.beamLeft ? C(L2.beamLeft) : null;
-    const beamRight = L2.beamRight ? C(L2.beamRight) : null;
+    const hasBeamLeft = Boolean(L2.beamLeft);
+    if (hasBeamLeft) cBeamL.set(L2.beamLeft);
+    const hasBeamRight = Boolean(L2.beamRight);
+    if (hasBeamRight) cBeamR.set(L2.beamRight);
     const l2 = L2.beamLayer2 && typeof L2.beamLayer2 === "object" ? L2.beamLayer2 : null;
     const l2Palette = l2 && Array.isArray(l2.beams) && l2.beams.length ? l2.beams : null;
-    beamSrc.forEach(([x], i) => {
+    for (let i = 0; i < beamSrc.length; i++) {
+      const x = beamSrc[i][0];
       if (l2Palette && (i & 1) === 1) {
-        beams.setColorAt(i, C(l2Palette[(i >> 1) % l2Palette.length]));
-      } else if (beamLeft && x < -6) {
-        beams.setColorAt(i, beamLeft);
-      } else if (beamRight && x > 6) {
-        beams.setColorAt(i, beamRight);
+        cScratch.set(l2Palette[(i >> 1) % l2Palette.length]);
+        beams.setColorAt(i, cScratch);
+      } else if (hasBeamLeft && x < -6) {
+        beams.setColorAt(i, cBeamL);
+      } else if (hasBeamRight && x > 6) {
+        beams.setColorAt(i, cBeamR);
       } else {
-        beams.setColorAt(i, C(beamPalette[i % beamPalette.length]));
+        cScratch.set(beamPalette[i % beamPalette.length]);
+        beams.setColorAt(i, cScratch);
       }
-    });
+    }
     beams.instanceColor.needsUpdate = true;
     beamMat.uniforms.uI.value = (L2.beamI ?? 1) * (L2.haze ?? 1);
     crowdMat.uniforms.uC.value.set(L2.crowdGlow || "#ff2a3a");
@@ -668,7 +701,8 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
         const zOrder = zoneSeen[zone] || 0;
         zoneSeen[zone] = zOrder + 1;
         const zTotal = zoneTotals[zone] || 1;
-        const grp = groups ? groups.find((g) => g.emitter === zone || g.emitter === "all" && zone !== "fineWeb" && zone !== "lowCurtain") || null : zone === "fineWeb" || zone === "lowCurtain" ? null : { color: null, count: 6, spread: 1.3, pitch: 0.55, sweep: 0.5, speed: 0.8, zDir: 0.8, on: true };
+        const isAuxZone = zone === "fineWeb" || zone === "lowCurtain" || zone === "wingLeft" || zone === "wingRight";
+        const grp = groups ? groups.find((g) => g.emitter === zone || g.emitter === "all" && !isAuxZone) || null : isAuxZone ? null : { color: null, count: 6, spread: 1.3, pitch: 0.55, sweep: 0.5, speed: 0.8, zDir: 0.8, on: true };
         let beamCount = Math.max(1, Math.min(PER * zTotal, Math.round(grp?.count ?? 4)));
         let emitterEnabled = Boolean(grp);
         if (groups && grp && grp.emitter === zone && zTotal > 1) {
@@ -684,9 +718,10 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
         beamCount = Math.min(PER, beamCount);
         const active = emitterEnabled && grp && grp.on !== false && (!(grp.strobe > 0) || Math.sin(t * grp.strobe * Math.PI * 2 + ei) > -0.15);
         const style = grp?.style || (zone === "fineWeb" ? "fine" : zone === "lowCurtain" ? "curtain" : "hero");
-        const motion = grp?.motion || (style === "fine" ? "step" : "sweep");
-        const widthPx = grp?.width ?? (style === "fine" ? 1.85 : style === "curtain" ? 2.2 : 5.1);
-        const gainVal = grp?.gain ?? (style === "fine" ? 0.78 : style === "curtain" ? 0.86 : 1.15);
+        const isSheet = style === "sheet" ? 1 : 0;
+        const motion = grp?.motion || (style === "fine" ? "step" : style === "sheet" ? "whip" : "sweep");
+        const widthPx = grp?.width ?? (style === "sheet" ? 30 : style === "fine" ? 1.15 : style === "curtain" ? 1.85 : 4.6);
+        const gainVal = grp?.gain ?? (style === "sheet" ? 0.68 : style === "fine" ? 0.28 : style === "curtain" ? 0.52 : 1.08);
         let spreadAmt = grp?.spread ?? (style === "fine" ? 1.95 : style === "curtain" ? 1.25 : 1.15);
         const pitchBase = grp?.pitch ?? (style === "curtain" ? 0.11 : 0.55);
         const sweepAmt = grp?.sweep ?? (style === "fine" ? 0.55 : 0.45);
@@ -734,7 +769,8 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
             lasers.setMatrixAt(j, m4);
             laserWidthBuf.setX(j, widthPx);
             laserGainBuf.setX(j, gainVal);
-            if (groups && grp?.color) {
+            laserSheetBuf.setX(j, isSheet);
+            if (groups && grp) {
               lasers.setColorAt(j, tmpC);
               laserEdgeBuf.setXYZ(j, tmpEdge.r, tmpEdge.g, tmpEdge.b);
             }
@@ -745,13 +781,14 @@ function setupNight({ scene, renderer, gtao, bloomPass, sky, sun, hemi }) {
       lasers.instanceMatrix.needsUpdate = true;
       laserWidthBuf.needsUpdate = true;
       laserGainBuf.needsUpdate = true;
+      laserSheetBuf.needsUpdate = true;
       if (groups) {
         lasers.instanceColor.needsUpdate = true;
         laserEdgeBuf.needsUpdate = true;
       }
     }
   }
-  return { setNight, setLook, setCustomLook, update, isNight: () => night, lookKey: () => lookKey };
+  return { setNight, setLook, setCustomLook, setPrewarm, update, isNight: () => night, lookKey: () => lookKey };
 }
 export {
   LOOKS,

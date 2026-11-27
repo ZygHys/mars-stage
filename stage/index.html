@@ -80,6 +80,12 @@
   #ui .showCues[hidden] { display: none; }
   #ui .showCues button { font-size: 11.5px; padding: 3px 7px; background: rgba(255,255,255,.07); max-width: 13em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #ui .showCues button.on { background: #9b2fae; color: #fff; }
+  #ui .showMedia { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.1); }
+  #ui .showMedia[hidden] { display: none; }
+  #ui .showMedia input[type="url"] { font: inherit; font-size: 12px; width: clamp(140px, 24vw, 220px); padding: 4px 7px; border-radius: 6px; border: 0; background: rgba(255,255,255,.1); color: #fff; }
+  #ui .showMedia input[type="number"] { font: inherit; font-size: 12px; width: 56px; padding: 3px 5px; border-radius: 6px; border: 0; background: rgba(255,255,255,.1); color: #fff; text-align: center; font-variant-numeric: tabular-nums; }
+  #ui .showMedia .smTag { color: #8fe8ff; font-size: 11.5px; max-width: 15em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #ui .showMedia button.smMini { font-size: 11.5px; padding: 3px 6px; }
   #ui .showMeta { flex-basis: 100%; color: #ffb4b4; font-size: 11.5px; line-height: 1.45; }
   #ui .showMeta[hidden] { display: none; }
   #ui .file input { font-size: 11px; color: #cfd3da; max-width: 15em; }
@@ -92,7 +98,8 @@
   .css3d.interact { z-index: 3; background: transparent; }
   .labels { z-index: 2; }
   
-  .vidSource { position: fixed; left: 0; bottom: 0; z-index: 0; pointer-events: none; }
+  .vidSource { position: fixed; left: 0; bottom: 0; z-index: -1; pointer-events: none; }
+  .vidSource.audioOnly:not(.front) { width: 2px; height: 2px; overflow: hidden; opacity: 0.01; }
   .vidSource .vsHead { display: none; }
   .vidSource.front { left: 12px; bottom: calc(50px + env(safe-area-inset-bottom, 0px)); z-index: 6; padding: 5px; border-radius: 10px; background: rgba(14,15,18,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #e6e9ee; font: 12px/1.3 "PingFang SC", system-ui, sans-serif; box-shadow: 0 4px 18px rgba(0,0,0,.3); pointer-events: auto; }
   .vidSource.front .vsHead { display: flex; gap: 8px; align-items: baseline; padding: 0 3px 5px; max-width: 320px; }

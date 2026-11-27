@@ -33,7 +33,10 @@ function parseVideoSource(raw) {
   if (host === "b23.tv") return { kind: "error", message: "b23.tv 短链接要先在浏览器里打开，复制跳转后的完整 bilibili.com/video/BV… 地址再粘贴" };
   if (host.endsWith("youtube.com") || host === "youtu.be") {
     const id = host === "youtu.be" ? url.pathname.slice(1) : url.searchParams.get("v") || (url.pathname.match(/\/(?:shorts|embed|live)\/([\w-]{6,})/) || [])[1];
-    if (id) return { kind: "embed", site: "YouTube", src: `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0`, label: id };
+    if (id) {
+      const origin = typeof location !== "undefined" && /^https?:/.test(location.origin) ? `&origin=${encodeURIComponent(location.origin)}` : "";
+      return { kind: "embed", site: "YouTube", src: `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&enablejsapi=1${origin}`, label: id };
+    }
   }
   if (/\.(mp4|webm|m4v|mov|ogg|ogv)(\?|#|$)/i.test(url.pathname + url.search)) return { kind: "texture", src: url.href, label: decodeURIComponent(url.pathname.split("/").pop()) };
   return { kind: "embed", site: host, src: url.href, label: host };
@@ -208,9 +211,9 @@ function createVideoScreens({ camera, container, onStatus = () => {
   }
   const SRC_W = 640, SRC_H = 360, SRC_PAD = 76;
   let source = null;
-  function openSource({ src, site, label }) {
+  function openSource({ src, site, label }, { audioOnly = false } = {}) {
     const root = document.createElement("div");
-    root.className = "vidSource";
+    root.className = audioOnly ? "vidSource audioOnly" : "vidSource";
     root.innerHTML = '<div class="vsHead"><span class="vsTitle"></span><span class="vsTip">大屏同步播放的就是这个播放器</span></div><div class="vsBody"><div class="vsStage"><div class="vsView"><iframe></iframe></div></div></div>';
     root.querySelector(".vsTitle").textContent = `${site} · ${label}`;
     const body = root.querySelector(".vsBody"), stage = root.querySelector(".vsStage"), view = root.querySelector(".vsView"), frame = root.querySelector("iframe");
@@ -244,7 +247,7 @@ function createVideoScreens({ camera, container, onStatus = () => {
     status("浏览器在问要不要共享“此标签页”：点“共享”，所有大屏就会同步播放这一路视频");
     let s;
     try {
-      s = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: 30 }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false, preferCurrentTab: true, selfBrowserSurface: "include", surfaceSwitching: "exclude", monitorTypeSurfaces: "exclude" });
+      s = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: 30 }, width: { ideal: 960 }, height: { ideal: 540 } }, audio: false, preferCurrentTab: true, selfBrowserSurface: "include", surfaceSwitching: "exclude", monitorTypeSurfaces: "exclude" });
     } catch (e) {
       castFailed(e && e.name === "NotAllowedError" ? "没有共享，所以没放。" : `共享标签页失败（${e && e.message}）。`);
       return;
@@ -290,9 +293,15 @@ function createVideoScreens({ camera, container, onStatus = () => {
     setMode("ready");
     status(why + "B 站这类网页播放器，只有共享本标签页，才能让所有大屏同步播放同一路画面。再点“播放”，在弹窗里点“共享”；或者用本地视频、.mp4 直链（不用共享，所有屏自动同步）");
   }
-  function playEmbed({ src, site, label }) {
+  function playEmbed({ src, site, label }, { audioOnly = false } = {}) {
     stop();
     current = { kind: "embed", src, site, label };
+    if (audioOnly) {
+      openSource(current, { audioOnly: true });
+      setMode("audioEmbed");
+      status(`${site}：${label} 仅音频就绪（若未自动出声，点「操作播放器」点击播放）`);
+      return;
+    }
     if (!CAN_CAST) {
       setMode("ready");
       status("这个浏览器不能共享标签页（要电脑版 Chrome / Edge），B 站这类网页播放器没法让所有大屏同步播放同一路画面。可以用本地视频、.mp4 直链（所有屏自动同步）；或者点“每屏单独加载”（每块屏各开一个播放器，不同步、较卡）");
@@ -405,13 +414,15 @@ function createVideoScreens({ camera, container, onStatus = () => {
     setInteractive,
     playMulti,
     castFromMulti,
+    getVideoElement: () => mode === "texture" ? video : null,
+    getEmbedIframe: () => source?.root?.querySelector("iframe") || embeds[0]?.frame || null,
     state: () => ({ target, fit, current, mode, interactive, canCast: CAN_CAST, embedded: embeds.length > 0, castScreens: stream ? swapped.length : 0, castSize: stream && video ? [video.videoWidth, video.videoHeight] : null, embedScreens: embeds.filter((e) => e.screen).map((e) => e.screen.name), playing: !!video && !video.paused, muted: !!video && video.muted })
   };
   function embedHint() {
     if (mode === "cast") status("点“操作播放器”，左下角会浮出那个播放器，在上面暂停、调音量");
     else if (mode === "multi") status("点“操作播放器”，再点屏上的播放器暂停、调音量");
   }
-  function play(raw) {
+  function play(raw, opts = {}) {
     const src = parseVideoSource(raw);
     if (!src) {
       status("看不懂这个链接");
@@ -422,7 +433,7 @@ function createVideoScreens({ camera, container, onStatus = () => {
       return;
     }
     if (src.kind === "texture") playTexture(src.src, src.label);
-    else playEmbed(src);
+    else playEmbed(src, opts);
   }
   function playFile(file) {
     if (!file) return;

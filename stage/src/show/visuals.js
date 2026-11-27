@@ -3,6 +3,64 @@ import { videoScreens } from "../venue.js";
 import { drawMarsLogo } from "../textures.js";
 const CANVAS_W = 512, CANVAS_H = 288;
 const PANO_W = 1024, PANO_H = 288;
+const singerSpriteCache =  new Map();
+function getSingerPixelSprite(hair = "#f0182a") {
+  if (singerSpriteCache.has(hair)) return singerSpriteCache.get(hair);
+  const px = 8;
+  const c = document.createElement("canvas");
+  c.width = 20 * px;
+  c.height = 27 * px;
+  const g = c.getContext("2d");
+  const put = (gx, gy, gw, gh, col) => {
+    g.fillStyle = col;
+    g.fillRect(gx * px, gy * px, gw * px, gh * px);
+  };
+  put(0, 12, 3, 2, "#d8e2f4");
+  put(1, 10, 4, 3, "#f8faff");
+  put(2, 9, 3, 2, "#ffffff");
+  put(0, 14, 4, 2, "#e8effc");
+  put(3, 11, 3, 4, "#f4f8ff");
+  put(2, 15, 3, 2, "#c8d6ee");
+  put(5, 13, 10, 13, "#141620");
+  put(4, 14, 2, 12, "#0d0f16");
+  put(14, 14, 2, 12, "#0d0f16");
+  put(7, 12, 6, 2, "#1c1f2c");
+  put(8, 13, 4, 7, "#0d0e15");
+  put(7, 13, 1, 5, "#b82434");
+  put(12, 13, 1, 5, "#b82434");
+  for (let i = 0; i < 6; i++) {
+    put(6 + i, 15 + i, 2, 1, "#e8d08e");
+    put(12 - i, 15 + i, 2, 1, "#e8d08e");
+  }
+  put(6, 16, 1, 1, "#eef4ff");
+  put(13, 16, 1, 1, "#eef4ff");
+  put(5, 23, 10, 2, "#0a0b10");
+  put(8, 23, 4, 2, "#e8d08e");
+  put(8, 11, 4, 2, "#dfb99a");
+  put(6, 4, 8, 8, "#f2d4bc");
+  put(6, 4, 1, 8, "#e2be9e");
+  put(13, 4, 1, 8, "#e2be9e");
+  put(5, 1, 10, 3, hair);
+  put(6, 0, 8, 2, "#ff4858");
+  put(4, 3, 2, 7, "#9e0e1e");
+  put(14, 3, 2, 7, "#9e0e1e");
+  put(5, 9, 2, 3, hair);
+  put(13, 9, 2, 3, hair);
+  put(6, 3, 3, 2, hair);
+  put(10, 3, 2, 2, "#ff4858");
+  put(12, 3, 2, 2, hair);
+  put(7, 7, 2, 2, "#1b1922");
+  put(11, 7, 2, 2, "#1b1922");
+  put(7, 7, 1, 1, "#ffffff");
+  put(11, 7, 1, 1, "#ffffff");
+  put(6, 9, 2, 1, "#ef9a8e");
+  put(12, 9, 2, 1, "#ef9a8e");
+  put(9, 10, 2, 1, "#8e3838");
+  put(12, 11, 2, 2, "#e61e2b");
+  put(11, 10, 2, 2, "#e8eef8");
+  singerSpriteCache.set(hair, c);
+  return c;
+}
 function drawProcedural(ctx, w, h, spec, t) {
   const mode = spec.mode || "default";
   const c1 = spec.primary || "#b03cff";
@@ -258,6 +316,34 @@ function drawProcedural(ctx, w, h, spec, t) {
     }
     return;
   }
+  if (mode === "monoBurst") {
+    ctx.fillStyle = "#06070c";
+    ctx.fillRect(0, 0, w, h);
+    const centers = w >= 900 ? [[w * 0.12, h * 0.5], [w * 0.31, h * 0.44], [w * 0.5, h * 0.52], [w * 0.69, h * 0.44], [w * 0.88, h * 0.5]] : [[w * 0.5, h * 0.5]];
+    ctx.strokeStyle = c1 || "#f4f8ff";
+    ctx.fillStyle = c1 || "#f4f8ff";
+    ctx.lineCap = "round";
+    for (let ci = 0; ci < centers.length; ci++) {
+      const [cx, cy] = centers[ci];
+      const rays = 12;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 16, 0, Math.PI * 2);
+      ctx.fill();
+      for (let i = 0; i < rays; i++) {
+        const ang = i / rays * Math.PI * 2 + tt * (0.28 + ci * 0.06) * (ci % 2 === 0 ? 1 : -1);
+        const len = h * 0.28 + h * 0.26 * (0.5 + 0.5 * Math.sin(tt * 2.2 + i * 1.7 + ci));
+        ctx.lineWidth = i % 2 === 0 ? 11 : 6;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(ang) * 18, cy + Math.sin(ang) * 18);
+        ctx.lineTo(cx + Math.cos(ang) * len, cy + Math.sin(ang) * len);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx + Math.cos(ang) * (len * 0.86), cy + Math.sin(ang) * (len * 0.86), 8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    return;
+  }
   if (mode === "imagFrame") {
     const bg = c1 || "#1848b8";
     const border = c2 || "#edf4ff";
@@ -285,53 +371,7 @@ function drawProcedural(ctx, w, h, spec, t) {
     const px = 8;
     const ox = Math.round(w * 0.5) - 10 * px + sway * px;
     const oy = Math.round(h - 27 * px) + bob * 3;
-    const put = (gx, gy, gw, gh, col) => {
-      ctx.fillStyle = col;
-      ctx.fillRect(ox + gx * px, oy + gy * px, gw * px, gh * px);
-    };
-    put(0, 12, 3, 2, "#d8e2f4");
-    put(1, 10, 4, 3, "#f8faff");
-    put(2, 9, 3, 2, "#ffffff");
-    put(0, 14, 4, 2, "#e8effc");
-    put(3, 11, 3, 4, "#f4f8ff");
-    put(2, 15, 3, 2, "#c8d6ee");
-    put(5, 13, 10, 13, "#141620");
-    put(4, 14, 2, 12, "#0d0f16");
-    put(14, 14, 2, 12, "#0d0f16");
-    put(7, 12, 6, 2, "#1c1f2c");
-    put(8, 13, 4, 7, "#0d0e15");
-    put(7, 13, 1, 5, "#b82434");
-    put(12, 13, 1, 5, "#b82434");
-    for (let i = 0; i < 6; i++) {
-      put(6 + i, 15 + i, 2, 1, "#e8d08e");
-      put(12 - i, 15 + i, 2, 1, "#e8d08e");
-    }
-    put(6, 16, 1, 1, "#eef4ff");
-    put(13, 16, 1, 1, "#eef4ff");
-    put(5, 23, 10, 2, "#0a0b10");
-    put(8, 23, 4, 2, "#e8d08e");
-    put(8, 11, 4, 2, "#dfb99a");
-    put(6, 4, 8, 8, "#f2d4bc");
-    put(6, 4, 1, 8, "#e2be9e");
-    put(13, 4, 1, 8, "#e2be9e");
-    put(5, 1, 10, 3, hair);
-    put(6, 0, 8, 2, "#ff4858");
-    put(4, 3, 2, 7, "#9e0e1e");
-    put(14, 3, 2, 7, "#9e0e1e");
-    put(5, 9, 2, 3, hair);
-    put(13, 9, 2, 3, hair);
-    put(6, 3, 3, 2, hair);
-    put(10, 3, 2, 2, "#ff4858");
-    put(12, 3, 2, 2, hair);
-    put(7, 7, 2, 2, "#1b1922");
-    put(11, 7, 2, 2, "#1b1922");
-    put(7, 7, 1, 1, "#ffffff");
-    put(11, 7, 1, 1, "#ffffff");
-    put(6, 9, 2, 1, "#ef9a8e");
-    put(12, 9, 2, 1, "#ef9a8e");
-    put(9, 10, 2, 1, "#8e3838");
-    put(12, 11, 2, 2, "#e61e2b");
-    put(11, 10, 2, 2, "#e8eef8");
+    ctx.drawImage(getSingerPixelSprite(hair), ox, oy);
     if (hasBorder) {
       ctx.strokeStyle = border;
       ctx.lineWidth = 7;
@@ -425,23 +465,46 @@ function createScreenVisuals() {
   }
   let activeSpecs = {};
   let baseUrl = "";
+  let externalOverrideGroup = null;
+  let overriddenMeshes =  new Set();
+  function setExternalOverride(groupOrNull) {
+    externalOverrideGroup = groupOrNull || null;
+    overriddenMeshes =  new Set();
+    if (externalOverrideGroup) {
+      for (const s of screensForGroup(externalOverrideGroup)) overriddenMeshes.add(s.mesh);
+    }
+  }
   function restoreAll() {
     for (const [mesh, orig] of originals) {
+      if (overriddenMeshes.has(mesh)) continue;
       mesh.material = orig;
     }
     activeSpecs = {};
+  }
+  function isSlotFullyOverridden(groupKey) {
+    if (!externalOverrideGroup) return false;
+    if (externalOverrideGroup === groupKey) return true;
+    if (externalOverrideGroup === "all" && groupKey !== "tower") return true;
+    return false;
   }
   function applySpecs(specs, showBaseUrl = "") {
     snapshotOriginals();
     baseUrl = showBaseUrl || "";
     activeSpecs = specs || {};
-    for (const [mesh, orig] of originals) mesh.material = orig;
+    for (const [mesh, orig] of originals) {
+      if (overriddenMeshes.has(mesh)) continue;
+      mesh.material = orig;
+    }
     const orderedKeys = Object.keys(activeSpecs).sort((a, b) => a === "all" ? -1 : b === "all" ? 1 : 0);
     for (const grp of orderedKeys) {
       const spec = activeSpecs[grp];
       if (!spec || !spec.mode || spec.mode === "default") continue;
       const slot = getGroupSlot(grp);
+      const specKey = JSON.stringify(spec);
+      const changed = slot.specKey !== specKey;
       slot.spec = spec;
+      slot.specKey = specKey;
+      if (changed) slot.lastDraw = -999;
       slot.mat.emissiveIntensity = spec.intensity ?? 1.08;
       if (spec.mode === "image" && spec.src) {
         const url = /^https?:|^data:|^blob:/.test(spec.src) ? spec.src : baseUrl + spec.src;
@@ -461,23 +524,26 @@ function createScreenVisuals() {
           slot.mat.needsUpdate = true;
         }
       }
-      const useSpan = grp === "tower" && slot.sliceMats && spec.mode !== "image" && spec.span !== false && (spec.mode === "monoCards" || spec.mode === "monoSilhouettes" || spec.mode === "monoEyes" || spec.span === true);
+      const useSpan = grp === "tower" && slot.sliceMats && spec.mode !== "image" && spec.span !== false && (spec.mode === "monoCards" || spec.mode === "monoSilhouettes" || spec.mode === "monoEyes" || spec.mode === "monoBurst" || spec.span === true);
       const targets = screensForGroup(grp);
       if (useSpan) {
         for (let i = 0; i < targets.length; i++) {
+          if (overriddenMeshes.has(targets[i].mesh)) continue;
           const sm = slot.sliceMats[i % slot.sliceMats.length];
           sm.emissiveIntensity = spec.intensity ?? 1.08;
           targets[i].mesh.material = sm;
         }
       } else {
         for (const s of targets) {
+          if (overriddenMeshes.has(s.mesh)) continue;
           s.mesh.material = slot.mat;
         }
       }
     }
   }
   function update(t) {
-    for (const slot of groupMats.values()) {
+    for (const [grp, slot] of groupMats.entries()) {
+      if (isSlotFullyOverridden(grp)) continue;
       const spec = slot.spec;
       if (!spec || !spec.mode || spec.mode === "default" || spec.mode === "image") continue;
       const staticMode = spec.mode === "blackout" || spec.mode === "solid" || spec.mode === "title";
@@ -492,7 +558,7 @@ function createScreenVisuals() {
   function invalidate() {
     for (const slot of groupMats.values()) slot.lastDraw = -999;
   }
-  return { applySpecs, update, restoreAll, invalidate };
+  return { applySpecs, update, restoreAll, invalidate, setExternalOverride };
 }
 export {
   createScreenVisuals

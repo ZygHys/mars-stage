@@ -20,6 +20,9 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
   let time = 0;
   let rate = 1;
   let loop = true;
+  let externalClock = false;
+  let screenOverride = null;
+  let lastSteadyKey = "";
   let lastCueIdx = -2;
   let lastScreensKey = "";
   let lastPrismsKey = "";
@@ -31,7 +34,7 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
   let activeBaseUrl = "";
   async function discoverCatalog() {
     try {
-      const res = await fetch("./shows/index.json", { cache: "no-store" });
+      const res = await fetch("./shows/index.json", { cache: "no-cache" });
       if (!res.ok) return list();
       const idx = await res.json();
       if (Array.isArray(idx?.shows)) {
@@ -57,6 +60,7 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
     return [...catalog.values()].map(({ id, title, subtitle }) => ({ id, title, subtitle }));
   }
   function resetTrackCache() {
+    lastSteadyKey = "";
     lastCueIdx = -2;
     lastScreensKey = "";
     lastPrismsKey = "";
@@ -67,14 +71,20 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
     lastFountain = null;
   }
   function applyEvaluation(evalRes, simT) {
-    const { index, state: state2 } = evalRes;
+    const { index, state: state2, beatStepIdx, blend } = evalRes;
+    const steadyKey = blend >= 1 ? `${index}:${beatStepIdx}:${screenOverride || ""}` : "";
+    if (steadyKey && steadyKey === lastSteadyKey) {
+      visuals.update(simT);
+      return state2;
+    }
+    lastSteadyKey = steadyKey;
     rig.setRingsTarget(state2.stage.rings);
-    const bridgeKey = JSON.stringify(state2.stage.bridge);
+    const bridgeKey = typeof state2.stage.bridge === "object" ? JSON.stringify(state2.stage.bridge) : String(state2.stage.bridge);
     if (bridgeKey !== lastBridge) {
       lastBridge = bridgeKey;
       rig.setBridge(state2.stage.bridge);
     }
-    const liftKey = JSON.stringify(state2.stage.lift);
+    const liftKey = typeof state2.stage.lift === "object" ? JSON.stringify(state2.stage.lift) : String(state2.stage.lift);
     if (liftKey !== lastLift) {
       lastLift = liftKey;
       rig.setLift(state2.stage.lift);
@@ -89,21 +99,25 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
       lastPrismsKey = pKey;
       rig.setPrisms(state2.prisms);
     }
-    const lKey = JSON.stringify(state2.lights);
-    if (lKey !== lastLightsKey) {
-      lastLightsKey = lKey;
+    if (blend < 1) {
       rig.setLights(state2.lights);
+      lastLightsKey = "";
+    } else {
+      const lKey = `${index}:${beatStepIdx}`;
+      if (lKey !== lastLightsKey) {
+        lastLightsKey = lKey;
+        rig.setLights(state2.lights);
+      }
     }
     if (state2.lights.hourglass && state2.lights.hourglass !== lastHourglass) {
       lastHourglass = state2.lights.hourglass;
       rig.setHourglass(state2.lights.hourglass);
     }
-    const sKey = JSON.stringify(state2.screens);
+    const sKey = `${index}:${beatStepIdx}:${screenOverride || ""}`;
     if (index !== lastCueIdx || sKey !== lastScreensKey) {
       lastCueIdx = index;
       lastScreensKey = sKey;
       visuals.applySpecs(state2.screens, activeBaseUrl);
-      visuals.invalidate();
     }
     visuals.update(simT);
     return state2;
@@ -116,7 +130,8 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
       if (!entry) throw new Error(`未找到舞美节目包：${idOrData}`);
       if (entry.path) {
         try {
-          const res = await fetch(entry.path, { cache: "no-store" });
+          const cacheMode = /[?&]v=/.test(entry.path) ? "force-cache" : "no-cache";
+          const res = await fetch(entry.path, { cache: cacheMode });
           if (res.ok) raw = await res.json();
         } catch {
         }
@@ -142,7 +157,7 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
     const initEval = evaluateShow(compiled, 0);
     applyEvaluation(initEval, 0);
     performer.snapTo(initEval.state.performer);
-    emit();
+    emit(true);
     return state();
   }
   function play() {
@@ -186,9 +201,39 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
     loop = Boolean(on);
     emit();
   }
+  function setExternalClock(on) {
+    externalClock = Boolean(on);
+  }
+  function setExternalTime(sec, isPlaying = true) {
+    if (!compiled) return;
+    const dur = compiled.show.duration || 1;
+    const clamped = loop && sec >= dur ? sec % dur : Math.max(0, Math.min(dur, Number(sec) || 0));
+    const jumped = Math.abs(clamped - time) > 0.35;
+    time = clamped;
+    playing = Boolean(isPlaying);
+    if (jumped) {
+      resetTrackCache();
+      fx.clear();
+      const evalRes = evaluateShow(compiled, time);
+      applyEvaluation(evalRes, time);
+      performer.snapTo(evalRes.state.performer);
+    }
+  }
+  function setScreenOverride(groupOrNull) {
+    const next = groupOrNull || null;
+    if (next === screenOverride) return;
+    screenOverride = next;
+    visuals.setExternalOverride(next);
+    if (compiled) {
+      lastSteadyKey = "";
+      lastScreensKey = "";
+      const evalRes = evaluateShow(compiled, time);
+      applyEvaluation(evalRes, time);
+    }
+  }
   function update(dt, simT) {
     if (!compiled) return;
-    if (playing) {
+    if (playing && !externalClock) {
       time += dt * rate;
       if (time >= compiled.show.duration) {
         if (loop) {
@@ -201,8 +246,9 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
       }
     }
     const evalRes = evaluateShow(compiled, time);
-    const st = applyEvaluation(evalRes, simT);
-    performer.update(playing ? dt : 0, simT, st.performer, evalRes.cueElapsed || 0);
+    const animT = compiled ? time : simT;
+    const st = applyEvaluation(evalRes, animT);
+    performer.update(playing ? dt : 0, animT, st.performer, evalRes.cueElapsed || 0);
     fx.update(playing ? dt : 0, st.fx);
     emit();
   }
@@ -214,6 +260,7 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
       title: compiled?.show.title || "",
       subtitle: compiled?.show.subtitle || "",
       evidenceUrl: compiled?.show.evidenceUrl || catalog.get(activeId)?.evidenceUrl || "",
+      media: compiled?.show.media || null,
       playing,
       time,
       timeLabel: formatTimecode(time),
@@ -243,8 +290,13 @@ function createShowEngine({ scene, rig, embeddedShows = [], onUpdate = () => {
     stop,
     setRate,
     setLoop,
+    setExternalClock,
+    setExternalTime,
+    setScreenOverride,
     update,
-    state
+    state,
+    isActive: () => Boolean(compiled),
+    getTime: () => time
   };
 }
 export {

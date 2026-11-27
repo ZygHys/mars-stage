@@ -85,7 +85,6 @@ function buildScreens({ mountPA = mountScreenPA } = {}) {
     for (let x = -s.w / 2; x <= s.w / 2 + 0.01; x += s.w / 6) {
       const [hx, hz] = rotP(s, x, 0.45);
       movingHead(hx, top - 0.3, hz);
-      if (groupOf(s) === "side") screenTopSpots.push([hx, top - 0.2, hz, 2]);
     }
     g.add(box(s.w, s.bottom, 0.3, MAT.stageSkirt, 0, s.bottom / 2, 0));
     out.push(labeled(g, s.name));
