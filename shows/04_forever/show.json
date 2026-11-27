@@ -2,7 +2,6 @@
   "schema": "1.0",
   "id": "04_forever",
   "title": "04 Forever",
-  "subtitle": "三环分层 · 蓝粉洋红铺光 · V形光束 · 延伸台升起 · 圆台喷泉",
   "bpm": 116,
   "duration": "1:15",
   "night": true,
@@ -11,7 +10,7 @@
     {
       "at": "0:00",
       "fade": 1.5,
-      "label": "蓝粉温柔铺光 · 三环缓缓分层展开",
+      "label": "蓝粉温柔铺光",
       "stage": {
         "rings": "layered",
         "bridge": "low",
@@ -60,12 +59,27 @@
           "secondary": "#4c8cff",
           "speed": 0.7
         }
+      },
+      "performer": {
+        "visible": true,
+        "outfit": "whiteSuit",
+        "prop": "redMic",
+        "pose": "sing",
+        "path": [
+          "mainFront",
+          "catwalk",
+          "circleCenter"
+        ],
+        "speed": 2,
+        "spotlight": true,
+        "spotColor": "#ffe4f6",
+        "spotIntensity": 1.2
       }
     },
     {
       "at": "0:18",
       "fade": 1.8,
-      "label": "洋红粉紫梦幻 · 延伸台升起 + 圆台喷泉开启",
+      "label": "洋红粉紫梦幻",
       "stage": {
         "rings": "layered",
         "bridge": "high",
@@ -138,7 +152,7 @@
     {
       "at": "0:42",
       "fade": 1.4,
-      "label": "粉紫金白高潮 · V形光束 + 空中吊笼与浪漫烟花",
+      "label": "粉紫金白高潮",
       "stage": {
         "rings": [
           [
@@ -236,12 +250,24 @@
           ],
           "rate": 1.6
         }
+      },
+      "performer": {
+        "path": [
+          "circleCenter",
+          "bridgeLeft",
+          "circleCenter",
+          "bridgeRight"
+        ],
+        "speed": 2.4,
+        "pose": "openArms",
+        "spotColor": "#fff2d8",
+        "spotIntensity": 1.35
       }
     },
     {
       "at": "1:04",
       "fade": 2,
-      "label": "柔和收尾 · 延伸台缓慢回降",
+      "label": "柔和收尾",
       "stage": {
         "rings": "layered",
         "bridge": "low",

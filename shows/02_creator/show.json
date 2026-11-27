@@ -2,7 +2,6 @@
   "schema": "1.0",
   "id": "02_creator",
   "title": "02 造物者",
-  "subtitle": "参考 09-27 灯光提示：暗红起步 → 金黄光束扇交叉扫射 → 冰蓝粉交替 → 橙红烈焰",
   "bpm": 132,
   "duration": "1:15",
   "night": true,
@@ -45,12 +44,22 @@
         "tower": {
           "mode": "default"
         }
+      },
+      "performer": {
+        "visible": true,
+        "outfit": "goldRoyal",
+        "prop": "redMic",
+        "pose": "sing",
+        "zone": "mainFront",
+        "spotlight": true,
+        "spotColor": "#ffe6a8",
+        "spotIntensity": 1.2
       }
     },
     {
       "at": "0:12",
       "fade": 1,
-      "label": "金黄色光束扇交叉扫射 · 屏塔合墙",
+      "label": "金黄色光束扇交叉扫射",
       "stage": {
         "rings": "tiered"
       },
@@ -93,7 +102,7 @@
     {
       "at": "0:28",
       "fade": 0.8,
-      "label": "冰蓝光束扇 · 锯齿阵型",
+      "label": "冰蓝光束扇",
       "stage": {
         "rings": "tilted"
       },
@@ -210,7 +219,7 @@
     {
       "at": "0:52",
       "fade": 0.9,
-      "label": "全场橙红烈焰 · 屏面火焰与焰火喷射",
+      "label": "全场橙红烈焰",
       "stage": {
         "rings": "bowl",
         "bridge": "high"
@@ -267,6 +276,18 @@
           "color": "#ff4a14",
           "intensity": 1.4
         }
+      },
+      "performer": {
+        "path": [
+          "mainFront",
+          "catwalk",
+          "circleCenter",
+          "bridgeRight"
+        ],
+        "speed": 2.8,
+        "pose": "rock",
+        "spotColor": "#ffdda0",
+        "spotIntensity": 1.35
       }
     },
     {

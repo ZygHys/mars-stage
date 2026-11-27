@@ -2,7 +2,6 @@
   "schema": "1.0",
   "id": "03_flame",
   "title": "03 火焰",
-  "subtitle": "参考 09-27 灯光提示：白色块面 → 竖直金色光柱 → 深蓝烟雾反转 → 红白频闪气柱与烟花",
   "bpm": 138,
   "duration": "1:20",
   "night": true,
@@ -11,7 +10,7 @@
     {
       "at": "0:00",
       "fade": 0.9,
-      "label": "极简冷白舞台 · 红色控制塔竖条",
+      "label": "极简冷白舞台",
       "stage": {
         "rings": "flat",
         "bridge": "low",
@@ -53,12 +52,22 @@
           "secondary": "#ffffff",
           "speed": 1
         }
+      },
+      "performer": {
+        "visible": true,
+        "outfit": "blackRock",
+        "prop": "micStand",
+        "pose": "rock",
+        "zone": "mainFront",
+        "spotlight": true,
+        "spotColor": "#ffffff",
+        "spotIntensity": 1.25
       }
     },
     {
       "at": "0:16",
       "fade": 0.8,
-      "label": "红白交替 · 舞台后方金色竖直光柱冲天",
+      "label": "红白交替",
       "stage": {
         "rings": "tiered"
       },
@@ -105,7 +114,7 @@
     {
       "at": "0:34",
       "fade": 1.6,
-      "label": "深蓝反转 · 蓝色浓雾与青色背光",
+      "label": "深蓝反转",
       "stage": {
         "rings": "bowl",
         "lift": "cage"
@@ -155,12 +164,19 @@
           "secondary": "#28c8ff",
           "speed": 0.8
         }
+      },
+      "performer": {
+        "zone": "cage",
+        "prop": "redMic",
+        "pose": "openArms",
+        "spotColor": "#98dcff",
+        "spotIntensity": 1.3
       }
     },
     {
       "at": "0:50",
       "fade": 0.5,
-      "label": "白绿爆亮 · 切黄绿浓烟与白光扇",
+      "label": "白绿爆亮",
       "stage": {
         "rings": "tilted",
         "lift": "up"
@@ -214,7 +230,7 @@
     {
       "at": "1:02",
       "fade": 0.4,
-      "label": "高潮爆裂 · 红白频闪 + 白色气柱 + 金红烟花",
+      "label": "高潮爆裂",
       "stage": {
         "rings": "layered",
         "bridge": "high",

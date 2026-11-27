@@ -2,7 +2,6 @@
   "schema": "1.0",
   "id": "01_opening_meili",
   "title": "01 开场 · 美丽",
-  "subtitle": "双色交叉激光（洋红 + 青白）· 屏塔变阵 · 彩烟烟花",
   "bpm": 124,
   "duration": "1:30",
   "night": true,
@@ -79,7 +78,7 @@
     {
       "at": "0:08",
       "fade": 2,
-      "label": "紫红铺光 · 左洋红右青白双色激光扇",
+      "label": "紫红铺光",
       "stage": {
         "rings": "flat",
         "lift": "down"
@@ -173,12 +172,22 @@
           "secondary": "#ff3278",
           "speed": 0.9
         }
+      },
+      "performer": {
+        "visible": true,
+        "outfit": "redCoat",
+        "prop": "redMic",
+        "pose": "stand",
+        "zone": "mainSteps",
+        "spotlight": true,
+        "spotColor": "#ffd8ec",
+        "spotIntensity": 1.15
       }
     },
     {
       "at": "0:24",
       "fade": 0.8,
-      "label": "橙色焰火爆开 · 瞬切深蓝紫",
+      "label": "橙色焰火爆开",
       "stage": {
         "rings": "tiered"
       },
@@ -243,7 +252,7 @@
     {
       "at": "0:38",
       "fade": 1.5,
-      "label": "第一段彩色烟花 · 紫色激光扇",
+      "label": "第一段彩色烟花",
       "stage": {
         "rings": "layered",
         "lift": "up"
@@ -326,12 +335,24 @@
           ],
           "rate": 1.4
         }
+      },
+      "performer": {
+        "path": [
+          "mainSteps",
+          "mainFront",
+          "catwalk",
+          "circleCenter"
+        ],
+        "speed": 2.6,
+        "pose": "sing",
+        "spotColor": "#fff6e8",
+        "spotIntensity": 1.25
       }
     },
     {
       "at": "0:56",
       "fade": 1.2,
-      "label": "多色激光秀（蓝·黄绿·紫）· 八屏合墙",
+      "label": "多色激光秀（蓝",
       "stage": {
         "rings": "tilted",
         "bridge": "high",
@@ -426,7 +447,7 @@
     {
       "at": "1:12",
       "fade": 0.8,
-      "label": "高潮爆点 · 红焰火 + 全场烟花 + 激光齐射",
+      "label": "高潮爆点",
       "stage": {
         "rings": "layered",
         "bridge": "high",
@@ -533,12 +554,18 @@
           "color": "#ff3b1a",
           "intensity": 1.35
         }
+      },
+      "performer": {
+        "zone": "circleCenter",
+        "pose": "openArms",
+        "spotColor": "#fff4d8",
+        "spotIntensity": 1.4
       }
     },
     {
       "at": "1:24",
       "fade": 2.5,
-      "label": "收光落幕 · 余烟微光",
+      "label": "收光落幕",
       "stage": {
         "rings": "stowed",
         "bridge": "low",

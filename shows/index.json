@@ -1,0 +1,36 @@
+{
+  "schema": "1.0",
+  "version": "5ce781f",
+  "shows": [
+    {
+      "id": "1115_bufengpei",
+      "title": "11-15 · 不奉陪",
+      "path": "./shows/1115_bufengpei/show.json?v=5ce781f",
+      "baseUrl": "./shows/1115_bufengpei/"
+    },
+    {
+      "id": "01_opening_meili",
+      "title": "01 开场 · 美丽",
+      "path": "./shows/01_opening_meili/show.json?v=5ce781f",
+      "baseUrl": "./shows/01_opening_meili/"
+    },
+    {
+      "id": "02_creator",
+      "title": "02 造物者",
+      "path": "./shows/02_creator/show.json?v=5ce781f",
+      "baseUrl": "./shows/02_creator/"
+    },
+    {
+      "id": "03_flame",
+      "title": "03 火焰",
+      "path": "./shows/03_flame/show.json?v=5ce781f",
+      "baseUrl": "./shows/03_flame/"
+    },
+    {
+      "id": "04_forever",
+      "title": "04 Forever",
+      "path": "./shows/04_forever/show.json?v=5ce781f",
+      "baseUrl": "./shows/04_forever/"
+    }
+  ]
+}

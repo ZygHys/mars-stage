@@ -7,7 +7,7 @@
 <style>
   html, body { margin: 0; height: 100%; overflow: hidden; background: #c9d3dc; font: 13px/1.4 "PingFang SC", system-ui, sans-serif; }
   #app { position: fixed; inset: 0; }
-  /* 加载画面（loader.js）：夜空 + canvas 粒子烟花（GSAP 驱动）；脚本还没跑起来时文字自己呼吸 */
+  
   #loader { position: fixed; inset: 0; z-index: 50; overflow: hidden; color: #f1f2f6; background: #05060d; font-family: "PingFang SC", system-ui, sans-serif; }
   #loader .ldSky { position: absolute; inset: 0; }
   #loader .ldSky canvas { display: block; }
@@ -18,10 +18,10 @@
   #loader .ldBar i { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(.03); background: linear-gradient(90deg, #5ab8f0, #f07ab8, #f4d24a); }
   #loader .ldText { font-size: 12px; color: #c9ccd8; letter-spacing: .12em; animation: ldPulse 1.6s ease-in-out infinite; }
   @keyframes ldPulse { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
-  #app > canvas { display: block; }   /* 只管三维画布；小地图的画布在 #app 里，不能用 #app canvas（ID 选择器会压过 .minimap.closed） */
+  #app > canvas { display: block; }   
   .labels { position: absolute; inset: 0; pointer-events: none; }
   .tag { padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,.62); color: #fff; font-size: 12px; white-space: nowrap; }
-  /* 顶部一条控制栏 + 分组面板（舞台 / 环境 / 显示 / ?），磨砂深色，尽量少挡画面 */
+  
   #ui { position: fixed; left: 12px; top: calc(10px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 6px; max-width: calc(100vw - 24px); z-index: 5; }
   #ui[hidden] { display: none; }
   #ui .bar { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; padding: 4px; border-radius: 10px; background: rgba(14,15,18,.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); align-self: flex-start; max-width: 100%; }
@@ -42,18 +42,18 @@
   #sceneTime { width: clamp(90px, 22vw, 240px); accent-color: #e49e66; cursor: pointer; }
   #ui .hint { color: #e8eaee; line-height: 1.7; font-size: 12.5px; }
   #ui .hint b { color: #fff; margin-right: 6px; }
-  /* 无人机读数（大疆风格） */
+  
   .hud { position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 14px; padding: 6px 14px; border-radius: 10px; background: rgba(10,11,14,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; font: 600 13px/1.2 "PingFang SC", system-ui, sans-serif; font-variant-numeric: tabular-nums; pointer-events: none; z-index: 4; white-space: nowrap; }
   .hud[hidden] { display: none; }
   .hud i { font-style: normal; font-weight: 400; color: #9fb4c8; margin-right: 4px; font-size: 11px; }
-  /* 小地图 */
+  
   .minimap { position: fixed; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 6px; border-radius: 10px; background: rgba(14,15,18,.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #ddd; font: 11px "PingFang SC", system-ui, sans-serif; z-index: 4; }
   .minimap[hidden] { display: none; }
   .minimap .mmHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
   .minimap .mmToggle { font: inherit; border: 0; border-radius: 6px; padding: 2px 8px; background: rgba(255,255,255,.12); color: #eee; cursor: pointer; }
   .minimap canvas { display: block; border-radius: 6px; cursor: crosshair; }
   .minimap .mmTip { height: 14px; margin-top: 3px; color: #ffd65a; font-variant-numeric: tabular-nums; }
-  /* 触屏：左下摇杆、右下按钮（touch-controls.js）；无人机显示升降，走路显示跳 */
+  
   #app > canvas { touch-action: none; }
   .touchUI { position: fixed; inset: 0; pointer-events: none; z-index: 4; }
   .touchUI .tcStick { position: absolute; left: calc(18px + env(safe-area-inset-left, 0px)); bottom: calc(62px + env(safe-area-inset-bottom, 0px)); width: 128px; height: 128px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.10), rgba(10,11,14,.38)); border: 1.5px solid rgba(255,255,255,.45); pointer-events: auto; touch-action: none; display: grid; place-items: center; }
@@ -71,26 +71,27 @@
   .minimap .mmTabs button.on { background: #c0392b; color: #fff; }
   .minimap.closed canvas, .minimap.closed .mmTip, .minimap.closed .mmHead span { display: none; }
   #ui .panel.video { max-width: min(720px, 100%); }
-  #ui .panel.show { max-width: min(780px, 100%); }
+  #ui .panel.show { max-width: min(560px, 100%); }
   #ui .showTimeline { flex-basis: 100%; display: flex; align-items: center; gap: 8px; }
-  #ui .showTimeline input[type="range"] { flex: 1; min-width: 140px; accent-color: #e048b8; cursor: pointer; }
+  #ui .showTimeline input[type="range"] { flex: 1; min-width: 120px; accent-color: #e048b8; cursor: pointer; }
   #ui .showTime { color: #fff; font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  #ui .showCueLabel { color: #ffd47a; font-size: 12px; max-width: 24em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #ui .showCues { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px; max-height: 82px; overflow: auto; }
-  #ui .showCues button { font-size: 11.5px; padding: 3px 7px; background: rgba(255,255,255,.07); }
+  #ui .showCueLabel { color: #ffd47a; font-size: 12px; max-width: 11em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #ui .showCues { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px; max-height: 58px; overflow: auto; }
+  #ui .showCues[hidden] { display: none; }
+  #ui .showCues button { font-size: 11.5px; padding: 3px 7px; background: rgba(255,255,255,.07); max-width: 13em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #ui .showCues button.on { background: #9b2fae; color: #fff; }
-  #ui .showMeta { flex-basis: 100%; color: #b9c0c9; font-size: 11.5px; line-height: 1.45; }
+  #ui .showMeta { flex-basis: 100%; color: #ffb4b4; font-size: 11.5px; line-height: 1.45; }
+  #ui .showMeta[hidden] { display: none; }
   #ui .file input { font-size: 11px; color: #cfd3da; max-width: 15em; }
   #ui .urlRow { display: inline-flex; gap: 4px; align-items: center; }
   #ui #vidUrl { font: inherit; font-size: 12.5px; width: clamp(180px, 30vw, 340px); padding: 5px 8px; border-radius: 7px; border: 0; background: rgba(255,255,255,.1); color: #fff; }
   #ui #vidUrl::placeholder { color: #9aa0a8; }
   #ui .vidStatus { flex-basis: 100%; color: #b9c0c9; font-size: 11.5px; line-height: 1.5; }
-  #app > canvas { position: relative; z-index: 1; }   /* 三维画布；CSS3D 播放器层在它后面，从屏面的透明窗口透出来 */
+  #app > canvas { position: relative; z-index: 1; }   
   .css3d { z-index: 0; background: #000; }
   .css3d.interact { z-index: 3; background: transparent; }
   .labels { z-index: 2; }
-  /* 网页播放器只加载这一个：平时藏在三维画布后面（z-index 0），画面靠“共享标签页”录下来同步铺到所有大屏；
-     “操作播放器”时缩小一半浮到左下角（video-screens.js） */
+  
   .vidSource { position: fixed; left: 0; bottom: 0; z-index: 0; pointer-events: none; }
   .vidSource .vsHead { display: none; }
   .vidSource.front { left: 12px; bottom: calc(50px + env(safe-area-inset-bottom, 0px)); z-index: 6; padding: 5px; border-radius: 10px; background: rgba(14,15,18,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #e6e9ee; font: 12px/1.3 "PingFang SC", system-ui, sans-serif; box-shadow: 0 4px 18px rgba(0,0,0,.3); pointer-events: auto; }
@@ -100,7 +101,7 @@
   .vidSource .vsBody { position: relative; isolation: isolate; overflow: hidden; background: #000; }
   .vidSource .vsStage { position: absolute; left: 0; top: 0; }
   .vidSource .vsView { position: absolute; left: 0; overflow: hidden; isolation: isolate; background: #000; }
-  .vidSource.front .vsView { overflow: visible; }   /* 浮出来操作时露出标题栏和控制条；录的仍是视频区那一块 */
+  .vidSource.front .vsView { overflow: visible; }   
   .vidSource iframe { position: absolute; left: 0; border: 0; }
   @media (max-width: 620px) { .hud { gap: 8px; font-size: 11px; padding: 5px 8px; } .hud > :nth-child(3), .hud > :nth-child(4), .hud > :nth-child(6) { display: none; } .minimap canvas { width: 150px !important; height: auto !important; } }
 </style>
@@ -109,58 +110,6 @@
 </script>
 </head>
 <body>
-<script id="live-dev">
-// 开发用实时预览（打包成单文件时 build.mjs 会删掉这段）。
-// ?live=1：每 2.5 秒问一次 /version；源码变了先在隐藏的 iframe（?probe=1）里把新版本完整跑一遍，
-// 跑通了才刷新当前页面；跑出错就保持当前画面，并在右下角写出错误，等下一次修改再试。当前页面本身坏了就直接刷新。
-(() => {
-  const q = new URLSearchParams(location.search);
-  if (q.get('probe') === '1') {
-    let sent = false; const send = (ok, msg) => { if (!sent) { sent = true; parent.postMessage({ liveProbe: 1, ok, msg }, '*'); } };
-    addEventListener('error', (e) => send(false, String(e.message || e.error)));
-    addEventListener('unhandledrejection', (e) => send(false, String(e.reason)));
-    const ce = console.error; console.error = (...a) => { if (/Shader Error|shader error/i.test(String(a[0]))) send(false, '着色器编译失败：' + String(a[0]).slice(0, 160)); ce.apply(console, a); };
-    const t0 = Date.now(), iv = setInterval(() => {
-      if (window.G) { clearInterval(iv); try { window.G.step(3); send(true); } catch (e) { send(false, String(e)); } }
-      else if (Date.now() - t0 > 90000) { clearInterval(iv); send(false, '90 秒内没有启动'); }
-    }, 300);
-    return;
-  }
-  if (q.get('live') !== '1') return;
-  let bootErr = null, seen = null, probing = null, lastErr = '';
-  addEventListener('error', (e) => { if (!window.G) bootErr = String(e.message || e.error); });
-  addEventListener('unhandledrejection', (e) => { if (!window.G) bootErr = String(e.reason); });
-  const badge = document.createElement('div');
-  badge.style.cssText = 'position:fixed;right:10px;bottom:10px;max-width:60vw;padding:4px 8px;border-radius:6px;background:rgba(20,20,24,.78);color:#fff;font:12px/1.4 "PingFang SC",system-ui,sans-serif;z-index:9';
-  addEventListener('DOMContentLoaded', () => document.body.appendChild(badge));
-  const say = (t) => (badge.textContent = t);
-  const tick = async () => {
-    let r; try { r = await (await fetch('/version', { cache: 'no-store' })).json(); } catch (e) { say('预览服务未连接'); return; }
-    if (seen === null) seen = r.v;
-    if (!r.ok) { say('源码正在修改中（暂不刷新）'); return; }
-    if (probing) return;
-    if (r.v === seen) {
-      say(window.G ? '实时预览 · 已是最新 ' + new Date(r.v).toLocaleTimeString() + (lastErr ? '（更新的版本运行出错，暂未切换：' + lastErr + '）' : '') : bootErr ? '当前版本运行出错，等修正后自动刷新：' + bootErr : '加载中…');
-      return;
-    }
-    if (!window.G) { location.reload(); return; }
-    probing = r.v; say('发现新版本，正在后台试运行…');
-    const f = document.createElement('iframe');
-    f.style.cssText = 'position:fixed;left:0;top:0;width:640px;height:400px;opacity:0;pointer-events:none;z-index:-1';
-    const done = (ok, msg) => {
-      removeEventListener('message', onMsg); clearTimeout(to); f.remove();
-      if (ok) { try { window.__liveSave && window.__liveSave(); } catch (e) {} location.reload(); return; }
-      seen = probing; probing = null; lastErr = msg || '未知错误'; console.warn('[live] 新版本运行出错：', msg);
-    };
-    const onMsg = (e) => { if (e.source === f.contentWindow && e.data && e.data.liveProbe) done(e.data.ok, e.data.msg); };
-    const to = setTimeout(() => done(false, '试运行超时'), 120000);
-    addEventListener('message', onMsg);
-    f.src = location.pathname + '?probe=1&ao=0&ui=0';
-    document.body.appendChild(f);
-  };
-  setInterval(tick, 2500);
-})();
-</script>
 <div id="loader" aria-live="polite"><div class="ldSky"></div><div class="ldCenter"><div class="ldTitle"><b>MARS CONCERT</b><span>火星演唱会 · 南京汤山 · 场地还原</span></div><div class="ldBar"><i></i></div><div class="ldText">加载中</div></div></div>
 <div id="app"></div>
 <div id="ui"></div>

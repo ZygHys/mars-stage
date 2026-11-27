@@ -1,0 +1,4233 @@
+{
+  "schema": "1.0",
+  "id": "1115_bufengpei",
+  "title": "11-15 · 不奉陪",
+  "source": {
+    "date": "2026-11-15",
+    "city": "南京汤山"
+  },
+  "bpm": 130,
+  "beatOffset": 0.45,
+  "duration": "3:44",
+  "night": true,
+  "loop": true,
+  "defaults": {
+    "stage": {
+      "rings": "flat",
+      "bridge": "low",
+      "lift": "down",
+      "fountain": false
+    },
+    "prisms": "matrix",
+    "lights": {
+      "beams": [
+        "#ff2428",
+        "#9e0d12"
+      ],
+      "pattern": "down",
+      "beamSpread": "sharp",
+      "beamI": 0.08,
+      "wash": "#4a060a",
+      "washI": 0.35,
+      "haze": 0.9,
+      "hazeI": 0.65,
+      "hazeC": "#7a0c10",
+      "strips": "#ff1e24",
+      "towerStrips": "#2a0608",
+      "hgColor": "#e81820",
+      "hgTopColor": "#ff1c24",
+      "hgTopI": 1.15,
+      "screenTopColor": "#ff1e24",
+      "screenTopI": 0.2,
+      "canopyMatrixColor": "#286eff",
+      "canopyMatrixI": 0,
+      "stripI": 0.5,
+      "hourglass": "amberBars",
+      "laserOn": false,
+      "crowdGlow": "#ff6a8a",
+      "crowdGlowI": 0.9,
+      "beamSwing": 1,
+      "beamChase": "none",
+      "beamChaseSpeed": 8,
+      "beamLayer2": null,
+      "frontStrobeI": 0,
+      "frontStrobeColor": "#ffffff",
+      "frontStrobeMode": "chase",
+      "frontStrobeSpeed": 12
+    },
+    "screens": {
+      "all": {
+        "mode": "blackout"
+      },
+      "tower": {
+        "mode": "blackout"
+      }
+    },
+    "performer": {
+      "visible": true,
+      "outfit": "redFeather",
+      "prop": "redMic",
+      "pose": "stand",
+      "zone": "mainCenter",
+      "facingDeg": 0,
+      "spotlight": true,
+      "spotColor": "#ffd8d8",
+      "spotIntensity": 0.6
+    }
+  },
+  "cues": [
+    {
+      "at": "0:00",
+      "fade": 0.25,
+      "label": "前奏暗红",
+      "stage": {
+        "rings": "flat",
+        "bridge": "low",
+        "lift": "down",
+        "fountain": false
+      },
+      "prisms": "matrix",
+      "lights": {
+        "beams": [
+          "#ff2028",
+          "#880810"
+        ],
+        "pattern": "down",
+        "beamSpread": "sharp",
+        "beamI": 0.08,
+        "wash": "#68080c",
+        "washI": 0.45,
+        "hazeI": 0.72,
+        "hazeC": "#880c12",
+        "strips": "#ff1c24",
+        "towerStrips": "#1c0508",
+        "hgColor": "#e8141c",
+        "hgTopColor": "#ff1c24",
+        "hgTopI": 1.25,
+        "screenTopI": 0.1,
+        "canopyMatrixI": 0,
+        "stripI": 0.5,
+        "hourglass": "amberBars",
+        "laserOn": false,
+        "crowdGlow": "#ff6a8a",
+        "crowdGlowI": 0.85,
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0
+      },
+      "screens": {
+        "all": {
+          "mode": "blackout"
+        },
+        "tower": {
+          "mode": "bars",
+          "primary": "#ff1820",
+          "secondary": "#380408",
+          "speed": 0.8
+        }
+      },
+      "performer": {
+        "visible": true,
+        "outfit": "redFeather",
+        "prop": "redMic",
+        "pose": "stand",
+        "zone": "mainCenter",
+        "spotlight": true,
+        "spotColor": "#ff9a9a",
+        "spotIntensity": 0.55
+      }
+    },
+    {
+      "at": "0:01.5",
+      "fade": 0.2,
+      "label": "双色激光破空",
+      "stage": {
+        "rings": "flat",
+        "bridge": "low",
+        "lift": "down"
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#8cbfff",
+          "#dceaff"
+        ],
+        "pattern": "waveWhip",
+        "beamSpread": "sharp",
+        "beamSpeed": 1.45,
+        "beamI": 0.56,
+        "wash": [
+          "#243498",
+          "#2d68e8",
+          "#2d78d8"
+        ],
+        "washI": 0.85,
+        "hazeI": 0.85,
+        "hazeC": "#3858a8",
+        "strips": "#e8f2ff",
+        "towerStrips": "#eef4ff",
+        "hgColor": "#eef6ff",
+        "hgTopColor": "#c8e0ff",
+        "hgTopI": 0.35,
+        "screenTopColor": "#9cc8ff",
+        "screenTopI": 0.9,
+        "canopyMatrixColor": "#286eff",
+        "canopyMatrixI": 0.35,
+        "stripI": 1.05,
+        "hourglass": "inkWhite",
+        "laserOn": true,
+        "laserI": 1.5,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "count": 2,
+            "color": "#f020ff",
+            "edgeColor": "#a800ff",
+            "style": "hero",
+            "motion": "sweep",
+            "spread": 0.48,
+            "pitch": 0.72,
+            "sweep": 0.24,
+            "speed": 1.25,
+            "aimBias": -0.1,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageCenter",
+            "count": 4,
+            "color": "#78ffae",
+            "edgeColor": "#d23cff",
+            "style": "hero",
+            "motion": "sweep",
+            "spread": 0.36,
+            "pitch": 0.48,
+            "sweep": 0.26,
+            "speed": 1.35,
+            "aimBias": 0.65,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "fineWeb",
+            "count": 10,
+            "color": "#d8ecff",
+            "edgeColor": "#78b8ff",
+            "style": "fine",
+            "motion": "step",
+            "spread": 1.85,
+            "pitch": 0.52,
+            "sweep": 0.45,
+            "speed": 1.8,
+            "gain": 0.62,
+            "zDir": 0.48
+          },
+          {
+            "emitter": "lowCurtain",
+            "count": 4,
+            "color": "#eef8ff",
+            "edgeColor": "#90d4ff",
+            "style": "curtain",
+            "motion": "sweep",
+            "spread": 1.35,
+            "pitch": 0.1,
+            "sweep": 0.45,
+            "speed": 1.6,
+            "gain": 0.72,
+            "zDir": 0.82
+          }
+        ],
+        "crowdGlow": "#ff789a",
+        "crowdGlowI": 1,
+        "beamSwing": 0.9,
+        "beamChase": "wave",
+        "beamChaseSpeed": 7.5,
+        "beamLayer2": null,
+        "frontStrobeI": 0.4,
+        "frontStrobeColor": "#b8dcff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 10
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1d58d8",
+          "secondary": "#eef4ff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "blackout"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1d58d8",
+          "secondary": "#eef4ff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock",
+        "spotColor": "#e6f0ff",
+        "spotIntensity": 1.15
+      }
+    },
+    {
+      "at": "0:07.5",
+      "fade": 0.25,
+      "label": "前奏",
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#4a94ff",
+          "#b8dcff",
+          "#ffffff"
+        ],
+        "pattern": "whipSweep",
+        "beamSpread": "sharp",
+        "beamSpeed": 2.35,
+        "beamI": 0.88,
+        "wash": [
+          "#1e52e0",
+          "#2d74ff",
+          "#1e52e0"
+        ],
+        "washI": 1.05,
+        "hazeI": 1.15,
+        "hazeC": "#3468e0",
+        "strips": "#e8f2ff",
+        "towerStrips": "#dce8ff",
+        "hgColor": "#dceaff",
+        "hgTopColor": "#98ccff",
+        "hgTopI": 0.45,
+        "screenTopColor": "#6eb4ff",
+        "screenTopI": 1.05,
+        "canopyMatrixColor": "#2a72ff",
+        "canopyMatrixI": 1.25,
+        "hourglass": "inkWhite",
+        "laserOn": true,
+        "laserI": 1.5,
+        "beamSwing": 1.1,
+        "beamChase": "wave",
+        "beamChaseSpeed": 10,
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#8cd8ff"
+          ],
+          "pattern": "scissorWhip",
+          "speed": 2.8,
+          "swing": 1.05,
+          "spread": "sharp",
+          "intensity": 0.95
+        },
+        "frontStrobeI": 0.95,
+        "frontStrobeColor": "#d8ecff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 14
+      },
+      "beatCycle": {
+        "unitBeats": 0.5,
+        "steps": [
+          {
+            "lights": {
+              "pattern": "whipSweep",
+              "beamSpread": "sharp",
+              "beamSpeed": 2.4,
+              "beamI": 0.78,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#74d4ff"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3,
+                "swing": 1.1,
+                "spread": "sharp",
+                "intensity": 0.9
+              },
+              "frontStrobeI": 0.95,
+              "frontStrobeMode": "chase",
+              "hourglass": "zebra",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#74ffc2",
+                  "edgeColor": "#30d4ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.55,
+                  "pitch": 0.72,
+                  "sweep": 0.75,
+                  "speed": 2.6,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 14,
+                  "color": "#e0f0ff",
+                  "edgeColor": "#80b8ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.1,
+                  "pitch": 0.54,
+                  "sweep": 0.62,
+                  "speed": 2.6,
+                  "gain": 0.78,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#ffffff",
+                  "edgeColor": "#8ce0ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.4,
+                  "gain": 0.88,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          },
+          {
+            "lights": {
+              "pattern": "waveWhip",
+              "beamSpread": "sharp",
+              "beamSpeed": 2.5,
+              "beamI": 0.98,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#b4dcff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 2.9,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.05
+              },
+              "frontStrobeI": 1.1,
+              "frontStrobeMode": "centerOut",
+              "hourglass": "inkWhite",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageCenter",
+                  "count": 3,
+                  "color": "#ffffff",
+                  "edgeColor": "#9cc8ff",
+                  "style": "hero",
+                  "motion": "step",
+                  "width": 4.8,
+                  "spread": 0.42,
+                  "pitch": 0.92,
+                  "sweep": 0.32,
+                  "speed": 2.2,
+                  "zDir": 0.35
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#e6f2ff",
+                  "edgeColor": "#88c2ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.58,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "gain": 0.82,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eef8ff",
+                  "edgeColor": "#98dcff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamSpeed": 2.6,
+              "beamI": 0.68,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#70b4ff",
+                  "#ffffff"
+                ],
+                "pattern": "waveWhip",
+                "speed": 3,
+                "swing": 1.05,
+                "spread": "sharp",
+                "intensity": 0.85
+              },
+              "frontStrobeI": 0.9,
+              "frontStrobeMode": "strobe",
+              "hourglass": "zebra",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#f024ff",
+                  "edgeColor": "#a810ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.38,
+                  "pitch": 0.68,
+                  "sweep": 0.72,
+                  "speed": 2.8,
+                  "aimBias": 0.16,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#dceeff",
+                  "edgeColor": "#90c0ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.15,
+                  "pitch": 0.54,
+                  "sweep": 0.65,
+                  "speed": 2.8,
+                  "gain": 0.78,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 5,
+                  "color": "#e8f6ff",
+                  "edgeColor": "#84d4ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.3,
+                  "gain": 0.82,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamSpeed": 2.5,
+              "beamI": 1.28,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#a8e0ff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.4,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.25
+              },
+              "frontStrobeI": 1.25,
+              "frontStrobeMode": "strobe",
+              "hourglass": "inkWhite",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "fineWeb",
+                  "count": 14,
+                  "color": "#eef6ff",
+                  "edgeColor": "#8ec8ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.1,
+                  "pitch": 0.6,
+                  "sweep": 0.58,
+                  "speed": 2.6,
+                  "gain": 0.72,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 4,
+                  "color": "#ffffff",
+                  "edgeColor": "#9ce0ff",
+                  "style": "curtain",
+                  "motion": "sweep",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.2,
+                  "gain": 0.78,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1c62e8",
+          "secondary": "#f0f5ff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU Hey Hey"
+        },
+        "tower": {
+          "mode": "monoCards",
+          "primary": "#f4f7fc",
+          "text": "♣ H E Y ♠ H E Y"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1c62e8",
+          "secondary": "#f0f5ff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU Hey Hey",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "sing"
+      }
+    },
+    {
+      "at": "0:15",
+      "fade": 0.7,
+      "label": "第一段主歌",
+      "stage": {
+        "rings": "layered"
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#2d6cff",
+          "#6ea8ff",
+          "#dce8ff"
+        ],
+        "pattern": "vertical",
+        "beamSpread": "sharp",
+        "beamSpeed": 0.5,
+        "beamI": 0.48,
+        "wash": [
+          "#0e2058",
+          "#1e50c8",
+          "#0e2058"
+        ],
+        "washI": 0.82,
+        "hazeI": 0.9,
+        "hazeC": "#204498",
+        "strips": "#dce6ff",
+        "towerStrips": "#e2ecff",
+        "hgColor": "#dce8ff",
+        "hgTopColor": "#5894ff",
+        "hgTopI": 0.25,
+        "screenTopColor": "#5894ff",
+        "screenTopI": 0.65,
+        "canopyMatrixColor": "#2872ff",
+        "canopyMatrixI": 1.4,
+        "hourglass": "zebra",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0.12,
+        "frontStrobeColor": "#5898ff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 5
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1646a8",
+          "secondary": "#e8effc",
+          "accent": "#f0182a",
+          "subtext": "我更爱自己的虚妄"
+        },
+        "tower": {
+          "mode": "monoSilhouettes",
+          "primary": "#e8eef8",
+          "secondary": "#11131a",
+          "speed": 1
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1646a8",
+          "secondary": "#e8effc",
+          "accent": "#f0182a",
+          "subtext": "我更爱自己的虚妄",
+          "border": false
+        }
+      },
+      "performer": {
+        "path": [
+          "mainFront",
+          "mainLeft",
+          "mainFront"
+        ],
+        "speed": 1.8,
+        "pose": "sing",
+        "spotColor": "#d8ecff",
+        "spotIntensity": 1.1
+      }
+    },
+    {
+      "at": "0:34",
+      "fade": 0.15,
+      "label": "主歌重音突刺",
+      "lights": {
+        "beams": [
+          "#4a90ff",
+          "#ffffff"
+        ],
+        "pattern": "scissorWhip",
+        "beamSpread": "sharp",
+        "beamI": 0.75,
+        "wash": [
+          "#2040b8",
+          "#2d6eff",
+          "#2040b8"
+        ],
+        "washI": 0.95,
+        "hazeI": 1.05,
+        "hazeC": "#325ec8",
+        "strips": "#eef4ff",
+        "towerStrips": "#eef4ff",
+        "hgColor": "#f0f6ff",
+        "hgTopI": 0.4,
+        "screenTopI": 0.9,
+        "canopyMatrixI": 1.35,
+        "hourglass": "zebra",
+        "laserOn": true,
+        "laserI": 1.45,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "count": 2,
+            "color": "#e828ff",
+            "edgeColor": "#a818ff",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.45,
+            "pitch": 0.64,
+            "sweep": 0.58,
+            "speed": 2.4,
+            "aimBias": 0.18,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageCenter",
+            "count": 2,
+            "color": "#64ffb8",
+            "edgeColor": "#28d0ff",
+            "style": "hero",
+            "motion": "scissor",
+            "spread": 0.52,
+            "pitch": 0.74,
+            "sweep": 0.25,
+            "speed": 2.6,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageRight",
+            "count": 2,
+            "color": "#8cf0ff",
+            "edgeColor": "#c058ff",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.45,
+            "pitch": 0.62,
+            "sweep": 0.58,
+            "speed": 2.4,
+            "aimBias": -0.18,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "fineWeb",
+            "count": 12,
+            "color": "#dceeff",
+            "edgeColor": "#7ab8ff",
+            "style": "fine",
+            "motion": "step",
+            "spread": 2,
+            "pitch": 0.55,
+            "sweep": 0.55,
+            "speed": 2.4,
+            "gain": 0.7,
+            "zDir": 0.48
+          },
+          {
+            "emitter": "lowCurtain",
+            "count": 4,
+            "color": "#eef8ff",
+            "edgeColor": "#88d0ff",
+            "style": "curtain",
+            "motion": "sweep",
+            "spread": 1.35,
+            "pitch": 0.1,
+            "sweep": 0.45,
+            "speed": 2,
+            "gain": 0.75,
+            "zDir": 0.82
+          }
+        ],
+        "beamSpeed": 2.4,
+        "beamSwing": 1.05,
+        "beamChase": "centerOut",
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#88c8ff"
+          ],
+          "pattern": "whipSweep",
+          "speed": 2.8,
+          "swing": 1,
+          "spread": "sharp",
+          "intensity": 0.9
+        },
+        "frontStrobeI": 0.95,
+        "frontStrobeColor": "#dceeff",
+        "frontStrobeMode": "strobe",
+        "frontStrobeSpeed": 12
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1e68f0",
+          "secondary": "#ffffff",
+          "accent": "#f0182a",
+          "subtext": "谁折磨喜乐悲伤只由我"
+        },
+        "tower": {
+          "mode": "bars",
+          "primary": "#f2f6ff",
+          "secondary": "#101218",
+          "speed": 1.3
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1e68f0",
+          "secondary": "#ffffff",
+          "accent": "#f0182a",
+          "subtext": "谁折磨喜乐悲伤只由我",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock"
+      }
+    },
+    {
+      "at": "0:37.5",
+      "fade": 0.5,
+      "label": "超现实黑白巨眼屏塔",
+      "lights": {
+        "beams": [
+          "#3c80ff",
+          "#c8e0ff"
+        ],
+        "pattern": "fan",
+        "beamSpread": "sharp",
+        "beamI": 0.52,
+        "wash": "#163890",
+        "washI": 0.82,
+        "hazeI": 0.9,
+        "hazeC": "#244ca8",
+        "strips": "#dce8ff",
+        "towerStrips": "#dce8ff",
+        "hgColor": "#dce6f8",
+        "canopyMatrixColor": "#2872ff",
+        "canopyMatrixI": 1.25,
+        "hourglass": "zebra",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0
+      },
+      "beatCycle": {
+        "unitBeats": 2,
+        "steps": [
+          {
+            "lights": {
+              "laserOn": false,
+              "laserGroups": []
+            }
+          },
+          {
+            "lights": {
+              "laserOn": false,
+              "laserGroups": []
+            }
+          },
+          {
+            "lights": {
+              "laserOn": false,
+              "laserGroups": []
+            }
+          },
+          {
+            "lights": {
+              "laserOn": true,
+              "laserI": 0.95,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#d8ecff",
+                  "spread": 0.75,
+                  "pitch": 0.35,
+                  "sweep": 0.25,
+                  "speed": 0.7
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#c8f8e8",
+                  "spread": 0.75,
+                  "pitch": 0.35,
+                  "sweep": 0.25,
+                  "speed": 0.7
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1650c4",
+          "secondary": "#eef4ff",
+          "accent": "#f0182a",
+          "subtext": "我不是灵验的月亮"
+        },
+        "tower": {
+          "mode": "monoEyes",
+          "primary": "#e2e8f6",
+          "speed": 0.9
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1650c4",
+          "secondary": "#eef4ff",
+          "accent": "#f0182a",
+          "subtext": "我不是灵验的月亮",
+          "border": false
+        }
+      },
+      "performer": {
+        "path": [
+          "mainFront",
+          "mainRight",
+          "mainCenter"
+        ],
+        "speed": 1.6,
+        "pose": "sing"
+      }
+    },
+    {
+      "at": "0:55",
+      "fade": 0.35,
+      "label": "间奏短促收黑",
+      "lights": {
+        "beamI": 0.2,
+        "wash": "#0a1840",
+        "washI": 0.4,
+        "hazeI": 0.7,
+        "canopyMatrixI": 0.65,
+        "screenTopI": 0.3,
+        "hourglass": "off",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#0c2258",
+          "secondary": "#a8c0e8",
+          "accent": "#f0182a"
+        },
+        "tower": {
+          "mode": "blackout"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#0c2258",
+          "secondary": "#a8c0e8",
+          "accent": "#f0182a",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainCenter",
+        "pose": "stand"
+      }
+    },
+    {
+      "at": "1:00",
+      "fade": 0.5,
+      "label": "副歌预推",
+      "lights": {
+        "beams": [
+          "#3a86ff",
+          "#88ccff",
+          "#ffffff"
+        ],
+        "pattern": "waveWhip",
+        "beamSpread": "normal",
+        "beamI": 0.8,
+        "wash": "#1c56d8",
+        "washI": 1,
+        "hazeI": 1.15,
+        "hazeC": "#3268dc",
+        "strips": "#e8f2ff",
+        "towerStrips": "#e8f2ff",
+        "canopyMatrixColor": "#2a76ff",
+        "canopyMatrixI": 1.4,
+        "screenTopColor": "#6eb8ff",
+        "screenTopI": 0.95,
+        "hourglass": "zebra",
+        "hgColor": "#dceaff",
+        "laserOn": false,
+        "beamSpeed": 1.65,
+        "beamSwing": 0.95,
+        "beamChase": "wave",
+        "beamChaseSpeed": 8,
+        "beamLayer2": null,
+        "frontStrobeI": 0.5,
+        "frontStrobeColor": "#8cc4ff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 10
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1c5ee0",
+          "secondary": "#f0f6ff",
+          "accent": "#f0182a",
+          "subtext": "不声不响"
+        },
+        "tower": {
+          "mode": "monoSilhouettes",
+          "primary": "#edf2fc",
+          "secondary": "#101218",
+          "speed": 1.3
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1c5ee0",
+          "secondary": "#f0f6ff",
+          "accent": "#f0182a",
+          "subtext": "不声不响",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "sing"
+      }
+    },
+    {
+      "at": "1:08.5",
+      "fade": 0.2,
+      "label": "第一副歌",
+      "stage": {
+        "rings": "tiered"
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#7cc4ff",
+          "#dceeff",
+          "#ffffff"
+        ],
+        "pattern": "doubleFan",
+        "beamSpread": "sharp",
+        "beamSpeed": 2.5,
+        "beamI": 0.85,
+        "wash": [
+          "#2058e8",
+          "#3a80ff",
+          "#2058e8"
+        ],
+        "washI": 1.1,
+        "hazeI": 1.2,
+        "hazeC": "#4478e8",
+        "strips": "#f0f6ff",
+        "towerStrips": "#f0f6ff",
+        "hgColor": "#f4f8ff",
+        "hgTopColor": "#dceeff",
+        "hgTopI": 0.55,
+        "screenTopColor": "#8cc8ff",
+        "screenTopI": 1.15,
+        "canopyMatrixColor": "#2e7bff",
+        "canopyMatrixI": 1.4,
+        "hourglass": "off",
+        "laserOn": true,
+        "laserI": 1.52,
+        "beamSwing": 1.12,
+        "beamChase": "wave",
+        "beamChaseSpeed": 11,
+        "frontStrobeI": 1.05,
+        "frontStrobeColor": "#dceeff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 14
+      },
+      "beatCycle": {
+        "unitBeats": 0.25,
+        "steps": [
+          {
+            "lights": {
+              "pattern": "waveWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.72,
+              "washI": 1.05,
+              "hazeI": 1.15,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#60ffb4",
+                  "edgeColor": "#28dcff",
+                  "style": "hero",
+                  "motion": "scissor",
+                  "spread": 0.58,
+                  "pitch": 0.82,
+                  "sweep": 0.24,
+                  "speed": 3,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageLeft",
+                  "count": 1,
+                  "color": "#88d4ff",
+                  "edgeColor": "#3c8eff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.2,
+                  "pitch": 0.56,
+                  "sweep": 0.78,
+                  "speed": 2.6,
+                  "aimBias": 0.35,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#e4f2ff",
+                  "edgeColor": "#84c0ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.56,
+                  "sweep": 0.68,
+                  "speed": 2.9,
+                  "gain": 0.8,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#ffffff",
+                  "edgeColor": "#88d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.5,
+              "beamSwing": 1.1,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#8cd4ff"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.2,
+                "swing": 1.12,
+                "spread": "sharp",
+                "intensity": 1
+              },
+              "frontStrobeI": 1.05,
+              "frontStrobeColor": "#d8ecff",
+              "frontStrobeMode": "chase"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#1c5ae0",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "Hey SASA SASALU"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f5f8ff",
+                "text": "♣ SA SA L U SA LU ♠"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#1c5ae0",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "Hey SASA SASALU",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "whipSweep",
+              "beamSpread": "sharp",
+              "beamI": 0.7999999999999999,
+              "washI": 1.05,
+              "hazeI": 1.15,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#60ffb4",
+                  "edgeColor": "#28dcff",
+                  "style": "hero",
+                  "motion": "scissor",
+                  "spread": 0.72,
+                  "pitch": 0.82,
+                  "sweep": 0.24,
+                  "speed": 3,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageLeft",
+                  "count": 1,
+                  "color": "#88d4ff",
+                  "edgeColor": "#3c8eff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.2,
+                  "pitch": 0.56,
+                  "sweep": 0.78,
+                  "speed": 2.6,
+                  "aimBias": 0.35,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#e4f2ff",
+                  "edgeColor": "#84c0ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.56,
+                  "sweep": 0.68,
+                  "speed": 2.9,
+                  "gain": 0.8,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#ffffff",
+                  "edgeColor": "#88d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.5,
+              "beamSwing": 1.1,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#8cd4ff"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.2,
+                "swing": 1.12,
+                "spread": "sharp",
+                "intensity": 1
+              },
+              "frontStrobeI": 1.05,
+              "frontStrobeColor": "#d8ecff",
+              "frontStrobeMode": "centerOut"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.65,
+              "washI": 0.85,
+              "hazeI": 0.9,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#f024ff",
+                  "edgeColor": "#a810ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.36,
+                  "pitch": 0.7,
+                  "sweep": 0.68,
+                  "speed": 2.9,
+                  "aimBias": -0.1,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#c8f2ff",
+                  "edgeColor": "#60c0ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.52,
+                  "pitch": 0.56,
+                  "sweep": 0.65,
+                  "speed": 2.8,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#dceeff",
+                  "edgeColor": "#90c0ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "gain": 0.78,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eef8ff",
+                  "edgeColor": "#88d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.6,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamSwing": 1.15,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#98ccff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.4,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 0.95
+              },
+              "frontStrobeI": 1.1,
+              "frontStrobeMode": "strobe"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.88,
+              "washI": 1.05,
+              "hazeI": 1.15,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#e2f0ff",
+                  "edgeColor": "#78b8ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.65,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#88ffce",
+                  "edgeColor": "#b854ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.65,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 20,
+                  "color": "#eef6ff",
+                  "edgeColor": "#88ccff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.3,
+                  "pitch": 0.58,
+                  "sweep": 0.75,
+                  "speed": 3.2,
+                  "gain": 0.82,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#ffffff",
+                  "edgeColor": "#88dcff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.6,
+                  "gain": 0.88,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 3,
+              "beamSwing": 1.18,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#68ffd0"
+                ],
+                "pattern": "waveWhip",
+                "speed": 3.6,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.1
+              },
+              "frontStrobeI": 1.2,
+              "frontStrobeMode": "centerOut"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.56,
+              "wash": [
+                "#3a7eff",
+                "#78b8ff",
+                "#3a7eff"
+              ],
+              "washI": 1.45,
+              "hazeI": 1.7,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#f0f8ff",
+                  "edgeColor": "#90ccff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.62,
+                  "sweep": 0.65,
+                  "speed": 2.8,
+                  "gain": 0.68,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 4,
+                  "color": "#ffffff",
+                  "edgeColor": "#a8dcff",
+                  "style": "curtain",
+                  "motion": "sweep",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.2,
+                  "gain": 0.72,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamSwing": 1.15,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#b8e4ff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.6,
+                "swing": 1.18,
+                "spread": "sharp",
+                "intensity": 1.45
+              },
+              "frontStrobeI": 1.38,
+              "frontStrobeColor": "#eef8ff",
+              "frontStrobeMode": "strobe"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#2c78ff",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "Hey SASA SASALU Hey Hey"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#ffffff",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#2c78ff",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "Hey SASA SASALU Hey Hey",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.46,
+              "wash": [
+                "#3a7eff",
+                "#78b8ff",
+                "#3a7eff"
+              ],
+              "washI": 1.38,
+              "hazeI": 1.6,
+              "hourglass": "off",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#f0f8ff",
+                  "edgeColor": "#90ccff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.62,
+                  "sweep": 0.65,
+                  "speed": 2.8,
+                  "gain": 0.68,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 4,
+                  "color": "#ffffff",
+                  "edgeColor": "#a8dcff",
+                  "style": "curtain",
+                  "motion": "sweep",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.2,
+                  "gain": 0.72,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamSwing": 1.15,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#b8e4ff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.6,
+                "swing": 1.18,
+                "spread": "sharp",
+                "intensity": 1.45
+              },
+              "frontStrobeI": 1.38,
+              "frontStrobeColor": "#eef8ff",
+              "frontStrobeMode": "strobe"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.14,
+              "wash": "#060a14",
+              "washI": 0.15,
+              "hazeI": 0.22,
+              "hourglass": "inkWhite",
+              "hgColor": "#f4f8ff",
+              "hgTopI": 0.75,
+              "screenTopI": 0.25,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#f2e8a8",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "HEY!"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#ffffff",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#f2e8a8",
+                "secondary": "#ffffff",
+                "accent": "#f0182a",
+                "subtext": "HEY!",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.03,
+              "wash": "#05070e",
+              "washI": 0.1,
+              "hazeI": 0.12,
+              "hourglass": "inkWhite",
+              "hgColor": "#f6f9ff",
+              "hgTopI": 0.75,
+              "screenTopI": 0.2,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1c5ae0",
+          "secondary": "#ffffff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "monoCards",
+          "primary": "#f5f8ff",
+          "text": "♣ SA SA L U SA LU ♠"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1c5ae0",
+          "secondary": "#ffffff",
+          "accent": "#f0182a",
+          "subtext": "Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock",
+        "spotColor": "#ffffff",
+        "spotIntensity": 1.25
+      }
+    },
+    {
+      "at": "1:24",
+      "fade": 0.8,
+      "label": "第二段主歌",
+      "stage": {
+        "rings": "layered",
+        "bridge": "low",
+        "lift": "down"
+      },
+      "lights": {
+        "beams": [
+          "#3880ff",
+          "#7ec4ff"
+        ],
+        "pattern": "fan",
+        "beamSpread": "sharp",
+        "beamSpeed": 0.65,
+        "beamI": 0.55,
+        "wash": "#143898",
+        "washI": 0.85,
+        "hazeI": 0.95,
+        "hazeC": "#244ca8",
+        "strips": "#d8e6ff",
+        "towerStrips": "#d8e6ff",
+        "hgColor": "#dce8ff",
+        "hgTopI": 0.25,
+        "screenTopColor": "#5894ff",
+        "screenTopI": 0.7,
+        "canopyMatrixColor": "#2872ff",
+        "canopyMatrixI": 1.3,
+        "hourglass": "zebra",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "beamChaseSpeed": 5.5,
+        "frontStrobeI": 0,
+        "frontStrobeColor": "#78b8ff"
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#184cb8",
+          "secondary": "#e8f0ff",
+          "accent": "#f0182a",
+          "subtext": "我天生就这副脊梁"
+        },
+        "tower": {
+          "mode": "monoSilhouettes",
+          "primary": "#e6edf8",
+          "secondary": "#101218",
+          "speed": 1.1
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#184cb8",
+          "secondary": "#e8f0ff",
+          "accent": "#f0182a",
+          "subtext": "我天生就这副脊梁",
+          "border": false
+        }
+      },
+      "performer": {
+        "path": [
+          "mainFront",
+          "catwalk",
+          "circleFront",
+          "circleLeft",
+          "circleRight",
+          "circleCenter"
+        ],
+        "speed": 2,
+        "pose": "sing",
+        "spotColor": "#dff0ff",
+        "spotIntensity": 1.15
+      }
+    },
+    {
+      "at": "1:50",
+      "fade": 0.7,
+      "label": "主歌推进",
+      "lights": {
+        "beams": [
+          "#3878ff",
+          "#98d4ff"
+        ],
+        "pattern": "cone",
+        "beamSpread": "sharp",
+        "beamI": 0.68,
+        "wash": "#1842b8",
+        "washI": 0.95,
+        "hazeI": 1.05,
+        "canopyMatrixI": 1.35,
+        "hourglass": "zebra",
+        "laserOn": false,
+        "beamLayer2": null,
+        "beamChase": "wave",
+        "beamChaseSpeed": 5.5,
+        "frontStrobeI": 0.18,
+        "frontStrobeColor": "#78b8ff"
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#184ec8",
+          "secondary": "#f0f6ff",
+          "accent": "#f0182a",
+          "subtext": "别赐我圣贤的模样"
+        },
+        "tower": {
+          "mode": "monoEyes",
+          "primary": "#e6ecf8",
+          "speed": 1.15
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#184ec8",
+          "secondary": "#f0f6ff",
+          "accent": "#f0182a",
+          "subtext": "别赐我圣贤的模样",
+          "border": false
+        }
+      },
+      "performer": {
+        "path": [
+          "circleCenter",
+          "catwalk",
+          "mainFront"
+        ],
+        "speed": 2.3,
+        "pose": "sing"
+      }
+    },
+    {
+      "at": "2:09.5",
+      "fade": 0.2,
+      "label": "炽热橙红",
+      "stage": {
+        "rings": "tiered"
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#ff8830",
+          "#ffd080",
+          "#ff4818"
+        ],
+        "pattern": "doubleFan",
+        "beamSpread": "wide",
+        "beamSpeed": 2.6,
+        "beamI": 1.25,
+        "wash": [
+          "#e03e12",
+          "#ff6818",
+          "#e03e12"
+        ],
+        "washI": 1.25,
+        "hazeI": 1.5,
+        "hazeC": "#e05820",
+        "strips": "#ff7828",
+        "towerStrips": "#1c68ff",
+        "hgColor": "#ff5818",
+        "hgTopColor": "#ff9830",
+        "hgTopI": 1.2,
+        "screenTopColor": "#ff9e38",
+        "screenTopI": 1.15,
+        "canopyMatrixColor": "#ff8828",
+        "canopyMatrixI": 1.35,
+        "stripI": 1.15,
+        "hourglass": "amberBars",
+        "laserOn": true,
+        "laserI": 1.52,
+        "crowdGlow": "#ff6a8a",
+        "crowdGlowI": 1.05,
+        "beamSwing": 1.15,
+        "beamChase": "centerOut",
+        "beamChaseSpeed": 11,
+        "frontStrobeI": 1.3,
+        "frontStrobeColor": "#ffd480",
+        "frontStrobeMode": "centerOut",
+        "frontStrobeSpeed": 14
+      },
+      "beatCycle": {
+        "unitBeats": 0.25,
+        "steps": [
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.52,
+              "beams": [
+                "#ffa848",
+                "#ffe0a0",
+                "#ff6820"
+              ],
+              "wash": [
+                "#e84814",
+                "#ff7c24",
+                "#e84814"
+              ],
+              "washI": 1.4,
+              "hazeI": 1.7,
+              "hazeC": "#e86828",
+              "hourglass": "amberBars",
+              "hgTopColor": "#ffaa38",
+              "hgTopI": 1.35,
+              "screenTopColor": "#ffaa38",
+              "screenTopI": 1.25,
+              "canopyMatrixI": 1.45,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#fff2e4",
+                  "edgeColor": "#e068ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.34,
+                  "pitch": 0.64,
+                  "sweep": 0.56,
+                  "speed": 2.4,
+                  "aimBias": -0.18,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 15,
+                  "color": "#ffe8bc",
+                  "edgeColor": "#ff9840",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.58,
+                  "sweep": 0.62,
+                  "speed": 2.7,
+                  "gain": 0.74,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff0d0",
+                  "edgeColor": "#ffaa52",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.3,
+                  "gain": 0.8,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.7,
+              "beamSwing": 1.12,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#fff6e0",
+                  "#ffb448"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.5,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.42
+              },
+              "frontStrobeI": 1.38,
+              "frontStrobeColor": "#ffd888",
+              "frontStrobeMode": "centerOut"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#d82c12",
+                "secondary": "#fff0e6",
+                "accent": "#ff2430",
+                "subtext": "Hey SASA SASALU"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f5f4f0",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#d82c12",
+                "secondary": "#fff0e6",
+                "accent": "#ff2430",
+                "subtext": "Hey SASA SASALU",
+                "border": false,
+                "flames": true
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.42,
+              "beams": [
+                "#ffa848",
+                "#ffe0a0",
+                "#ff6820"
+              ],
+              "wash": [
+                "#e84814",
+                "#ff7c24",
+                "#e84814"
+              ],
+              "washI": 1.3,
+              "hazeI": 1.6,
+              "hazeC": "#e86828",
+              "hourglass": "amberBars",
+              "hgTopI": 1.25,
+              "screenTopI": 1.15,
+              "canopyMatrixI": 1.35,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#fff2e4",
+                  "edgeColor": "#e068ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.34,
+                  "pitch": 0.64,
+                  "sweep": 0.56,
+                  "speed": 2.4,
+                  "aimBias": -0.18,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 15,
+                  "color": "#ffe8bc",
+                  "edgeColor": "#ff9840",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.58,
+                  "sweep": 0.62,
+                  "speed": 2.7,
+                  "gain": 0.74,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff0d0",
+                  "edgeColor": "#ffaa52",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.3,
+                  "gain": 0.8,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.7,
+              "beamSwing": 1.12,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#fff6e0",
+                  "#ffb448"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.5,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.42
+              },
+              "frontStrobeI": 1.38,
+              "frontStrobeColor": "#ffd888",
+              "frontStrobeMode": "centerOut"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.14,
+              "beams": [
+                "#c8dcf0",
+                "#8ca4c0"
+              ],
+              "wash": "#060912",
+              "washI": 0.14,
+              "hazeI": 0.18,
+              "hazeC": "#141e30",
+              "hourglass": "zebra",
+              "hgColor": "#f2f6ff",
+              "hgTopI": 0.18,
+              "screenTopI": 0.15,
+              "canopyMatrixI": 0.15,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#f4f6fc",
+                "secondary": "#ffffff",
+                "accent": "#ff2430",
+                "subtext": "HEY!"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f4f7fc",
+                "text": "♣ SA SA L U SA LU ♠"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#f4f6fc",
+                "secondary": "#ffffff",
+                "accent": "#ff2430",
+                "subtext": "HEY!",
+                "border": false,
+                "flames": true
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.03,
+              "beams": [
+                "#b8cce0"
+              ],
+              "wash": "#05070e",
+              "washI": 0.1,
+              "hazeI": 0.1,
+              "hourglass": "zebra",
+              "hgColor": "#f4f8ff",
+              "hgTopI": 0.12,
+              "screenTopI": 0.12,
+              "canopyMatrixI": 0.1,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#2ce0ff",
+                "secondary": "#ffffff",
+                "accent": "#ff2430",
+                "subtext": "HEY!"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f4f7fc",
+                "text": "♣ SA SA L U SA LU ♠"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#2ce0ff",
+                "secondary": "#ffffff",
+                "accent": "#ff2430",
+                "subtext": "HEY!",
+                "border": false,
+                "flames": true
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.72,
+              "beams": [
+                "#ff7824",
+                "#ffb858"
+              ],
+              "wash": [
+                "#c83810",
+                "#e85c18",
+                "#c83810"
+              ],
+              "washI": 1,
+              "hazeI": 1.2,
+              "hazeC": "#d05020",
+              "hourglass": "amberBars",
+              "hgTopI": 1,
+              "screenTopI": 0.95,
+              "canopyMatrixI": 1,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#88ffbe",
+                  "edgeColor": "#cc44ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.3,
+                  "pitch": 0.62,
+                  "sweep": 0.65,
+                  "speed": 2.9,
+                  "aimBias": -0.18,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#c8ffe4",
+                  "edgeColor": "#ffaa58",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.15,
+                  "pitch": 0.52,
+                  "sweep": 0.68,
+                  "speed": 2.9,
+                  "gain": 0.76,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#d8fff0",
+                  "edgeColor": "#64d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.84,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamSwing": 1.15,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffe6b0",
+                  "#ff9038"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.3,
+                "swing": 1.12,
+                "spread": "sharp",
+                "intensity": 0.92
+              },
+              "frontStrobeI": 1,
+              "frontStrobeColor": "#ffbe60",
+              "frontStrobeMode": "chase"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#d82c12",
+                "secondary": "#fff0e6",
+                "accent": "#ff2430",
+                "subtext": "Hey SASA SASALU"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f5f4f0",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#d82c12",
+                "secondary": "#fff0e6",
+                "accent": "#ff2430",
+                "subtext": "Hey SASA SASALU",
+                "border": false,
+                "flames": true
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.16,
+              "wash": "#080b14",
+              "washI": 0.18,
+              "hazeI": 0.2,
+              "hourglass": "off",
+              "hgTopI": 0.2,
+              "screenTopI": 0.25,
+              "canopyMatrixI": 0.2,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#88ffbe",
+                  "edgeColor": "#cc44ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.42,
+                  "pitch": 0.48,
+                  "sweep": 0.62,
+                  "speed": 2.8,
+                  "aimBias": -0.22,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 3,
+                  "color": "#84ffb8",
+                  "edgeColor": "#38c8ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.68,
+                  "pitch": 0.44,
+                  "sweep": 0.62,
+                  "speed": 2.8,
+                  "aimBias": 0.32,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 14,
+                  "color": "#b8ffe0",
+                  "edgeColor": "#48d0ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.1,
+                  "pitch": 0.44,
+                  "sweep": 0.65,
+                  "speed": 3,
+                  "gain": 0.76,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#c8fff0",
+                  "edgeColor": "#48d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.85,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.6,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0.35,
+              "frontStrobeColor": "#88ffd4",
+              "frontStrobeMode": "strobe"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "whipSweep",
+              "beamSpread": "sharp",
+              "beamI": 0.88,
+              "beams": [
+                "#ff7c20",
+                "#88b8ff"
+              ],
+              "wash": [
+                "#b83812",
+                "#e85c18",
+                "#b83812"
+              ],
+              "washI": 0.95,
+              "hazeI": 1.15,
+              "hazeC": "#c85224",
+              "hourglass": "amberBars",
+              "hgTopI": 0.85,
+              "screenTopI": 0.9,
+              "canopyMatrixI": 1,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#78ffbe",
+                  "edgeColor": "#38b8ff",
+                  "style": "hero",
+                  "motion": "scissor",
+                  "spread": 0.52,
+                  "pitch": 0.72,
+                  "sweep": 0.25,
+                  "speed": 3,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#ff9e38",
+                  "edgeColor": "#ff5418",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.65,
+                  "pitch": 0.54,
+                  "sweep": 0.68,
+                  "speed": 2.8,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#ffe8c4",
+                  "edgeColor": "#ff9c42",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.15,
+                  "pitch": 0.56,
+                  "sweep": 0.66,
+                  "speed": 2.9,
+                  "gain": 0.78,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff2d8",
+                  "edgeColor": "#ffb058",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.4,
+                  "gain": 0.82,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.9,
+              "beamSwing": 1.15,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#88d4ff"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.4,
+                "swing": 1.12,
+                "spread": "sharp",
+                "intensity": 1.05
+              },
+              "frontStrobeI": 1.15,
+              "frontStrobeColor": "#ffd080",
+              "frontStrobeMode": "chase"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "normal",
+              "beamI": 1.18,
+              "beams": [
+                "#ff9838",
+                "#ffd480"
+              ],
+              "wash": [
+                "#d84212",
+                "#ff7020",
+                "#d84212"
+              ],
+              "washI": 1.2,
+              "hazeI": 1.45,
+              "hazeC": "#de6024",
+              "hourglass": "amberBars",
+              "hgTopI": 1.15,
+              "screenTopI": 1.1,
+              "canopyMatrixI": 1.25,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#ff7820",
+                  "edgeColor": "#ff3810",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.55,
+                  "pitch": 0.58,
+                  "sweep": 0.62,
+                  "speed": 2.8,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#ffaa38",
+                  "edgeColor": "#ff6018",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.55,
+                  "pitch": 0.58,
+                  "sweep": 0.62,
+                  "speed": 2.8,
+                  "zDir": 0.45
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#ffecd0",
+                  "edgeColor": "#ffa848",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.2,
+                  "pitch": 0.58,
+                  "sweep": 0.68,
+                  "speed": 3,
+                  "gain": 0.78,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff4dc",
+                  "edgeColor": "#ffb85c",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.84,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamSwing": 1.15,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#fff0cc",
+                  "#ff9e38"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.5,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1.2
+              },
+              "frontStrobeI": 1.28,
+              "frontStrobeColor": "#ffd884",
+              "frontStrobeMode": "strobe"
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#d82c12",
+          "secondary": "#fff0e6",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "monoCards",
+          "primary": "#f5f4f0",
+          "text": "♣ H E Y ♠ H E Y"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#d82c12",
+          "secondary": "#fff0e6",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU",
+          "border": false,
+          "flames": true
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock",
+        "spotColor": "#ffd2a8",
+        "spotIntensity": 1.35
+      },
+      "fx": {
+        "flameJet": {
+          "color": "#ff7414",
+          "intensity": 1.45
+        }
+      }
+    },
+    {
+      "at": "2:26",
+      "fade": 0.3,
+      "label": "星爆交叉激光网",
+      "lights": {
+        "beams": [
+          "#fff0dc",
+          "#ff8844",
+          "#88c4ff"
+        ],
+        "pattern": "scissorWhip",
+        "beamSpread": "sharp",
+        "beamSpeed": 2.9,
+        "beamI": 0.85,
+        "wash": [
+          "#b83024",
+          "#e86c38",
+          "#b83024"
+        ],
+        "washI": 1.05,
+        "hazeI": 1.2,
+        "hazeC": "#c8603c",
+        "strips": "#ffe8d0",
+        "towerStrips": "#a0b4d8",
+        "hgColor": "#382820",
+        "hgTopI": 0.45,
+        "screenTopI": 0.85,
+        "canopyMatrixColor": "#ff9848",
+        "canopyMatrixI": 0.9,
+        "hourglass": "off",
+        "laserOn": true,
+        "laserI": 1.45,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "count": 2,
+            "color": "#e830ff",
+            "edgeColor": "#ff68c8",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.48,
+            "pitch": 0.66,
+            "sweep": 0.72,
+            "speed": 2.9,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageCenter",
+            "count": 2,
+            "color": "#84ffd4",
+            "edgeColor": "#48a8ff",
+            "style": "hero",
+            "motion": "scissor",
+            "spread": 0.78,
+            "pitch": 0.72,
+            "sweep": 0.32,
+            "speed": 3,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageRight",
+            "count": 2,
+            "color": "#ffd8e8",
+            "edgeColor": "#88d8ff",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.65,
+            "pitch": 0.58,
+            "sweep": 0.72,
+            "speed": 2.9,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "fineWeb",
+            "count": 18,
+            "color": "#fff0e4",
+            "edgeColor": "#ff98c8",
+            "style": "fine",
+            "motion": "step",
+            "spread": 2.25,
+            "pitch": 0.56,
+            "sweep": 0.72,
+            "speed": 3.1,
+            "gain": 0.8,
+            "zDir": 0.48
+          },
+          {
+            "emitter": "lowCurtain",
+            "count": 6,
+            "color": "#fff4ec",
+            "edgeColor": "#a8d8ff",
+            "style": "curtain",
+            "motion": "whip",
+            "spread": 1.35,
+            "pitch": 0.1,
+            "sweep": 0.45,
+            "speed": 2.6,
+            "gain": 0.86,
+            "zDir": 0.82
+          }
+        ],
+        "beamSwing": 1.18,
+        "beamChase": "wave",
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#88d4ff",
+            "#ffb068"
+          ],
+          "pattern": "waveWhip",
+          "speed": 3.5,
+          "swing": 1.15,
+          "spread": "sharp",
+          "intensity": 1.15
+        },
+        "frontStrobeI": 1.2,
+        "frontStrobeColor": "#ffe4c0",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 14
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#cc2418",
+          "secondary": "#ffffff",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU Hey Hey"
+        },
+        "tower": {
+          "mode": "bars",
+          "primary": "#ffffff",
+          "secondary": "#ff8030",
+          "speed": 1.8
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#cc2418",
+          "secondary": "#ffffff",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU Hey Hey",
+          "border": false,
+          "flames": true
+        }
+      },
+      "fx": {
+        "flameJet": {
+          "color": "#ff9e38",
+          "intensity": 1.25
+        }
+      }
+    },
+    {
+      "at": "2:33",
+      "fade": 0.8,
+      "label": "桥段回冷",
+      "stage": {
+        "rings": "bowl"
+      },
+      "lights": {
+        "beams": [
+          "#3898ff",
+          "#64e8ff"
+        ],
+        "pattern": "down",
+        "beamSpread": "sharp",
+        "beamSpeed": 0.45,
+        "beamI": 0.42,
+        "wash": "#104498",
+        "washI": 0.8,
+        "hazeI": 0.95,
+        "hazeC": "#2468b8",
+        "strips": "#98d8ff",
+        "towerStrips": "#dcecff",
+        "hgColor": "#284060",
+        "hgTopI": 0.15,
+        "screenTopColor": "#58b0ff",
+        "screenTopI": 0.55,
+        "canopyMatrixColor": "#2878ff",
+        "canopyMatrixI": 0.95,
+        "hourglass": "off",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1668b8",
+          "secondary": "#e4f4ff",
+          "accent": "#f0182a",
+          "subtext": "谁懂无师自通 都是源于没苦自找"
+        },
+        "tower": {
+          "mode": "monoSilhouettes",
+          "primary": "#dce8f6",
+          "secondary": "#162030",
+          "speed": 0.7
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1668b8",
+          "secondary": "#e4f4ff",
+          "accent": "#f0182a",
+          "subtext": "谁懂无师自通 都是源于没苦自找",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainCenter",
+        "pose": "sing",
+        "spotColor": "#c8f0ff",
+        "spotIntensity": 1.15
+      }
+    },
+    {
+      "at": "3:00",
+      "fade": 0.35,
+      "label": "冷色高潮",
+      "stage": {
+        "rings": "layered"
+      },
+      "lights": {
+        "beams": [
+          "#50ffd4",
+          "#4ea6ff",
+          "#ffffff"
+        ],
+        "beamLeft": "#50ffd4",
+        "beamRight": "#4ea6ff",
+        "pattern": "whipSweep",
+        "beamSpread": "wide",
+        "beamSpeed": 3,
+        "beamI": 1.15,
+        "wash": [
+          "#1478a8",
+          "#1e66d8",
+          "#1478a8"
+        ],
+        "washI": 1.1,
+        "hazeI": 1.2,
+        "hazeC": "#3494d8",
+        "strips": "#c8f8ff",
+        "towerStrips": "#d8f0ff",
+        "hgColor": "#e2f4ff",
+        "hgTopColor": "#7ce8ff",
+        "hgTopI": 0.45,
+        "screenTopColor": "#74d8ff",
+        "screenTopI": 0.95,
+        "canopyMatrixColor": "#3294ff",
+        "canopyMatrixI": 1.35,
+        "hourglass": "zebra",
+        "laserOn": true,
+        "laserI": 1.52,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "count": 2,
+            "color": "#f024ff",
+            "edgeColor": "#a810ff",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.28,
+            "pitch": 0.62,
+            "sweep": 0.92,
+            "speed": 3.4,
+            "aimBias": 0.15,
+            "zDir": 0.42
+          },
+          {
+            "emitter": "stageRight",
+            "count": 2,
+            "color": "#58ffd4",
+            "edgeColor": "#34b8ff",
+            "style": "hero",
+            "motion": "whip",
+            "spread": 0.52,
+            "pitch": 0.58,
+            "sweep": 0.85,
+            "speed": 3.2,
+            "zDir": 0.42
+          },
+          {
+            "emitter": "fineWeb",
+            "count": 18,
+            "color": "#e6f8ff",
+            "edgeColor": "#64d4ff",
+            "style": "fine",
+            "motion": "step",
+            "spread": 2.25,
+            "pitch": 0.56,
+            "sweep": 0.75,
+            "speed": 3.2,
+            "gain": 0.82,
+            "zDir": 0.48
+          },
+          {
+            "emitter": "lowCurtain",
+            "count": 6,
+            "color": "#ffffff",
+            "edgeColor": "#64f0ff",
+            "style": "curtain",
+            "motion": "whip",
+            "spread": 1.35,
+            "pitch": 0.1,
+            "sweep": 0.45,
+            "speed": 2.7,
+            "gain": 0.88,
+            "zDir": 0.82
+          }
+        ],
+        "beamSwing": 1.22,
+        "beamChase": "wave",
+        "beamChaseSpeed": 12,
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#88f4ff"
+          ],
+          "pattern": "scissorWhip",
+          "speed": 3.6,
+          "swing": 1.2,
+          "spread": "sharp",
+          "intensity": 1.28
+        },
+        "frontStrobeI": 1.15,
+        "frontStrobeColor": "#9cf8ff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 14
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1468b8",
+          "secondary": "#eef8ff",
+          "accent": "#f0182a",
+          "subtext": "小到我们看不清楚欲望的围牢"
+        },
+        "tower": {
+          "mode": "monoSilhouettes",
+          "primary": "#dde8f8",
+          "secondary": "#1c2840",
+          "speed": 1.3
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1468b8",
+          "secondary": "#eef8ff",
+          "accent": "#f0182a",
+          "subtext": "小到我们看不清楚欲望的围牢",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "openArms"
+      }
+    },
+    {
+      "at": "3:05",
+      "fade": 0.3,
+      "label": "冷色高潮",
+      "stage": {
+        "rings": "bowl",
+        "lift": "up"
+      },
+      "lights": {
+        "beams": [
+          "#b4f8ff",
+          "#4c98ff",
+          "#ffffff"
+        ],
+        "beamLeft": null,
+        "beamRight": null,
+        "pattern": "whipSweep",
+        "beamSpread": "wide",
+        "beamSpeed": 3.2,
+        "beamI": 1.15,
+        "wash": "#1c5ee8",
+        "washI": 1.2,
+        "hazeI": 1.35,
+        "hazeC": "#3474ec",
+        "strips": "#eefaff",
+        "towerStrips": "#eefaff",
+        "hgColor": "#dceeff",
+        "hgTopI": 0.45,
+        "screenTopColor": "#84ccff",
+        "screenTopI": 1,
+        "canopyMatrixColor": "#3a88ff",
+        "canopyMatrixI": 1.35,
+        "hourglass": "zebra",
+        "laserOn": true,
+        "laserI": 1.55,
+        "beamSwing": 1.24,
+        "beamChase": "centerOut",
+        "beamChaseSpeed": 13,
+        "frontStrobeI": 1.25,
+        "frontStrobeColor": "#c8f4ff",
+        "frontStrobeMode": "strobe",
+        "frontStrobeSpeed": 15
+      },
+      "beatCycle": {
+        "unitBeats": 0.5,
+        "steps": [
+          {
+            "lights": {
+              "pattern": "whipSweep",
+              "beamSpread": "wide",
+              "beamSpeed": 3.3,
+              "beamSwing": 1.25,
+              "beamI": 1.2,
+              "beamChase": "wave",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#68ffd8"
+                ],
+                "pattern": "scissorWhip",
+                "speed": 3.8,
+                "swing": 1.2,
+                "spread": "sharp",
+                "intensity": 1.35
+              },
+              "frontStrobeI": 1.25,
+              "frontStrobeColor": "#d8fbff",
+              "frontStrobeMode": "chase",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#f024ff",
+                  "edgeColor": "#a810ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.28,
+                  "pitch": 0.62,
+                  "sweep": 0.92,
+                  "speed": 3.6,
+                  "aimBias": 0.18,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#e8ffff",
+                  "edgeColor": "#58ffd0",
+                  "style": "hero",
+                  "motion": "scissor",
+                  "spread": 0.58,
+                  "pitch": 0.72,
+                  "sweep": 0.35,
+                  "speed": 3.2,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#90f8ff",
+                  "edgeColor": "#4ca8ff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.52,
+                  "pitch": 0.58,
+                  "sweep": 0.82,
+                  "speed": 3.2,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#eaf8ff",
+                  "edgeColor": "#78ccff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.3,
+                  "pitch": 0.58,
+                  "sweep": 0.76,
+                  "speed": 3.3,
+                  "gain": 0.84,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#ffffff",
+                  "edgeColor": "#78e8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.8,
+                  "gain": 0.9,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          },
+          {
+            "lights": {
+              "pattern": "waveWhip",
+              "beamSpread": "normal",
+              "beamSpeed": 3.1,
+              "beamSwing": 1.2,
+              "beamI": 1.08,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#78b8ff"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.6,
+                "swing": 1.22,
+                "spread": "sharp",
+                "intensity": 1.25
+              },
+              "frontStrobeI": 1.2,
+              "frontStrobeColor": "#98d8ff",
+              "frontStrobeMode": "strobe",
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#ff3820",
+                  "edgeColor": "#ff7828",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.36,
+                  "pitch": 0.62,
+                  "sweep": 0.85,
+                  "speed": 3.4,
+                  "aimBias": 0.2,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageCenter",
+                  "count": 2,
+                  "color": "#88c8ff",
+                  "edgeColor": "#ffffff",
+                  "style": "hero",
+                  "motion": "scissor",
+                  "spread": 0.68,
+                  "pitch": 0.74,
+                  "sweep": 0.3,
+                  "speed": 3.1,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#94ccff",
+                  "edgeColor": "#58ffd0",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.58,
+                  "pitch": 0.54,
+                  "sweep": 0.78,
+                  "speed": 3.2,
+                  "zDir": 0.42
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#e4f2ff",
+                  "edgeColor": "#64b8ff",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.56,
+                  "sweep": 0.72,
+                  "speed": 3.2,
+                  "gain": 0.82,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eefaff",
+                  "edgeColor": "#64d8ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.7,
+                  "gain": 0.88,
+                  "zDir": 0.82
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#2498f0",
+          "secondary": "#ffffff",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "rings",
+          "primary": "#ffffff",
+          "secondary": "#54c8ff",
+          "speed": 1.4
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#2498f0",
+          "secondary": "#ffffff",
+          "accent": "#ff2430",
+          "subtext": "Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock"
+      }
+    },
+    {
+      "at": "3:15",
+      "fade": 0.35,
+      "label": "深皇家蓝全场漫雾",
+      "stage": {
+        "rings": "bowl",
+        "lift": "up"
+      },
+      "lights": {
+        "beams": [
+          "#1e5eff",
+          "#4c94ff"
+        ],
+        "pattern": "fan",
+        "beamSpread": "wide",
+        "beamI": 0.55,
+        "wash": "#1852ff",
+        "washI": 1.4,
+        "hazeI": 1.9,
+        "hazeC": "#2466ff",
+        "strips": "#eef4ff",
+        "towerStrips": "#eef4ff",
+        "hgColor": "#3058b8",
+        "hgTopI": 0.2,
+        "screenTopColor": "#448cff",
+        "screenTopI": 0.9,
+        "canopyMatrixColor": "#307eff",
+        "canopyMatrixI": 1.45,
+        "hourglass": "off",
+        "laserOn": false,
+        "laserGroups": [],
+        "beamLayer2": null,
+        "beamChase": "none",
+        "frontStrobeI": 0.25,
+        "frontStrobeColor": "#448cff",
+        "frontStrobeMode": "chase",
+        "frontStrobeSpeed": 6
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#1654e8",
+          "secondary": "#eef4ff",
+          "accent": "#ff1e2e",
+          "subtext": "Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "gradient",
+          "primary": "#2c74ff",
+          "secondary": "#0b2468",
+          "speed": 0.8
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#1654e8",
+          "secondary": "#eef4ff",
+          "accent": "#ff1e2e",
+          "subtext": "Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "openArms",
+        "spotColor": "#cce4ff",
+        "spotIntensity": 1.3
+      }
+    },
+    {
+      "at": "3:19.5",
+      "fade": 0.2,
+      "label": "终章",
+      "stage": {
+        "rings": "layered",
+        "lift": "up"
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#ffd480",
+          "#ff9e38",
+          "#fff4dc"
+        ],
+        "pattern": "doubleFan",
+        "beamSpread": "wide",
+        "beamSpeed": 2.8,
+        "beamI": 1.35,
+        "wash": [
+          "#d8621c",
+          "#ff9e38",
+          "#d8621c"
+        ],
+        "washI": 1.35,
+        "hazeI": 1.65,
+        "hazeC": "#e8883c",
+        "strips": "#ffe2a8",
+        "towerStrips": "#f4f6fc",
+        "hgColor": "#fff2dc",
+        "hgTopColor": "#ffb848",
+        "hgTopI": 1.45,
+        "screenTopColor": "#ffbe52",
+        "screenTopI": 1.35,
+        "canopyMatrixColor": "#ffba52",
+        "canopyMatrixI": 1.5,
+        "hourglass": "inkWhite",
+        "laserOn": true,
+        "laserI": 1.55,
+        "beamSwing": 1.18,
+        "beamChase": "centerOut",
+        "beamChaseSpeed": 12,
+        "frontStrobeI": 1.4,
+        "frontStrobeColor": "#ffe2a0",
+        "frontStrobeMode": "strobe",
+        "frontStrobeSpeed": 15
+      },
+      "beatCycle": {
+        "unitBeats": 0.25,
+        "steps": [
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.6,
+              "beams": [
+                "#fff0cc",
+                "#ffba58",
+                "#ff8428"
+              ],
+              "wash": [
+                "#e8641c",
+                "#ffaa44",
+                "#e8641c"
+              ],
+              "washI": 1.48,
+              "hazeI": 1.85,
+              "hazeC": "#f09448",
+              "hourglass": "inkWhite",
+              "hgColor": "#fff2dc",
+              "hgTopColor": "#ffba48",
+              "hgTopI": 1.55,
+              "screenTopColor": "#ffbe52",
+              "screenTopI": 1.4,
+              "canopyMatrixI": 1.55,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#fff2d0",
+                  "edgeColor": "#ffb048",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.6,
+                  "sweep": 0.66,
+                  "speed": 2.9,
+                  "gain": 0.72,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff8e0",
+                  "edgeColor": "#ffc060",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.8,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.9,
+              "beamSwing": 1.16,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#ffe090"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.8,
+                "swing": 1.18,
+                "spread": "sharp",
+                "intensity": 1.48
+              },
+              "frontStrobeI": 1.45,
+              "frontStrobeColor": "#ffe4a4",
+              "frontStrobeMode": "strobe"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#d83818",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "Hey SASA SASALU Hey Hey"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#fff8ee",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#d83818",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "Hey SASA SASALU Hey Hey",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "doubleFan",
+              "beamSpread": "wide",
+              "beamI": 1.48,
+              "beams": [
+                "#fff0cc",
+                "#ffba58",
+                "#ff8428"
+              ],
+              "wash": [
+                "#e8641c",
+                "#ffaa44",
+                "#e8641c"
+              ],
+              "washI": 1.38,
+              "hazeI": 1.75,
+              "hazeC": "#f09448",
+              "hourglass": "inkWhite",
+              "hgColor": "#fff2dc",
+              "hgTopI": 1.45,
+              "screenTopI": 1.3,
+              "canopyMatrixI": 1.45,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "fineWeb",
+                  "count": 16,
+                  "color": "#fff2d0",
+                  "edgeColor": "#ffb048",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.6,
+                  "sweep": 0.66,
+                  "speed": 2.9,
+                  "gain": 0.72,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#fff8e0",
+                  "edgeColor": "#ffc060",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.5,
+                  "gain": 0.8,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 2.9,
+              "beamSwing": 1.16,
+              "beamChase": "centerOut",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#ffe090"
+                ],
+                "pattern": "whipSweep",
+                "speed": 3.8,
+                "swing": 1.18,
+                "spread": "sharp",
+                "intensity": 1.48
+              },
+              "frontStrobeI": 1.45,
+              "frontStrobeColor": "#ffe4a4",
+              "frontStrobeMode": "strobe"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.14,
+              "beams": [
+                "#d0e0f4"
+              ],
+              "wash": "#060a14",
+              "washI": 0.14,
+              "hazeI": 0.18,
+              "hazeC": "#141e30",
+              "hourglass": "zebra",
+              "hgColor": "#f0f6ff",
+              "hgTopI": 0.18,
+              "screenTopI": 0.2,
+              "canopyMatrixI": 0.18,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#f2f6ff",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "HEY!"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f5f8ff",
+                "text": "♣ SA SA L U SA LU ♠"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#f2f6ff",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "HEY!",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "sunburst",
+              "beamSpread": "sharp",
+              "beamI": 0.03,
+              "wash": "#05070e",
+              "washI": 0.1,
+              "hazeI": 0.1,
+              "hourglass": "zebra",
+              "hgColor": "#f4f8ff",
+              "hgTopI": 0.12,
+              "screenTopI": 0.15,
+              "canopyMatrixI": 0.12,
+              "laserOn": false,
+              "laserGroups": [],
+              "beamSpeed": 0.5,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#38d8ff",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "HEY!"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#f5f8ff",
+                "text": "♣ SA SA L U SA LU ♠"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#38d8ff",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "HEY!",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.62,
+              "wash": "#181028",
+              "washI": 0.45,
+              "hazeI": 0.55,
+              "hourglass": "amberBars",
+              "hgTopI": 0.9,
+              "screenTopI": 0.85,
+              "canopyMatrixI": 0.9,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#f020ff",
+                  "edgeColor": "#a800ff",
+                  "altColor": "#ff5c14",
+                  "altEdgeColor": "#ff2808",
+                  "altRate": 14,
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.42,
+                  "pitch": 0.66,
+                  "sweep": 0.7,
+                  "speed": 3,
+                  "aimBias": -0.1,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#48e0ff",
+                  "edgeColor": "#48ffa8",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.52,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "aimBias": 0.25,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#f4ecff",
+                  "edgeColor": "#ff9860",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.56,
+                  "sweep": 0.72,
+                  "speed": 3.2,
+                  "gain": 0.8,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eef8ff",
+                  "edgeColor": "#64e0ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.7,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 3.1,
+              "beamSwing": 1.18,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#ffba60"
+                ],
+                "pattern": "waveWhip",
+                "speed": 3.6,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1
+              },
+              "frontStrobeI": 1.25,
+              "frontStrobeColor": "#ffd8a8",
+              "frontStrobeMode": "chase"
+            },
+            "screens": {
+              "all": {
+                "mode": "imagFrame",
+                "primary": "#d83818",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "Hey SASA SASALU"
+              },
+              "tower": {
+                "mode": "monoCards",
+                "primary": "#ffffff",
+                "text": "♣ H E Y ♠ H E Y"
+              },
+              "cylinder": {
+                "mode": "imagFrame",
+                "primary": "#d83818",
+                "secondary": "#ffffff",
+                "accent": "#ff1e28",
+                "subtext": "Hey SASA SASALU",
+                "border": false
+              }
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.72,
+              "wash": "#28120c",
+              "washI": 0.55,
+              "hazeI": 0.65,
+              "hourglass": "amberBars",
+              "hgTopI": 1,
+              "screenTopI": 0.95,
+              "canopyMatrixI": 1,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#ff5c14",
+                  "edgeColor": "#ff2808",
+                  "altColor": "#f020ff",
+                  "altEdgeColor": "#a800ff",
+                  "altRate": 14,
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.42,
+                  "pitch": 0.66,
+                  "sweep": 0.7,
+                  "speed": 3,
+                  "aimBias": -0.1,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#48e0ff",
+                  "edgeColor": "#48ffa8",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.52,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "aimBias": 0.25,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#f4ecff",
+                  "edgeColor": "#ff9860",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.56,
+                  "sweep": 0.72,
+                  "speed": 3.2,
+                  "gain": 0.8,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eef8ff",
+                  "edgeColor": "#64e0ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.7,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 3.1,
+              "beamSwing": 1.18,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#ffba60"
+                ],
+                "pattern": "waveWhip",
+                "speed": 3.6,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1
+              },
+              "frontStrobeI": 1.25,
+              "frontStrobeColor": "#ffd8a8",
+              "frontStrobeMode": "chase"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.65,
+              "wash": "#181028",
+              "washI": 0.45,
+              "hazeI": 0.55,
+              "hourglass": "amberBars",
+              "hgTopI": 0.95,
+              "screenTopI": 0.9,
+              "canopyMatrixI": 0.95,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#f020ff",
+                  "edgeColor": "#a800ff",
+                  "altColor": "#ff5c14",
+                  "altEdgeColor": "#ff2808",
+                  "altRate": 14,
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.42,
+                  "pitch": 0.66,
+                  "sweep": 0.7,
+                  "speed": 3,
+                  "aimBias": -0.1,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#48e0ff",
+                  "edgeColor": "#48ffa8",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.52,
+                  "pitch": 0.54,
+                  "sweep": 0.72,
+                  "speed": 3,
+                  "aimBias": 0.25,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 18,
+                  "color": "#f4ecff",
+                  "edgeColor": "#ff9860",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.25,
+                  "pitch": 0.56,
+                  "sweep": 0.72,
+                  "speed": 3.2,
+                  "gain": 0.8,
+                  "zDir": 0.48
+                },
+                {
+                  "emitter": "lowCurtain",
+                  "count": 6,
+                  "color": "#eef8ff",
+                  "edgeColor": "#64e0ff",
+                  "style": "curtain",
+                  "motion": "whip",
+                  "spread": 1.35,
+                  "pitch": 0.1,
+                  "sweep": 0.45,
+                  "speed": 2.7,
+                  "gain": 0.86,
+                  "zDir": 0.82
+                }
+              ],
+              "beamSpeed": 3.1,
+              "beamSwing": 1.18,
+              "beamChase": "strobeAlt",
+              "beamLayer2": {
+                "beams": [
+                  "#ffffff",
+                  "#ffba60"
+                ],
+                "pattern": "waveWhip",
+                "speed": 3.6,
+                "swing": 1.15,
+                "spread": "sharp",
+                "intensity": 1
+              },
+              "frontStrobeI": 1.25,
+              "frontStrobeColor": "#ffd8a8",
+              "frontStrobeMode": "chase"
+            }
+          },
+          {
+            "lights": {
+              "pattern": "scissorWhip",
+              "beamSpread": "sharp",
+              "beamI": 0.22,
+              "wash": "#080b14",
+              "washI": 0.22,
+              "hazeI": 0.25,
+              "hourglass": "inkWhite",
+              "hgColor": "#fff0d8",
+              "hgTopI": 1.2,
+              "screenTopI": 1.05,
+              "canopyMatrixI": 1.15,
+              "laserOn": true,
+              "laserGroups": [
+                {
+                  "emitter": "stageLeft",
+                  "count": 2,
+                  "color": "#88ffbe",
+                  "edgeColor": "#d23cff",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.34,
+                  "pitch": 0.62,
+                  "sweep": 0.62,
+                  "speed": 2.8,
+                  "aimBias": -0.16,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "stageRight",
+                  "count": 2,
+                  "color": "#ff8820",
+                  "edgeColor": "#ff4018",
+                  "style": "hero",
+                  "motion": "whip",
+                  "spread": 0.62,
+                  "pitch": 0.54,
+                  "sweep": 0.65,
+                  "speed": 2.8,
+                  "aimBias": 0.3,
+                  "zDir": 0.44
+                },
+                {
+                  "emitter": "fineWeb",
+                  "count": 14,
+                  "color": "#fff0d8",
+                  "edgeColor": "#88ffd0",
+                  "style": "fine",
+                  "motion": "step",
+                  "spread": 2.1,
+                  "pitch": 0.52,
+                  "sweep": 0.65,
+                  "speed": 3,
+                  "gain": 0.76,
+                  "zDir": 0.48
+                }
+              ],
+              "beamSpeed": 2.8,
+              "beamChase": "none",
+              "beamLayer2": null,
+              "frontStrobeI": 0.45,
+              "frontStrobeColor": "#ffe4a8",
+              "frontStrobeMode": "strobe"
+            }
+          }
+        ]
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#d83818",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "Hey SASA SASALU Hey Hey"
+        },
+        "tower": {
+          "mode": "monoCards",
+          "primary": "#fff8ee",
+          "text": "♣ H E Y ♠ H E Y"
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#d83818",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "Hey SASA SASALU Hey Hey",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "rock",
+        "spotColor": "#ffe6b8",
+        "spotIntensity": 1.4
+      }
+    },
+    {
+      "at": "3:35",
+      "fade": 0.35,
+      "label": "终章第一波",
+      "stage": {
+        "rings": "layered",
+        "bridge": "low",
+        "lift": "up",
+        "fountain": false
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#fff0cc",
+          "#ffd288",
+          "#ffffff"
+        ],
+        "pattern": "doubleFan",
+        "beamSpread": "normal",
+        "beamSpeed": 1.65,
+        "beamI": 1.2,
+        "wash": [
+          "#cfa860",
+          "#ffe4a8",
+          "#cfa860"
+        ],
+        "washI": 1.2,
+        "hazeI": 1.4,
+        "hazeC": "#e8ca94",
+        "strips": "#fff8e8",
+        "towerStrips": "#eef4ff",
+        "hgColor": "#fff2cc",
+        "hgTopColor": "#ffc860",
+        "hgTopI": 1.45,
+        "screenTopColor": "#ffd888",
+        "screenTopI": 1.2,
+        "canopyMatrixColor": "#ffe4a8",
+        "canopyMatrixI": 1.35,
+        "stripI": 1.3,
+        "hourglass": "inkWhite",
+        "laserOn": true,
+        "laserI": 1.2,
+        "laserGroups": [
+          {
+            "emitter": "stageLeft",
+            "count": 2,
+            "color": "#b4d8ff",
+            "edgeColor": "#72a8ff",
+            "style": "hero",
+            "motion": "sweep",
+            "spread": 0.35,
+            "pitch": 0.65,
+            "sweep": 0.25,
+            "speed": 1.4,
+            "aimBias": 0.2,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "stageRight",
+            "count": 2,
+            "color": "#b4d8ff",
+            "edgeColor": "#72a8ff",
+            "style": "hero",
+            "motion": "sweep",
+            "spread": 0.35,
+            "pitch": 0.5,
+            "sweep": 0.25,
+            "speed": 1.4,
+            "aimBias": -0.3,
+            "zDir": 0.45
+          },
+          {
+            "emitter": "fineWeb",
+            "count": 12,
+            "color": "#fff4d8",
+            "edgeColor": "#ffc868",
+            "style": "fine",
+            "motion": "step",
+            "spread": 2,
+            "pitch": 0.58,
+            "sweep": 0.45,
+            "speed": 2,
+            "gain": 0.68,
+            "zDir": 0.48
+          }
+        ],
+        "crowdGlow": "#ff98a8",
+        "crowdGlowI": 1.2,
+        "beamSwing": 0.95,
+        "beamChase": "centerOut",
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#b4e0ff"
+          ],
+          "pattern": "waveWhip",
+          "speed": 2.2,
+          "swing": 0.95,
+          "spread": "sharp",
+          "intensity": 1.15
+        },
+        "frontStrobeI": 1.15,
+        "frontStrobeColor": "#fff0cc",
+        "frontStrobeMode": "centerOut",
+        "frontStrobeSpeed": 10
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#72e8ff",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "不奉陪 · Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "monoEyes",
+          "primary": "#ffffff",
+          "speed": 0.6
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#72e8ff",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "不奉陪 · Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "openArms",
+        "spotColor": "#fff8e8",
+        "spotIntensity": 1.45
+      }
+    },
+    {
+      "at": "3:38.5",
+      "fade": 0.35,
+      "label": "终极辉煌定格",
+      "stage": {
+        "rings": "layered",
+        "bridge": "low",
+        "lift": "up",
+        "fountain": false
+      },
+      "prisms": "screens",
+      "lights": {
+        "beams": [
+          "#fff6e0",
+          "#ffd48a",
+          "#ffffff"
+        ],
+        "pattern": "sunburst",
+        "beamSpread": "wide",
+        "beamSpeed": 0.85,
+        "beamI": 1.62,
+        "wash": [
+          "#ffbe78",
+          "#fff0d0",
+          "#ffbe78"
+        ],
+        "washI": 1.55,
+        "hazeI": 2,
+        "hazeC": "#ffd8a8",
+        "strips": "#fff8ec",
+        "towerStrips": "#f4f6ff",
+        "hgColor": "#fff4e4",
+        "hgTopColor": "#ffc258",
+        "hgTopI": 1.85,
+        "screenTopColor": "#ffc864",
+        "screenTopI": 1.6,
+        "canopyMatrixColor": "#ffe6a8",
+        "canopyMatrixI": 1.65,
+        "stripI": 1.5,
+        "hourglass": "zebra",
+        "laserOn": false,
+        "laserGroups": [],
+        "crowdGlow": "#ffa4b4",
+        "crowdGlowI": 1.3,
+        "beamSwing": 0.75,
+        "beamChase": "none",
+        "beamLayer2": {
+          "beams": [
+            "#ffffff",
+            "#fff2cc"
+          ],
+          "pattern": "sunburst",
+          "speed": 1.15,
+          "swing": 0.85,
+          "spread": "sharp",
+          "intensity": 1.5
+        },
+        "frontStrobeI": 1.5,
+        "frontStrobeColor": "#fff2c8",
+        "frontStrobeMode": "solid"
+      },
+      "screens": {
+        "all": {
+          "mode": "imagFrame",
+          "primary": "#ff4068",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "不奉陪 · Hey SASA SASALU"
+        },
+        "tower": {
+          "mode": "monoEyes",
+          "primary": "#ffffff",
+          "speed": 0.4
+        },
+        "cylinder": {
+          "mode": "imagFrame",
+          "primary": "#ff4068",
+          "secondary": "#ffffff",
+          "accent": "#ff1e28",
+          "subtext": "不奉陪 · Hey SASA SASALU",
+          "border": false
+        }
+      },
+      "performer": {
+        "zone": "mainFront",
+        "pose": "openArms",
+        "spotColor": "#fff8e8",
+        "spotIntensity": 1.55
+      }
+    }
+  ]
+}

@@ -1,24 +1,19 @@
-// 舞美现场特效引擎（烟花 / 舞台焰火喷射 / 高压白色气柱）：
-// 使用单个动态 Points 粒子池驱动，性能极轻，支持时间轴任意触发与停止清空。
-import * as THREE from 'three';
-
+import * as THREE from "three";
 const MAX_PARTICLES = 1800;
-
 function makeGlowSprite() {
-  const c = document.createElement('canvas');
+  const c = document.createElement("canvas");
   c.width = c.height = 64;
-  const g = c.getContext('2d');
+  const g = c.getContext("2d");
   const gr = g.createRadialGradient(32, 32, 2, 32, 32, 32);
-  gr.addColorStop(0, 'rgba(255,255,255,1)');
-  gr.addColorStop(0.35, 'rgba(255,255,255,0.65)');
-  gr.addColorStop(1, 'rgba(255,255,255,0)');
+  gr.addColorStop(0, "rgba(255,255,255,1)");
+  gr.addColorStop(0.35, "rgba(255,255,255,0.65)");
+  gr.addColorStop(1, "rgba(255,255,255,0)");
   g.fillStyle = gr;
   g.fillRect(0, 0, 64, 64);
   const t = new THREE.CanvasTexture(c);
   return t;
 }
-
-export function createShowFX(scene) {
+function createShowFX(scene) {
   const pos = new Float32Array(MAX_PARTICLES * 3);
   const col = new Float32Array(MAX_PARTICLES * 3);
   const size = new Float32Array(MAX_PARTICLES);
@@ -27,22 +22,19 @@ export function createShowFX(scene) {
   const maxLife = new Float32Array(MAX_PARTICLES);
   const drag = new Float32Array(MAX_PARTICLES);
   const grav = new Float32Array(MAX_PARTICLES);
-
   let cursor = 0;
   const tmpColor = new THREE.Color();
-
   const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-  geo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
-
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  geo.setAttribute("aSize", new THREE.BufferAttribute(size, 1));
   const mat = new THREE.ShaderMaterial({
     transparent: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     uniforms: {
       uMap: { value: makeGlowSprite() },
-      uDpr: { value: Math.min(window.devicePixelRatio || 1, 1.5) },
+      uDpr: { value: Math.min(window.devicePixelRatio || 1, 1.5) }
     },
     vertexShader: `
       attribute vec3 color;
@@ -68,32 +60,35 @@ export function createShowFX(scene) {
         vec4 tex = texture2D(uMap, gl_PointCoord);
         if (tex.a < 0.02) discard;
         gl_FragColor = vec4(clamp(vColor * tex.rgb, 0.0, 4.0), clamp(tex.a, 0.0, 1.0));
-      }`,
+      }`
   });
-
   const points = new THREE.Points(geo, mat);
-  points.name = '舞美特效粒子';
+  points.name = "舞美特效粒子";
   points.frustumCulled = false;
   points.visible = false;
   points.userData.dynamic = true;
   points.userData.skipAoDepth = true;
   scene.add(points);
-
   function spawn(x, y, z, vx, vy, vz, hex, pSize, pLife, pDrag, pGrav) {
     const i = cursor;
     cursor = (cursor + 1) % MAX_PARTICLES;
-    pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
-    vel[i * 3] = vx; vel[i * 3 + 1] = vy; vel[i * 3 + 2] = vz;
+    pos[i * 3] = x;
+    pos[i * 3 + 1] = y;
+    pos[i * 3 + 2] = z;
+    vel[i * 3] = vx;
+    vel[i * 3 + 1] = vy;
+    vel[i * 3 + 2] = vz;
     tmpColor.set(hex);
-    col[i * 3] = tmpColor.r; col[i * 3 + 1] = tmpColor.g; col[i * 3 + 2] = tmpColor.b;
+    col[i * 3] = tmpColor.r;
+    col[i * 3 + 1] = tmpColor.g;
+    col[i * 3 + 2] = tmpColor.b;
     size[i] = pSize;
     life[i] = pLife;
     maxLife[i] = pLife;
     drag[i] = pDrag;
     grav[i] = pGrav;
   }
-
-  function burstFirework(colors = ['#ff3b6b', '#ffd442', '#66e0ff']) {
+  function burstFirework(colors = ["#ff3b6b", "#ffd442", "#66e0ff"]) {
     const cx = (Math.random() - 0.5) * 90;
     const cy = 44 + Math.random() * 26;
     const cz = -62 + (Math.random() - 0.5) * 28;
@@ -107,30 +102,28 @@ export function createShowFX(scene) {
       spawn(cx, cy, cz, r * Math.cos(a) * spd, u * spd + 3, r * Math.sin(a) * spd, mainHex, 1.45 + Math.random() * 0.9, 1.5 + Math.random() * 0.9, 1.4, -7.5);
     }
   }
-
-  function emitFlameJets(color = '#ff5a1a', intensity = 1.0) {
-    const xs = [-30, -20, -10, 10, 20, 30];
-    const perJet = Math.max(1, Math.round(2 * intensity));
+  function emitFlameJets(color = "#ff5a1a", intensity = 1) {
+    const xs = [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27];
+    const perJet = Math.max(1, Math.round(1.6 * intensity));
     for (const x of xs) {
       for (let k = 0; k < perJet; k++) {
         spawn(
-          x + (Math.random() - 0.5) * 0.6,
+          x + (Math.random() - 0.5) * 0.45,
           1.7,
-          -38.2 + (Math.random() - 0.5) * 0.5,
-          (Math.random() - 0.5) * 1.4,
-          13 + Math.random() * 9 * intensity,
-          (Math.random() - 0.5) * 1.4,
-          Math.random() < 0.35 ? '#ffd452' : color,
-          2.2 + Math.random() * 1.4,
-          0.55 + Math.random() * 0.35,
-          1.8,
-          2.0,
+          -38.2 + (Math.random() - 0.5) * 0.4,
+          (Math.random() - 0.5) * 0.9,
+          13 + Math.random() * 8 * intensity,
+          (Math.random() - 0.5) * 0.9,
+          Math.random() < 0.42 ? "#ffe484" : color,
+          2.1 + Math.random() * 1.2,
+          0.52 + Math.random() * 0.3,
+          1.9,
+          2
         );
       }
     }
   }
-
-  function emitSmokeJets(color = '#e6f0ff', intensity = 1.0) {
+  function emitSmokeJets(color = "#e6f0ff", intensity = 1) {
     const xs = [-26, -14, -4, 4, 14, 26];
     const perJet = Math.max(1, Math.round(2 * intensity));
     for (const x of xs) {
@@ -146,14 +139,12 @@ export function createShowFX(scene) {
           3.4 + Math.random() * 2.2,
           0.75 + Math.random() * 0.45,
           2.4,
-          1.2,
+          1.2
         );
       }
     }
   }
-
   let fwTimer = 0, jetTimer = 0;
-
   function clear() {
     life.fill(0);
     size.fill(0);
@@ -162,26 +153,24 @@ export function createShowFX(scene) {
     fwTimer = 0;
     jetTimer = 0;
   }
-
   function update(dt, fxSpec) {
     const hasFx = fxSpec && (fxSpec.firework || fxSpec.flameJet || fxSpec.smokeJet);
     if (hasFx && dt > 0) {
       if (fxSpec.firework) {
-        const rate = fxSpec.firework.rate ?? 1.2; // 次/秒
+        const rate = fxSpec.firework.rate ?? 1.2;
         fwTimer -= dt;
         if (fwTimer <= 0) {
-          burstFirework(fxSpec.firework.colors || ['#ff3b6b', '#ffd442', '#66e0ff']);
+          burstFirework(fxSpec.firework.colors || ["#ff3b6b", "#ffd442", "#66e0ff"]);
           fwTimer = 1 / Math.max(0.2, rate);
         }
       }
       jetTimer -= dt;
       if (jetTimer <= 0) {
-        if (fxSpec.flameJet) emitFlameJets(fxSpec.flameJet.color || '#ff5a1a', fxSpec.flameJet.intensity ?? 1);
-        if (fxSpec.smokeJet) emitSmokeJets(fxSpec.smokeJet.color || '#e6f0ff', fxSpec.smokeJet.intensity ?? 1);
+        if (fxSpec.flameJet) emitFlameJets(fxSpec.flameJet.color || "#ff5a1a", fxSpec.flameJet.intensity ?? 1);
+        if (fxSpec.smokeJet) emitSmokeJets(fxSpec.smokeJet.color || "#e6f0ff", fxSpec.smokeJet.intensity ?? 1);
         jetTimer = 0.045;
       }
     }
-
     let alive = 0;
     for (let i = 0; i < MAX_PARTICLES; i++) {
       if (life[i] <= 0) continue;
@@ -213,6 +202,8 @@ export function createShowFX(scene) {
       geo.attributes.aSize.needsUpdate = true;
     }
   }
-
   return { update, clear };
 }
+export {
+  createShowFX
+};
